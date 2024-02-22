@@ -1,0 +1,64 @@
+/* xl */
+@media (max-width: 1280px) {
+  #nav-logo {
+    width: 145px;
+  }
+
+  #search-bar {
+    width: 400px;
+  }
+
+  #mobile-header {
+    display: none;
+  }
+}
+
+/* lg */
+@media (max-width: 1024px) {
+  #nav-logo {
+    width: 125px;
+  }
+
+  #search-bar {
+    width: 350px;
+  }
+
+  #user-name {
+    display: none;
+  }
+}
+
+/* md */
+@media (max-width: 768px) {
+  #search-bar {
+    width: 100%;
+  }
+  #main-header {
+    display: none;
+  }
+  #mobile-header {
+    display: block;
+  }
+}
+
+/* sm */
+@media (max-width: 640px) {
+  #nav-logo {
+    width: 120px;
+  }
+
+  #whishlist-logo,
+  #cart-log,
+  #user-logo {
+    height: 25px;
+    width: 25px;
+  }
+}
+
+/* xs */
+@media (max-width: 475px) {
+  #nav-logo {
+    width: 75px;
+    height: 40px;
+  }
+}

@@ -1,0 +1,28 @@
+/* xl */
+@media (max-width: 1280px) {
+}
+
+/* lg */
+@media (max-width: 1024px) {
+  #hero-upperpart {
+    width: 90%;
+  }
+}
+
+/* md */
+@media (max-width: 768px) {
+  #part2-hero {
+    display: none;
+  }
+}
+
+/* sm */
+@media (max-width: 640px) {
+}
+
+/* xs */
+@media (max-width: 475px) {
+  #hero-upperpart {
+    width: 95%;
+  }
+}

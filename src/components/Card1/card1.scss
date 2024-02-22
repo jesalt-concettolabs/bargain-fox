@@ -1,0 +1,14 @@
+/* md */
+@media (max-width: 768px) {
+}
+
+/* xs */
+@media (max-width: 475px) {
+  #card1 {
+    p,
+    span {
+      font-size: 10px;
+      line-height: 15px;
+    }
+  }
+}
