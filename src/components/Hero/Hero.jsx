@@ -13,7 +13,7 @@ const Hero = () => {
       <section className="container flex items-center justify-center">
         <div
           id="hero-upperpart"
-          className="flex gap-6 w-[80%] justify-center items-center"
+          className="flex gap-6 w-[80%] justify-center items-center pb-3"
         >
           <div
             id="part1-hero"

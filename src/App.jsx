@@ -5,6 +5,7 @@ import Electronics from "./components/Electronics/Electronics";
 import Trending from "./components/Trending/Trending";
 import Graden from "./components/Garden-part/Graden";
 import Newsletter from "./components/Newsletter/Newsletter";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <Graden />
       <Newsletter />
       <Electronics />
+      <Footer />
     </div>
   );
 };

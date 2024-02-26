@@ -29,7 +29,7 @@ const Electronics = () => {
             </Link>
           </div>
         </div>
-        <div className="flex gap-2 justify-center items-center mt-6 mx-auto">
+        <div className="flex gap-2 justify-center items-center mx-auto">
           <div id="gardenCard1">
             <Card2
               imageURL={electonicImg1}

@@ -4,7 +4,8 @@ import shoe2Img from "/assets/shoes.png";
 import manImg from "/assets/man.png";
 import sunglassImg from "/assets/sunglasses.png";
 import ringImg from "/assets/gold-ring.png";
-import Card1 from "./Card1/Card1";
+import Card1 from "../Card1/Card1";
+import React from "react";
 
 const DealSilder = () => {
   return (

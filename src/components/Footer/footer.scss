@@ -1,0 +1,39 @@
+/* lg */
+@media (max-width: 1024px) {
+  #footer-lastDiv {
+    display: flex;
+    flex-direction: column;
+    #footer-rights {
+      padding: 5px 0;
+    }
+  }
+}
+
+/* sm */
+@media (max-width: 640px) {
+  #footer-lastDiv {
+    #footer-rights,
+    #footer-terms {
+      font-size: 12px;
+    }
+  }
+  #list-mainDiv {
+    #list-head1,
+    #list-head2,
+    #list-head3 {
+      font-size: 16px;
+    }
+  }
+}
+
+/* xs */
+@media (max-width: 475px) {
+  #list-mainDiv {
+    font-size: 10px;
+    #list-head1,
+    #list-head2,
+    #list-head3 {
+      font-size: 12px;
+    }
+  }
+}

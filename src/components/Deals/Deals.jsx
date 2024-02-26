@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./deals.scss";
 
 import rightArrow from "/assets/Group 24.svg";
-import DealSilder from "../DealSilder";
+import DealSilder from "../DealSlider/DealSilder";
 
 const Deals = () => {
   return (

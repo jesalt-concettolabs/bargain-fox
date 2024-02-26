@@ -10,7 +10,7 @@ import shoppingCart from "/assets/shopping-cart.svg";
 const Navbar = () => {
   return (
     <main>
-      <header className="container">
+      <header className="container p-5">
         {/* Main Header */}
         <div id="main-header" className="flex justify-between items-center">
           <Link to={"/"}>
