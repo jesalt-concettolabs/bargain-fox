@@ -1,5 +1,4 @@
 import "./newsletter.scss";
-import imageNews from "/assets/Group 905271.png";
 
 const Newsletter = () => {
   return (

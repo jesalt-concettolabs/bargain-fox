@@ -80,7 +80,7 @@ const Electronics = () => {
                 cardPrice="44"
                 cardNotPrice="33.98"
                 cardDiscount="-10%"
-              />{" "}
+              />
             </div>
             <div>
               <Card2

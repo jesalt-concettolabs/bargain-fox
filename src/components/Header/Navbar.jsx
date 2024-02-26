@@ -52,18 +52,53 @@ const Navbar = () => {
                 </span>
               </div>
             </Link>
-            <div className="flex items-center gap-2 ">
-              <img src={userlogo} alt="user-logo" />
+            <div
+              id="user-div"
+              className="flex flex-col items-center gap-2 cursor-pointer "
+            >
+              <div className="flex gap-2">
+                <img src={userlogo} alt="user-logo" />
+                <div
+                  id="user-name"
+                  className="text-sm flex flex-col text-[#292D32]"
+                >
+                  <span className="text-left">Hello there,</span>
+                  <span className="font-bold">SIGN IN/REGISTER</span>
+                </div>
+              </div>
               <div
-                id="user-name"
-                className="text-sm flex flex-col text-[#292D32]"
+                id="user-hover"
+                className="hidden absolute bg-[#FFFFFF] shadow-md rounded-md px-4 pt-7 mt-9"
               >
-                <span className="text-left">Hello there,</span>
-                <span className="font-bold">SIGN IN/REGISTER</span>
+                <div>
+                  <button className="bg-[#FF7900] text-white text-sm font-bold p-2 rounded-[56px]">
+                    Login/Register
+                  </button>
+                </div>
+                <div>
+                  <ul className="flex flex-col gap-4 text-[16px] mt-2 text-left text-[#292D32] p-2">
+                    <li>
+                      <Link to={"/"}>Your Profile</Link>
+                    </li>
+                    <li>
+                      <Link to={"/"}>Your Orders</Link>
+                    </li>
+                    <li>
+                      <Link to={"/"}>Address</Link>
+                    </li>
+                    <li>
+                      <Link to={"/"}>Notifications</Link>
+                    </li>
+                    <li>
+                      <Link to={"/"}>Wishlist</Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
         {/* Mobile Header */}
         <div id="mobile-header" className="hidden">
           <div className="flex justify-between">
