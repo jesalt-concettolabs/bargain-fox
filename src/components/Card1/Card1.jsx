@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./card1.scss";
 
 const Card1 = ({
@@ -11,7 +12,7 @@ const Card1 = ({
 }) => {
   return (
     <div id="card1">
-      <div className={`${imgDivClass}`}>
+      <div id="imgDiv" className={`${imgDivClass}`}>
         <img src={imageurl} alt="womanimg" />
       </div>
       <div className={`flex flex-col gap-1 p-2 ${divClass} `}>
