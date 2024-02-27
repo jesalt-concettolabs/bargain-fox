@@ -1,25 +1,20 @@
-import Deals from "./components/Deals/Deals";
-import Navbar from "./components/Header/Navbar";
-import Hero from "./components/Hero/Hero";
-import Electronics from "./components/Electronics/Electronics";
-import Trending from "./components/Trending/Trending";
-import Graden from "./components/Garden-part/Graden";
-import Newsletter from "./components/Newsletter/Newsletter";
-import Footer from "./components/Footer/Footer";
+import React from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
+import HomePage from "./pages/HomePage";
 
-const App = () => {
-  return (
-    <div>
-      <Navbar />
-      <Hero />
-      <Deals />
-      <Trending />
-      <Graden />
-      <Newsletter />
-      <Electronics />
-      <Footer />
-    </div>
-  );
-};
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+    ],
+  },
+]);
 
+const App = () => <RouterProvider router={router} />;
 export default App;
