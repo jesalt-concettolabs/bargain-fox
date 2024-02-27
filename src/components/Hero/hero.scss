@@ -1,60 +1,16 @@
-// #item1:hover {
-//   #hover-card {
-//     display: block;
-//     #activetab1 {
-//       color: #292d32;
-//     }
-//     #activesubtab1 {
-//       display: block;
-//       display: flex;
-//       flex-direction: column;
-//       gap: 16px;
-//     }
-
-//     #activetab2:hover {
-//       color: #292d32;
-//       #activesubtab2 {
-//         display: block;
-//       }
-//       #activetab1 {
-//         color: #a4a4b8;
-//       }
-//       #activesubtab1 {
-//         display: none;
-//       }
-//     }
-//   }
-// }
-
-#item1:hover #hover-card {
-  display: block;
+.inActive {
+  display: none;
 }
 
-#item1:hover #activetab1 {
-  color: #292d32;
-}
-
-#item1:hover #activesubtab1 {
-  display: block;
+.Active {
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-#activetab2:hover {
+  text-align: left;
+  right: 48px;
+  font-size: 16px;
   color: #292d32;
-}
-
-#activetab2:hover #activesubtab2 {
-  display: block;
-}
-
-#activetab2:hover #activetab1 {
-  color: #a4a4b8;
-}
-
-#activetab2:hover #activesubtab1 {
-  display: none;
+  font-weight: 400;
 }
 
 /* xl */
@@ -74,6 +30,10 @@
     display: none;
   }
   #hover-card {
+    display: none;
+  }
+  #hover-div,
+  #hover-circle {
     display: none;
   }
 }
