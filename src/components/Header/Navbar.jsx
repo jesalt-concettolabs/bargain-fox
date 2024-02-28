@@ -10,7 +10,7 @@ import shoppingCart from "/assets/shopping-cart.svg";
 const Navbar = () => {
   return (
     <main>
-      <header className="container p-5">
+      <header className="container">
         {/* Main Header */}
         <div id="main-header" className="flex justify-between items-center">
           <Link to={"/"}>
@@ -68,7 +68,7 @@ const Navbar = () => {
               </div>
               <div
                 id="user-hover"
-                className="hidden absolute bg-[#FFFFFF] shadow-md rounded-md px-4 pt-7 mt-9"
+                className="hidden absolute bg-[#FFFFFF] shadow-md rounded-md px-4 pt-7 mt-9 z-[9999]"
               >
                 <div>
                   <button className="bg-[#FF7900] text-white text-sm font-bold p-2 rounded-[56px]">
