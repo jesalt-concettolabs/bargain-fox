@@ -8,7 +8,7 @@ const Dropdown = () => {
       <span className="md:block text-[#A4A4B8] text-sm pr-2 hidden">
         Sort by:
       </span>
-      <div className="hs-dropdown relative inline-flex">
+      <div className="hs-dropdown relative inline-flex z-[500]">
         <button
           id="hs-dropdown-default"
           type="button"

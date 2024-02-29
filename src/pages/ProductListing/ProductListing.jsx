@@ -5,6 +5,8 @@ import CustomerReview from "../../components/Filters/CustomerReview";
 import Discount from "../../components/Filters/Discount";
 import Price from "../../components/Filters/Price";
 import "./productlisting.scss";
+import Card2 from "../../components/MainCard/Card2";
+import gardenCardImg1 from "/assets/alleins.png";
 
 const ProductListing = () => {
   const [activeClose, setActiveClose] = useState(false);
@@ -80,21 +82,68 @@ const ProductListing = () => {
               </div>
             </div>
           </div>
-          <div className="flex gap-3 flex-wrap">
-            <ul>
-              <li>Hello</li>
-              <li>Hello</li>
-              <li>Hello</li>
-              <li>Hello</li>
-              <li>Hello</li>
-              <li>Hello</li>
-              <li>Hello</li>
-              <li>Hello</li>
-              <li>Hello</li>
-              <li>Hello</li>
-              <li>Hello</li>
-              <li>Hello</li>
-            </ul>
+          <div className="flex flex-col gap-3 mt-5">
+            <div
+              id="product-card-div"
+              className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 "
+            >
+              <Card2
+                imageURL={gardenCardImg1}
+                cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
+                cardPrice="44"
+                cardNotPrice="33.98"
+                cardDiscount="-10%"
+              />
+              <Card2
+                imageURL={gardenCardImg1}
+                cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
+                cardPrice="44"
+                cardNotPrice="33.98"
+                cardDiscount="-10%"
+              />
+              <Card2
+                imageURL={gardenCardImg1}
+                cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
+                cardPrice="44"
+                cardNotPrice="33.98"
+                cardDiscount="-10%"
+              />
+              <Card2
+                imageURL={gardenCardImg1}
+                cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
+                cardPrice="44"
+                cardNotPrice="33.98"
+                cardDiscount="-10%"
+              />
+              <Card2
+                imageURL={gardenCardImg1}
+                cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
+                cardPrice="44"
+                cardNotPrice="33.98"
+                cardDiscount="-10%"
+              />
+              <Card2
+                imageURL={gardenCardImg1}
+                cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
+                cardPrice="44"
+                cardNotPrice="33.98"
+                cardDiscount="-10%"
+              />
+              <Card2
+                imageURL={gardenCardImg1}
+                cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
+                cardPrice="44"
+                cardNotPrice="33.98"
+                cardDiscount="-10%"
+              />
+              <Card2
+                imageURL={gardenCardImg1}
+                cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
+                cardPrice="44"
+                cardNotPrice="33.98"
+                cardDiscount="-10%"
+              />
+            </div>
           </div>
         </section>
       </div>

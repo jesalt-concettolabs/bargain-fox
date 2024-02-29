@@ -26,16 +26,25 @@
 
 /* lg */
 @media (max-width: 1024px) {
-  #nav-logo {
-    width: 125px;
-  }
+  .container {
+    #main-header {
+      #nav-logo {
+        width: 125px;
+      }
 
-  #search-bar {
-    width: 350px;
-  }
+      #search-bar {
+        width: 350px;
+      }
+      #user-div {
+        #user-hover {
+          display: none;
+        }
 
-  #user-name {
-    display: none;
+        #user-name {
+          display: none;
+        }
+      }
+    }
   }
 }
 
