@@ -6,6 +6,7 @@ import searchIcon from "/assets/search-normal.svg";
 import userlogo from "/assets/user.svg";
 import heartLogo from "/assets/whishlist.svg";
 import shoppingCart from "/assets/shopping-cart.svg";
+import Signup from "../../pages/Signup";
 
 const Navbar = () => {
   return (
@@ -58,6 +59,7 @@ const Navbar = () => {
             >
               <div className="flex gap-2">
                 <img src={userlogo} alt="user-logo" />
+
                 <div
                   id="user-name"
                   className="text-sm flex flex-col text-[#292D32]"
@@ -71,9 +73,7 @@ const Navbar = () => {
                 className="hidden absolute bg-[#FFFFFF] shadow-md rounded-md px-4 pt-7 mt-9 z-[9999]"
               >
                 <div>
-                  <button className="bg-[#FF7900] text-white text-sm font-bold p-2 rounded-[56px]">
-                    Login/Register
-                  </button>
+                  <Signup />
                 </div>
                 <div>
                   <ul className="flex flex-col gap-4 text-[16px] mt-2 text-left text-[#292D32] p-2">
