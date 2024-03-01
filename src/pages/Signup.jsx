@@ -260,7 +260,7 @@ const Signup = ({ show, handleClose }) => {
           </div>
           <div className="flex justify-center items-center mb-4">
             <p className="text-sm md:text-[16px]">
-              Already have an account?
+              {onLogin ? "Already " : "Don't  "}have an account?
               <span
                 className="ml-1 font-bold cursor-pointer text-center  "
                 onClick={handleLogin}
