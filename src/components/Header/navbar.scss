@@ -36,10 +36,6 @@
         width: 350px;
       }
       #user-div {
-        #user-hover {
-          display: none;
-        }
-
         #user-name {
           display: none;
         }
@@ -58,6 +54,11 @@
   }
   #mobile-header {
     display: block;
+  }
+  #user-div {
+    #user-hover {
+      display: none;
+    }
   }
 }
 

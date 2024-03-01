@@ -41,8 +41,9 @@ const CustomerReview = () => {
         <section className="mt-2 flex flex-col">
           {discountNames.map((data, index) => (
             <label
+              htmlFor={index}
               key={index}
-              class="inline-flex items-center cursor-pointer py-2"
+              className="inline-flex items-center cursor-pointer py-2"
             >
               <Checkbox
                 shape="round"
@@ -55,7 +56,7 @@ const CustomerReview = () => {
                 onChange={() => handleCheck(index)}
               />
               <img src={data.imgUrl} alt="imgs" />{" "}
-              <span class=" pl-2 text-[#000000] text-[16px] font-normal text-left ">
+              <span className=" pl-2 text-[#000000] text-[16px] font-normal text-left ">
                 & up
               </span>
             </label>

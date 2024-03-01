@@ -7,10 +7,18 @@ import userlogo from "/assets/user.svg";
 import heartLogo from "/assets/whishlist.svg";
 import shoppingCart from "/assets/shopping-cart.svg";
 import Signup from "../../pages/Signup";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [show, setShow] = useState(false);
+  const handleBtn = () => {
+    console.log("Button clicked Navbar");
+    setShow(false);
+  };
+
   return (
     <main>
+      {show && <Signup show={show} handleClose={handleBtn} />}
       <header className="container">
         {/* Main Header */}
         <div id="main-header" className="flex justify-between items-center">
@@ -72,9 +80,12 @@ const Navbar = () => {
                 id="user-hover"
                 className="hidden absolute bg-[#FFFFFF] shadow-md rounded-md px-4 pt-7 mt-9 z-[9999]"
               >
-                <div>
-                  <Signup />
-                </div>
+                <button
+                  onClick={() => setShow(true)}
+                  className="bg-[#FF7900] text-white text-sm font-bold p-2 rounded-[56px]"
+                >
+                  Login/Register
+                </button>
                 <div>
                   <ul className="flex flex-col gap-4 text-[16px] mt-2 text-left text-[#292D32] p-2">
                     <li>
@@ -137,7 +148,7 @@ const Navbar = () => {
                   </span>
                 </div>
               </Link>
-              <div className="flex items-center">
+              <div className="flex items-center" onClick={() => setShow(true)}>
                 <img src={userlogo} alt="user-logo" id="user-logo" />
               </div>
             </div>

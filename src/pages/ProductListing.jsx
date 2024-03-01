@@ -1,11 +1,10 @@
 import { useState } from "react";
-import Dropdown from "../../components/DropDown/Dropdown";
-import Category from "../../components/Filters/Category";
-import CustomerReview from "../../components/Filters/CustomerReview";
-import Discount from "../../components/Filters/Discount";
-import Price from "../../components/Filters/Price";
-import "./productlisting.scss";
-import Card2 from "../../components/MainCard/Card2";
+import Dropdown from "../components/DropDown/Dropdown";
+import Category from "../components/Filters/Category";
+import CustomerReview from "../components/Filters/CustomerReview";
+import Discount from "../components/Filters/Discount";
+import Price from "../components/Filters/Price";
+import Card2 from "../components/MainCard/Card2";
 import gardenCardImg1 from "/assets/alleins.png";
 
 const ProductListing = () => {

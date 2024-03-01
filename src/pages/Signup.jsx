@@ -10,45 +10,42 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import googleLogo from "/assets/google.png";
-import iosLogo from "/assets/iOS.png";
+import closeIcon from "/assets/close.png";
 
-const Signup = () => {
-  const [open, setOpen] = useState(false);
+const Signup = ({ show, handleClose }) => {
   const [onLogin, setOnlogin] = useState(false);
 
   const handleLogin = () => {
     setOnlogin((prev) => !prev);
   };
-  const handleOpen = () => setOpen((cur) => !cur);
-
-  const phoneRegExp =
-    /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
 
   const [loading, setLoading] = useState(false);
 
-  const validateSchema = Yup.object().shape({
-    name: Yup.string().min(4).max(25).required("This field is required"),
-    email: Yup.string()
-      .email("Please enter a valid email")
-      .required("This field is required"),
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().min(4).max(25).required("Name is required"),
     phoneNumber: Yup.string()
-      .matches(phoneRegExp, "Phone number is not valid")
-      .min(10)
-      .max(10),
+      .required("Phone number is required")
+      .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
   });
 
-  const validateLoginSchema = Yup.object().shape({
-    name: Yup.string().required("This field is required"), // Assuming 'name' is the correct field
+  const loginSchema = Yup.object().shape({
+    name: Yup.string()
+      .required("Please enter your email or phone number")
+      .matches(
+        /^(?:\d{10})$|^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        "Invalid email or phone number"
+      ),
   });
 
   const loginFormik = useFormik({
     initialValues: {
       name: "",
     },
-    validationSchema: validateLoginSchema,
+    validationSchema: loginSchema,
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
       setLoading(true);
+      console.log(values);
       setTimeout(() => {
         setLoading(false);
         resetForm();
@@ -62,7 +59,7 @@ const Signup = () => {
       email: "",
       phoneNumber: "",
     },
-    validationSchema: validateSchema,
+    validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
       console.log(values);
       setLoading(true);
@@ -75,36 +72,36 @@ const Signup = () => {
 
   return (
     <>
-      <button
-        onClick={handleOpen}
-        className="bg-[#FF7900] text-white text-sm font-bold p-2 rounded-[56px]"
-      >
-        Login/Register
-      </button>
       <Dialog
         size="xs"
-        open={open}
-        handler={handleOpen}
+        open={show}
+        handler={handleClose}
         className="bg-transparent shadow-none"
       >
-        <Card className="mx-auto w-full p-3 max-w-[28rem]">
-          <div className={`${onLogin ? "hidden" : "block"}`}>
-            <form onSubmit={formik.handleSubmit}>
+        <Card className="mx-auto w-full p-3 max-w-[28rem] ">
+          <div
+            className="cursor-pointer right-5 top-4 absolute"
+            onClick={handleClose}
+          >
+            <img src={closeIcon} alt="closeicon" />
+          </div>
+          <div className={`${onLogin ? "block" : "hidden"}`}>
+            <form noValidate onSubmit={formik.handleSubmit}>
               <CardBody className="flex flex-col gap-4">
                 <Typography
-                  variant="h4"
-                  className="text-center text-2xl text-[#292D32]"
+                  variant="h5"
+                  className="text-center text-sm sm:text-2xl text-[#292D32]"
                 >
                   Looks like you are new here
                 </Typography>
                 <Typography
-                  className="mb-3 font-normal text-center"
+                  className="font-normal text-[12px] sm:text-sm text-center"
                   variant="paragraph"
                   color="gray"
                 >
                   Please fill your information below.
                 </Typography>
-                <Typography className="-mb-2" variant="h6">
+                <Typography className="-mb-2 text-sm sm:text-lg" variant="h6">
                   Name
                 </Typography>
                 <Input
@@ -120,18 +117,18 @@ const Signup = () => {
                 />
 
                 {formik.touched.name && formik.errors.name && (
-                  <Typography className="text-sm" color="red">
+                  <Typography className="text-sm text-red-400">
                     {formik.errors.name}
                   </Typography>
                 )}
-                <Typography className="-mb-2" variant="h6">
+                <Typography className="-mb-2 text-sm sm:text-lg" variant="h6">
                   Phone Number
                 </Typography>
                 <Input
                   required
                   autoComplete="off"
                   label="Number"
-                  type={"number"}
+                  type={"text"}
                   name="phoneNumber"
                   onChange={formik.handleChange}
                   value={formik.values.phoneNumber}
@@ -141,11 +138,11 @@ const Signup = () => {
                   size="lg"
                 />
                 {formik.touched.phoneNumber && formik.errors.phoneNumber && (
-                  <Typography className="text-sm" color="red">
+                  <Typography className="text-sm text-red-400">
                     {formik.errors.phoneNumber}
                   </Typography>
                 )}
-                <Typography className="-mb-2" variant="h6">
+                <Typography className="-mb-2 text-sm sm:text-lg" variant="h6">
                   Your Email
                 </Typography>
                 <Input
@@ -160,40 +157,38 @@ const Signup = () => {
                   size="lg"
                 />
                 {formik.touched.email && formik.errors.email && (
-                  <Typography className="text-sm" color="red">
+                  <Typography className="text-sm text-red-400">
                     {formik.errors.email}
                   </Typography>
                 )}
               </CardBody>
               <CardFooter className="pt-0">
                 <button
-                  disabled={loading}
                   type={"submit"}
                   className="bg-[#FF7900] w-full text-white text-sm font-bold p-2 rounded-[56px]"
-                  // onClick={handleOpen}
                 >
                   {loading ? "Loading..." : "Register"}
                 </button>
               </CardFooter>
             </form>
           </div>
-          <div className={`${onLogin ? "block" : "hidden"}`}>
-            <form onSubmit={loginFormik.handleSubmit}>
+          <div className={`${onLogin ? "hidden" : "block"}`}>
+            <form noValidate onSubmit={loginFormik.handleSubmit}>
               <CardBody className="flex flex-col gap-4">
                 <Typography
                   variant="h4"
-                  className="text-center text-2xl text-[#292D32]"
+                  className="text-center text-sm sm:text-2xl text-[#292D32]"
                 >
                   Sign In / Register
                 </Typography>
                 <Typography
-                  className="mb-3 font-normal text-center"
+                  className="mb-3 font-normal text-[12px] sm:text-sm text-center"
                   variant="paragraph"
                   color="gray"
                 >
                   Please enter your phone number or email below
                 </Typography>
-                <Typography className="-mb-2" variant="h6">
+                <Typography className="-mb-2 text-sm sm:text-lg" variant="h6">
                   Enter phone number or email
                 </Typography>
                 <Input
@@ -204,9 +199,6 @@ const Signup = () => {
                   onChange={loginFormik.handleChange}
                   value={loginFormik.values.name}
                   type={"text"}
-                  helpertext={
-                    loginFormik.errors.name ? loginFormik.errors.name : ""
-                  }
                   size="lg"
                 />
 
@@ -218,24 +210,22 @@ const Signup = () => {
               </CardBody>
               <CardFooter className="pt-0">
                 <button
-                  disabled={loading}
                   type={"submit"}
                   className="bg-[#FF7900] w-full text-white text-sm font-bold p-2 rounded-[56px]"
-                  // onClick={handleOpen}
                 >
-                  {loading ? "Loading..." : "Continue"}
+                  {loginFormik.isSubmitting ? "Loading..." : "Continue"}
                 </button>
                 <Typography
-                  className="p-2 mt-2 text-center text-sm text-[#292D32] font-normal"
+                  className="p-2 m-2 text-center text-sm text-[#292D32] font-normal"
                   variant="h6"
                 >
                   or Continue with
                 </Typography>
-                <div className="flex justify-evenly">
-                  <div class="flex items-center justify-center dark:bg-gray-800">
-                    <button className="px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
+                <div className="md:flex justify-evenly">
+                  <div className="flex items-center justify-center mb-2 md:mb-0">
+                    <button className="px-4 py-2 w-full md:w-[150px] border justify-center items-center rounded-3xl flex gap-2 border-[#D8D8D8] border-solid text-slate-700 hover:border-slate-800 hover:shadow transition duration-150">
                       <img
-                        class="w-6 h-6"
+                        className="w-6 h-6"
                         src={googleLogo}
                         loading="lazy"
                         alt="google logo"
@@ -243,10 +233,10 @@ const Signup = () => {
                       <span>Google</span>
                     </button>
                   </div>
-                  <div class="flex items-center justify-center dark:bg-gray-800">
-                    <button className="px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
+                  <div className="flex items-center justify-center">
+                    <button className="px-4 py-2 w-full md:w-[150px] border justify-center items-center rounded-3xl flex gap-2 border-[#D8D8D8] border-solid text-slate-700 hover:border-slate-800 hover:shadow transition duration-150">
                       <svg
-                        class="mr-2 -ml-1 w-6 h-6 text-black"
+                        className="mr-2 -ml-1 w-6 h-6 text-black"
                         aria-hidden="true"
                         focusable="false"
                         data-prefix="fab"
@@ -268,25 +258,21 @@ const Signup = () => {
               </CardFooter>
             </form>
           </div>
-
-          <Typography variant="small" className="mt-1 mb-4 flex justify-center">
-            Already have an account?
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="ml-1 font-bold cursor-pointer"
-              onClick={handleLogin}
-            >
-              {onLogin ? "Sign up" : "Sign in"}
-            </Typography>
-          </Typography>
-          <Typography
-            variant="small"
-            className="mb-4 text-center text-xs flex justify-center"
-          >
+          <div className="flex justify-center items-center mb-4">
+            <p className="text-sm md:text-[16px]">
+              Already have an account?
+              <span
+                className="ml-1 font-bold cursor-pointer text-center  "
+                onClick={handleLogin}
+              >
+                {onLogin ? "Sign in" : "Sign up"}
+              </span>
+            </p>
+          </div>
+          <div className="mb-4 text-center text-xs flex justify-center">
             By continuing, you agree to our Terms of Use and Privacy & Cookie
             Policy.
-          </Typography>
+          </div>
         </Card>
       </Dialog>
     </>
