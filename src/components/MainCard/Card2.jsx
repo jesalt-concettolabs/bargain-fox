@@ -14,7 +14,7 @@ const Card2 = ({
       <div className="relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
         <img src={imageURL} alt="card-img" />
       </div>
-      <div className="p-6">
+      <div className="p-4">
         <p className="block mt-3 font-sans text-xl antialiased font-normal leading-relaxed text-[#292D32]">
           {cardDes.slice(0, 60)}
           {cardDes.length > 60 ? "..." : ""}
