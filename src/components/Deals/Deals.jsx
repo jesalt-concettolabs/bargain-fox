@@ -26,17 +26,17 @@ const Deals = () => {
               </h2>
             </div> */}
           </div>
-          <div
-            id="view-deal-head"
-            className="flex gap-2 justify-center items-center"
-          >
-            <span className="text-[#292D32] font-semibold text-lg">
-              View All Deals
-            </span>
-            <Link to={"/"}>
+          <Link to={"/"}>
+            <div
+              id="view-deal-head"
+              className="flex gap-2 justify-center items-center"
+            >
+              <span className="text-[#292D32] font-semibold text-lg">
+                View All Deals
+              </span>
               <img src={rightArrow} alt="right-arrow" />
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
         <DealSilder />
       </section>

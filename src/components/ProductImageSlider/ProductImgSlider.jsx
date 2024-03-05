@@ -30,7 +30,7 @@ const ProductImgSlider = ({ onClick }) => {
     verticalSwiping: true,
   };
   return (
-    <div className="slider-container">
+    <div className="slider-container" id="main-sliders">
       <Slider {...settings}>
         {productImages.map((item, index) => (
           <div

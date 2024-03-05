@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const SubCard = ({ imageURL, title }) => {
   return (
     <div>
@@ -10,7 +12,10 @@ const SubCard = ({ imageURL, title }) => {
       </div>
       <div className="text-center">
         <p className="text-[#292D32] text-[16px] font-normal">
-          {title} <span className="text-[#ff7900]"> Read More</span>
+          {title}{" "}
+          <span className="text-[#ff7900]">
+            <Link to={"/"}> Read More</Link>
+          </span>
         </p>
       </div>
     </div>

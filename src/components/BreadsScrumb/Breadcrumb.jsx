@@ -1,4 +1,3 @@
-import { Breadcrumbs } from "@material-tailwind/react";
 import { Link, useLocation } from "react-router-dom";
 
 const Breadcrumb = () => {
@@ -19,8 +18,10 @@ const Breadcrumb = () => {
     });
 
   return (
-    <div className="container">
-      <Breadcrumbs separator=">">{crumbs}</Breadcrumbs>
+    <div className="container py-5">
+      <ul>
+        <li>{crumbs}</li>
+      </ul>
     </div>
   );
 };
