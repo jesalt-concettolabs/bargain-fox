@@ -544,7 +544,7 @@ const Hero = () => {
               onMouseEnter={() => setIsHovered5(true)}
               onMouseLeave={() => setIsHovered5(false)}
             >
-              <Link to={"/"}>
+              <Link to={"/product-list"}>
                 <div className="flex  flex-col justify-center items-center">
                   <img
                     src={sportsImg}

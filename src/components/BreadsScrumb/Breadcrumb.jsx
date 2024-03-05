@@ -1,19 +1,27 @@
 import { Breadcrumbs } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const Breadcrumb = ({ linkURL, linkContent }) => {
+const Breadcrumb = () => {
+  const location = useLocation();
+
+  let currentLink = "";
+
+  const crumbs = location.pathname
+    .split("/")
+    .filter((crumb) => crumb != "")
+    .map((crumb) => {
+      currentLink = +`/${crumb}`;
+      return (
+        <div className="crumb" key={crumb}>
+          <Link to={currentLink}>{crumb}</Link>
+        </div>
+      );
+    });
+
   return (
-    <Breadcrumbs separator=">">
-      <Link to={linkURL} className="opacity-60">
-        {linkContent}
-      </Link>
-      <Link to={linkURL} className="opacity-60">
-        {linkContent}
-      </Link>
-      <Link to={linkURL} className={`${linkClass}`}>
-        {linkContent}
-      </Link>
-    </Breadcrumbs>
+    <div className="container">
+      <Breadcrumbs separator=">">{crumbs}</Breadcrumbs>
+    </div>
   );
 };
 

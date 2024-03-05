@@ -6,6 +6,7 @@ import Discount from "../components/Filters/Discount";
 import Price from "../components/Filters/Price";
 import Card2 from "../components/MainCard/Card2";
 import gardenCardImg1 from "/assets/alleins.png";
+import { Link } from "react-router-dom";
 
 const ProductListing = () => {
   const [activeClose, setActiveClose] = useState(false);
@@ -86,20 +87,15 @@ const ProductListing = () => {
               id="product-card-div"
               className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 "
             >
-              <Card2
-                imageURL={gardenCardImg1}
-                cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
-                cardPrice="44"
-                cardNotPrice="33.98"
-                cardDiscount="-10%"
-              />
-              <Card2
-                imageURL={gardenCardImg1}
-                cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
-                cardPrice="44"
-                cardNotPrice="33.98"
-                cardDiscount="-10%"
-              />
+              <Link to={"/product-detail"}>
+                <Card2
+                  imageURL={gardenCardImg1}
+                  cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
+                  cardPrice="44"
+                  cardNotPrice="33.98"
+                  cardDiscount="-10%"
+                />
+              </Link>
               <Card2
                 imageURL={gardenCardImg1}
                 cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."

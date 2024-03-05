@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import flowerImg from "/assets/flowers.png";
 import shareLogo from "/assets/shareLogo.png";
 import correctLogo from "/assets/correctLogo.png";
@@ -9,6 +9,15 @@ import warrantyLogo from "/assets/warranty.png";
 import SubCard from "../components/DetailSubCard/SubCard";
 import oneStar from "/assets/onestar.png";
 import { Progress } from "@material-tailwind/react";
+import ReviewCard from "../components/ReviewCard/ReviewCard";
+import prdImg1 from "/assets/prdImg1.png";
+import prdImg2 from "/assets/prdImg2.png";
+import prdImg3 from "/assets/prdImg3.png";
+import prdImg4 from "/assets/prdImg4.png";
+import prdImg5 from "/assets/prdImg5.png";
+import prdImg6 from "/assets/prdImg6.png";
+import ProductImgSlider from "../components/ProductImageSlider/ProductImgSlider";
+import Breadcrumb from "../components/BreadsScrumb/Breadcrumb";
 
 const colors = ["#F76F3D", "#000000", "#327E07", "#8185E8", "#1B3497"];
 
@@ -41,44 +50,61 @@ const ratingDetails = [
   {
     id: "4",
     ratingStar: "2",
-    totalRating: "354",
+    totalRating: "3124",
   },
   {
     id: "5",
     ratingStar: "1",
-    totalRating: "245",
+    totalRating: "2145",
+  },
+];
+
+const customerImages = [flowerImg, flowerImg, flowerImg, flowerImg];
+
+const customerReviews = [
+  {
+    id: 1,
+    imgUrl: flowerImg,
+    custName: "Celina Peterburg",
+    ratingDesc:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit sed atque, impedit modi veniam sunt corrupti earum perspiciatis, aliquam natus esse cupiditate quia libero blanditiis, omnis fugiat similique in ducimu",
+    ratingStar: starLogo,
+    ratingDate: "10 July 2021",
+  },
+  {
+    id: 2,
+    imgUrl: flowerImg,
+    custName: "loremhkjhk",
+    ratingDesc:
+      "A very good quality fabric top. Same as shown. Fitting is just perfect. And as expected. All over I liked this top very much. Low price . Love it !",
+    ratingStar: starLogo,
+    ratingDate: "10 July 2021",
+  },
+  {
+    id: 3,
+    imgUrl: flowerImg,
+    custName: "ewgfnlanfclknc",
+    ratingDesc:
+      "A very good quality fabric top. Same as shown. Fitting is just perfect. And as expected. All over I liked this top very much. Low price . Love it !",
+    ratingStar: starLogo,
+    ratingDate: "10 July 2021",
   },
 ];
 
 const ProductDetails = () => {
+  const [imageChange, setImageChange] = useState(prdImg1);
+  const handleChange = (item) => {
+    setImageChange(item);
+  };
   return (
     <main className="container flex flex-col gap-10">
       <section className="block lg:flex lg:gap-[50px]">
         <div className="flex lg:w-[50%]">
-          <div className="flex flex-col gap-2 w-[30%]">
-            <img
-              src={flowerImg}
-              alt="flowerimg"
-              className="cursor-pointer h-[70px] sm:h-[100px] lg:h-[120px] w-[80%]"
-            />
-            <img
-              src={flowerImg}
-              alt="flowerimg"
-              className="cursor-pointer h-[70px] sm:h-[100px] lg:h-[120px] w-[80%]"
-            />
-            <img
-              src={flowerImg}
-              alt="flowerimg"
-              className="cursor-pointer h-[70px] sm:h-[100px] lg:h-[120px] w-[80%]"
-            />
-            <img
-              src={flowerImg}
-              alt="flowerimg"
-              className="cursor-pointer h-[70px] sm:h-[100px] lg:h-[120px] w-[80%]"
-            />
+          <div className="flex w-[30%] flex-col gap-2">
+            <ProductImgSlider onClick={handleChange} />
           </div>
-          <div className="w-[300px] h-[350px] sm:w-[400px] sm:h-[500px] mx-auto">
-            <img src={flowerImg} alt="flowerImg" className="w-full h-full" />
+          <div className="w-[70%] h-[350px] sm:w-[400px] sm:h-[500px] mx-auto">
+            <img src={imageChange} alt="flowerImg" className="w-full h-full" />
           </div>
         </div>
         <div className="lg:w-[50%]">
@@ -90,11 +116,13 @@ const ProductDetails = () => {
               explicabo ut.
             </h3>
             <div className="relative flex flex-col justify-center">
-              <img
-                src={shareLogo}
-                alt="shareLogo"
-                className="cursor-pointer "
-              />
+              <div className="h-5 w-5">
+                <img
+                  src={shareLogo}
+                  alt="shareLogo"
+                  className="cursor-pointer "
+                />
+              </div>
               <ul className="absolute hidden bg-white border mt-40 max-w-sm border-gray-300 rounded">
                 <li>Hello</li>
                 <li>Hello</li>
@@ -213,15 +241,15 @@ const ProductDetails = () => {
           <h3 className="text-2xl text-[#000000] font-semibold ">
             Customer Reviews
           </h3>
-          <div className="flex justify-evenly items-center">
-            <div className="flex flex-col gap-3 justify-center items-center">
-              <span className="text-[90px] font-bold">4</span>
+          <div className="block sm:flex justify-evenly items-center">
+            <div className="flex mb-3 sm:mb-0 flex-col gap-3 justify-center items-center">
+              <span className="text-[60px] sm:text-[90px] font-bold">4</span>
               <img src={starLogo} alt="4starsLogo" />
               <p className="text-[16px] text-[#A4A4B8] font-normal ">
                 46,546 Gloabal ratings
               </p>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex justify-center items-center flex-col gap-2">
               {ratingDetails.map((item) => (
                 <div key={item.id} className="flex items-center gap-2">
                   <span>{item.ratingStar}</span>
@@ -235,6 +263,27 @@ const ProductDetails = () => {
                   </div>
                   <span>{item.totalRating}</span>
                 </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-4">
+            <h3 className="text-[18px] font-semibold">Customer Photos</h3>
+            <div className="flex flex-wrap gap-3 py-2">
+              {customerImages.map((img, index) => (
+                <div
+                  key={index}
+                  className="w-[65px] h-[65px] sm:w-[100px] sm:h-[100px] rounded-md object-contain"
+                >
+                  <img src={img} />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-4">
+            <h4 className="text-[18px] font-semibold">Customer Reviews</h4>
+            <div className="flex flex-col gap-3 py-2">
+              {customerReviews.map((item) => (
+                <ReviewCard reviewDetail={item} key={item.id} />
               ))}
             </div>
           </div>
@@ -259,7 +308,7 @@ const ProductDetails = () => {
               {producrDesc.map((item, index) => (
                 <div key={index} className="flex gap-2 items-center">
                   <div className="h-2 w-2 rounded-full bg-white border border-[#ff7900]"></div>
-                  <p className="text-[16px] text-[#292D32] font-normal">
+                  <p className="text-sm sm:text-[16px] text-[#292D32] font-normal">
                     {item}
                   </p>
                 </div>
