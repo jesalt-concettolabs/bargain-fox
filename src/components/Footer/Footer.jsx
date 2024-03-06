@@ -57,7 +57,10 @@ const Footer = () => {
                 </div>
               ))}
             </div>
-            <div id="footer-rights" className="text-[#A4A4B8] text-[16px]">
+            <div
+              id="footer-rights"
+              className="text-[#A4A4B8] text-center text-[16px]"
+            >
               All rights reserved © 2023 BargainFox.com
             </div>
             <div id="footer-terms" className="text-[#A4A4B8] text-[16px]">

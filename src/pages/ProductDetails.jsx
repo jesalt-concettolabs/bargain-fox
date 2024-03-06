@@ -18,6 +18,7 @@ import prdImg5 from "/assets/prdImg5.png";
 import prdImg6 from "/assets/prdImg6.png";
 import ProductImgSlider from "../components/ProductImageSlider/ProductImgSlider";
 import Breadcrumb from "../components/BreadsScrumb/Breadcrumb";
+import { useNavigate } from "react-router-dom";
 
 const colors = ["#F76F3D", "#000000", "#327E07", "#8185E8", "#1B3497"];
 
@@ -92,6 +93,7 @@ const customerReviews = [
 ];
 
 const ProductDetails = () => {
+  const navigate = useNavigate();
   const [imageChange, setImageChange] = useState(prdImg1);
   const handleChange = (item) => {
     setImageChange(item);
@@ -226,10 +228,16 @@ const ProductDetails = () => {
               />
             </div>
             <div className="py-2 flex gap-3 justify-between items-center">
-              <button className="bg-[#FF7900] py-1 text-white hover:bg-black border border-[#ff7900] hover:border-none hover:text-white font-normal rounded-[25px] w-full">
+              <button
+                onClick={() => navigate("/")}
+                className="bg-[#FF7900] py-1 text-white hover:bg-black border border-[#ff7900] hover:border-none hover:text-white font-normal rounded-[25px] w-full"
+              >
                 Add to Cart
               </button>
-              <button className="bg-[#FF79001A] py-1 transition-all ease-in-out border border-[#FF7900] hover:bg-[#ff7900] hover:text-white  w-full rounded-[25px]">
+              <button
+                onClick={() => navigate("/cart")}
+                className="bg-[#FF79001A] py-1 transition-all ease-in-out border border-[#FF7900] hover:bg-[#ff7900] hover:text-white  w-full rounded-[25px]"
+              >
                 Buy now
               </button>
             </div>

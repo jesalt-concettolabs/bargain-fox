@@ -34,3 +34,17 @@ input[type="number"] {
   opacity: 0.75;
   color: #ff7900;
 }
+
+#shoppingCartName {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 575px) {
+  #shoppingCartName {
+    -webkit-line-clamp: 1;
+  }
+}
