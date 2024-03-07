@@ -14,6 +14,15 @@ const Card2 = ({
     <div className="relative flex max-w-[24rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
       <div className="relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
         <img src={imageURL} alt="card-img" />
+        <div className="absolute h-7 w-7 rounded-full bg-white top-2 right-2">
+          <img
+            src={imageURL}
+            alt=""
+            width="100%"
+            height="100%"
+            className="rounded-full"
+          />
+        </div>
       </div>
       <div className="p-4">
         <p className="block mt-3 font-sans text-xl antialiased font-normal leading-relaxed text-[#292D32]">

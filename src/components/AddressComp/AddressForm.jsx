@@ -17,15 +17,13 @@ const AddressForm = ({ show, handleClose }) => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().min(4).max(25).required("Full Name is required"),
-    phoneNumber: Yup.string()
-      .required("Phone number is required")
-      .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
+    phoneNumber: Yup.number().required("Phone number is required"),
     address: Yup.string().required("Address is required"),
     apartment: Yup.string()
       .max(50, "Apartment/suite number is too long")
       .nullable(),
     city: Yup.string().min(4).max(25).required("City is required"),
-    postcode: Yup.string().required("Postcode number is required"),
+    postcode: Yup.number().required("Postcode number is required"),
   });
 
   const formik = useFormik({
@@ -40,7 +38,7 @@ const AddressForm = ({ show, handleClose }) => {
 
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      console.log("dsfd", values);
+      console.log("User Address Detail: ", values);
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
@@ -113,13 +111,13 @@ const AddressForm = ({ show, handleClose }) => {
                   label="Apartment,Suite,etc."
                   name="apartments"
                   onChange={formik.handleChange}
-                  value={formik.values.apartments}
+                  value={formik.values.apartment}
                   type={"text"}
                   size="lg"
                 />
-                {formik.touched.apartments && formik.errors.apartments && (
+                {formik.touched.apartment && formik.errors.apartment && (
                   <Typography className="text-sm text-red-400">
-                    {formik.errors.apartments}
+                    {formik.errors.apartment}
                   </Typography>
                 )}
 
@@ -147,7 +145,7 @@ const AddressForm = ({ show, handleClose }) => {
                   onChange={formik.handleChange}
                   value={formik.values.postcode}
                   type={"text"}
-                  size="sm"
+                  size="lg"
                 />
                 {formik.touched.postcode && formik.errors.postcode && (
                   <Typography className="text-sm text-red-400">
