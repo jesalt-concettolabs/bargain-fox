@@ -8,7 +8,7 @@ const Layout = () => {
   return (
     <>
       <Navbar />
-      <Breadcrumb />
+      {/* <Breadcrumb /> */}
       <Outlet />
       <Footer />
     </>

@@ -5,6 +5,8 @@ import HomePage from "./pages/HomePage";
 import ProductListing from "./pages/ProductListing";
 import ProductDetails from "./pages/ProductDetails";
 import ShoppingCart from "./pages/ShoppingCart";
+import Checkout from "./pages/Checkout";
+import WhishList from "./pages/WhishList";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <ShoppingCart />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
+      },
+      {
+        path: "/whish",
+        element: <WhishList />,
       },
     ],
   },

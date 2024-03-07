@@ -1,4 +1,3 @@
-import { Checkbox } from "@material-tailwind/react";
 import "./cartcomp.scss";
 
 const CartComp = ({ list }) => {

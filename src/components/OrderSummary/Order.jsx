@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Order = () => {
   return (
     <main className="flex flex-col gap-8">
@@ -21,9 +23,11 @@ const Order = () => {
           <span>$28.50</span>
         </div>
         <div>
-          <button className="w-full flex items-center justify-center rounded-3xl py-2 bg-[#ff7900] text-white">
-            Proceed to Checkout
-          </button>
+          <Link to={"/checkout"}>
+            <button className="w-full flex items-center justify-center rounded-3xl py-2 bg-[#ff7900] text-white">
+              Proceed to Checkout
+            </button>
+          </Link>
         </div>
         <div>
           <p className="text-[#292D32] text-[14px] sm:text-sm ">

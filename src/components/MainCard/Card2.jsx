@@ -8,6 +8,7 @@ const Card2 = ({
   cardPrice,
   cardNotPrice,
   cardDiscount,
+  btnValue,
 }) => {
   return (
     <div className="relative flex max-w-[24rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
@@ -53,6 +54,13 @@ const Card2 = ({
           </span>
         </div>
       </div>
+      <button
+        className={`${
+          btnValue === "true" ? "block" : "hidden"
+        } my-1 bg-[#ff7900] p-2 rounded-[25px] text-white`}
+      >
+        Add to Cart
+      </button>
     </div>
   );
 };

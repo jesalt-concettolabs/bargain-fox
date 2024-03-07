@@ -45,7 +45,7 @@ const Navbar = () => {
             </button>
           </div>
           <div className="flex items-center gap-[30px]">
-            <Link to={"/"}>
+            <Link to={"/whish"}>
               <div className="relative">
                 <img src={heartLogo} alt="heart-logo" />
                 <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#FF7900] rounded-full flex justify-center items-center">
@@ -53,7 +53,7 @@ const Navbar = () => {
                 </span>
               </div>
             </Link>
-            <Link to={"/"}>
+            <Link to={"/cart"}>
               <div className="relative">
                 <img src={shoppingCart} alt="shoppingcart-logo" />
                 <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#FF7900] rounded-full flex justify-center items-center">

@@ -76,7 +76,7 @@ const Signup = ({ show, handleClose }) => {
         size="xs"
         open={show}
         handler={handleClose}
-        className="bg-transparent shadow-none"
+        className="bg-transparent shadow-none w-full max-h-full  overflow-y-auto"
       >
         <Card className="mx-auto w-full p-3 max-w-[28rem] ">
           <div
