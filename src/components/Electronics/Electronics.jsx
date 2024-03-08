@@ -2,11 +2,8 @@ import "../Garden-part/garden.scss";
 import { Link } from "react-router-dom";
 import Card2 from "../MainCard/Card2";
 import rightArrow from "/assets/Group 24.svg";
-import electonicImg4 from "/assets/Group 905524.png";
-import electonicImg2 from "/assets/Group 905522.png";
-import electonicImg3 from "/assets/Group 905523.png";
-import electonicImg1 from "/assets/Group 905521.png";
 import Slider from "react-slick";
+import { electronicCardData } from "../../constants/electronicCardData";
 
 const Electronics = () => {
   let settings = {
@@ -65,69 +62,13 @@ const Electronics = () => {
         </div>
         <div className="slider-container">
           <Slider {...settings}>
-            <Link to={"/"}>
-              <Card2
-                imageURL={electonicImg1}
-                cardDes="Apple iPad (9th Generation): with A13 Bionic chip, 10.2-inch Retina Display, 256GB, Wi-Fi, 12MP"
-                cardPrice="44"
-                cardNotPrice="33.98"
-                cardDiscount="-10%"
-              />
-            </Link>
-            <Link to={"/"}>
-              <Card2
-                imageURL={electonicImg2}
-                cardDes="Eilik - an Electronic Robot Pets Toys with Intelligent and Interactive | Abundant Emotions, Idle..."
-                cardPrice="44"
-                cardNotPrice="33.98"
-                cardDiscount="-10%"
-              />
-            </Link>
-            <Link to={"/"}>
-              <Card2
-                imageURL={electonicImg3}
-                cardDes="LOBKIN Wireless Bluetooth Headphones, Over-Ear Headphones with Built-in HD Mic"
-                cardPrice="44"
-                cardNotPrice="33.98"
-                cardDiscount="-10%"
-              />
-            </Link>
-            <Link to={"/"}>
-              <Card2
-                imageURL={electonicImg4}
-                cardDes="SAMSUNG Galaxy Watch 5 40mm Bluetooth Smartwatch w/ Body, Health, Fitness and Sleep Tracker.."
-                cardPrice="44"
-                cardNotPrice="33.98"
-                cardDiscount="-10%"
-              />
-            </Link>
-            <Link to={"/"}>
-              <Card2
-                imageURL={electonicImg3}
-                cardDes="LOBKIN Wireless Bluetooth Headphones, Over-Ear Headphones with Built-in HD Mic"
-                cardPrice="44"
-                cardNotPrice="33.98"
-                cardDiscount="-10%"
-              />
-            </Link>
-            <Link to={"/"}>
-              <Card2
-                imageURL={electonicImg1}
-                cardDes="Apple iPad (9th Generation): with A13 Bionic chip, 10.2-inch Retina Display, 256GB, Wi-Fi, 12MP"
-                cardPrice="44"
-                cardNotPrice="33.98"
-                cardDiscount="-10%"
-              />
-            </Link>
-            <Link to={"/"}>
-              <Card2
-                imageURL={electonicImg2}
-                cardDes="Eilik - an Electronic Robot Pets Toys with Intelligent and Interactive | Abundant Emotions, Idle..."
-                cardPrice="44"
-                cardNotPrice="33.98"
-                cardDiscount="-10%"
-              />
-            </Link>
+            {electronicCardData.map((item) => (
+              <div key={item.id}>
+                <Link to={item.cardUrl}>
+                  <Card2 data={item} />
+                </Link>
+              </div>
+            ))}
           </Slider>
         </div>
       </section>

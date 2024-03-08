@@ -1,13 +1,9 @@
 import { Link } from "react-router-dom";
 import Card2 from "../MainCard/Card2";
 import rightArrow from "/assets/Group 24.svg";
-import gardenCardImg1 from "/assets/alleins.png";
-import gardenCardImg2 from "/assets/showerjack.png";
-import gardenCardImg3 from "/assets/flowers.png";
-import gardenCardImg4 from "/assets/Group 905520.png";
 import Slider from "react-slick";
-
 import "./garden.scss";
+import { gardenCardData } from "../../constants/gardenCardData";
 
 const Graden = () => {
   let settings = {
@@ -67,83 +63,16 @@ const Graden = () => {
         </div>
         <div className="slider-container">
           <Slider {...settings}>
-            <div>
-              <Link to={"/"}>
-                <Card2
-                  imageURL={gardenCardImg1}
-                  cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
-                  cardPrice="44"
-                  cardNotPrice="33.98"
-                  cardDiscount="-10%"
-                />
-              </Link>
-            </div>
-            <div>
-              <Link to={"/"}>
-                <Card2
-                  imageURL={gardenCardImg2}
-                  cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
-                  cardPrice="44"
-                  cardNotPrice="33.98"
-                  cardDiscount="-10%"
-                />
-              </Link>
-            </div>
-            <div>
-              <Link to={"/"}>
-                <Card2
-                  imageURL={gardenCardImg3}
-                  cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
-                  cardPrice="44"
-                  cardNotPrice="33.98"
-                  cardDiscount="-10%"
-                />
-              </Link>
-            </div>
-            <div>
-              <Link to={"/"}>
-                <Card2
-                  imageURL={gardenCardImg4}
-                  cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
-                  cardPrice="44"
-                  cardNotPrice="33.98"
-                  cardDiscount="-10%"
-                />
-              </Link>
-            </div>
-            <div>
-              <Link to={"/"}>
-                <Card2
-                  imageURL={gardenCardImg1}
-                  cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
-                  cardPrice="44"
-                  cardNotPrice="33.98"
-                  cardDiscount="-10%"
-                />
-              </Link>
-            </div>
-            <div>
-              <Link to={"/"}>
-                <Card2
-                  imageURL={gardenCardImg2}
-                  cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
-                  cardPrice="44"
-                  cardNotPrice="33.98"
-                  cardDiscount="-10%"
-                />
-              </Link>
-            </div>
-            <div>
-              <Link to={"/"}>
-                <Card2
-                  imageURL={gardenCardImg4}
-                  cardDes="Oismys Glow in Dark Tree Elves Fairy 20Pcs Luminous Ghost Micro Landscape Accessories Garden..."
-                  cardPrice="44"
-                  cardNotPrice="33.98"
-                  cardDiscount="-10%"
-                />
-              </Link>
-            </div>
+            {gardenCardData &&
+              gardenCardData.map((item) => {
+                return (
+                  <div key={item.id}>
+                    <Link to={item.cardUrl}>
+                      <Card2 data={item} />
+                    </Link>
+                  </div>
+                );
+              })}
           </Slider>
         </div>
       </section>

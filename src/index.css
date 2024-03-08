@@ -35,7 +35,8 @@ input[type="number"] {
   color: #ff7900;
 }
 
-#shoppingCartName {
+#shoppingCartName,
+#mainCardTitle {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -45,6 +46,12 @@ input[type="number"] {
 
 @media only screen and (max-width: 575px) {
   #shoppingCartName {
+    -webkit-line-clamp: 1;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  #mainCardTitle {
     -webkit-line-clamp: 1;
   }
 }

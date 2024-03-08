@@ -2,22 +2,16 @@ import "./card2.scss";
 import starImg from "/assets/4stars.png";
 import star2Img from "/assets/Polygon 2.svg";
 
-const Card2 = ({
-  imageURL,
-  cardDes,
-  cardPrice,
-  cardNotPrice,
-  cardDiscount,
-  btnValue,
-}) => {
+const Card2 = ({ data, btnClass }) => {
+  const { cardImage, cardTitle, cardPrice, cardNotPrice, cardDiscount } = data;
   return (
-    <div className="relative flex max-w-[24rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+    <div className="relative mr-2 border-2 border-green-400 flex max-w-[24rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
       <div className="relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
-        <img src={imageURL} alt="card-img" />
+        <img src={cardImage} alt="card-img" />
         <div className="absolute h-7 w-7 rounded-full bg-white top-2 right-2">
           <img
-            src={imageURL}
-            alt=""
+            src={cardImage}
+            alt={cardPrice}
             width="100%"
             height="100%"
             className="rounded-full"
@@ -25,15 +19,15 @@ const Card2 = ({
         </div>
       </div>
       <div className="p-4">
-        <p className="block mt-3 font-sans text-xl antialiased font-normal leading-relaxed text-[#292D32]">
-          {cardDes.slice(0, 60)}
-          {cardDes.length > 60 ? "..." : ""}
+        <p id="mainCardTitle" className="block mt-3 text-sm text-[#292D32]">
+          {cardTitle.slice(0, 60)}
+          {cardTitle.length > 60 ? "..." : ""}
         </p>
-        <div className="flex items-center py-2">
+        <div className="flex items-center pt-2">
           <img src={starImg} alt="starImg" />
         </div>
       </div>
-      <div className="flex items-center justify-between px-6 py-2">
+      <div className="flex items-center justify-between px-6">
         <div className="flex items-center ">
           <div className="flex gap-2">
             <h5 id="price" className="text-[#292D32] text-2xl font-bold">
@@ -65,8 +59,8 @@ const Card2 = ({
       </div>
       <button
         className={`${
-          btnValue === "true" ? "block" : "hidden"
-        } my-1 bg-[#ff7900] p-2 rounded-[25px] text-white`}
+          btnClass === "true" ? "block" : "hidden"
+        } p-1 bg-[#ff7900] rounded-[25px] font-semibold text-white my-1`}
       >
         Add to Cart
       </button>
