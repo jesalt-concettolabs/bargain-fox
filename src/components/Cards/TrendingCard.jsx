@@ -9,7 +9,7 @@ const TrendingCard = ({ data }) => {
           className="w-full h-full object-contain"
         />
       </div>
-      <span className="rounded-2xl text-sm bg-[#ff7900] px-4 py-1 text-white ">
+      <span className="rounded-2xl text-sm bg-[#ff7900] px-2 py-1 text-white ">
         {cardOffer}
       </span>
       <span className="text-[#292D32] text-center font-semibold">

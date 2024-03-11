@@ -1,4 +1,6 @@
 import "./cartcomp.scss";
+import Counter from "../CardSubComponent/Counter";
+import Price from "../CardSubComponent/Price";
 
 const CartComp = ({ list }) => {
   const { prdName, prdPrice, prdNotPrice, discPercentage, cartImg } = list;
@@ -31,37 +33,13 @@ const CartComp = ({ list }) => {
               </p>
               <div className="flex items-center justify-between pt-4">
                 <div className="flex items-center gap-3 ">
-                  <div className="flex gap-2">
-                    <h5 className="text-[#292D32] text-2xl font-bold">
-                      <sup className="text-sm md:text-xl font-semibold">$</sup>
-                      {prdPrice}
-                    </h5>
-                    <span className="text-[#292D32] text-sm text-center flex justify-center items-center">
-                      <strike>${prdNotPrice}</strike>
-                    </span>
-                  </div>
+                  <Price cardPrice={prdPrice} cardNotPrice={prdNotPrice} />
                   <span className="text-[#2569F3] ">{discPercentage}</span>
                 </div>
               </div>
             </div>
             <div className="hidden sm:flex sm:gap-4">
-              <div className="py-3 flex gap-4">
-                <span className="flex items-center font-semibold text-[#A4A4B8] ">
-                  Quantity:
-                </span>
-
-                <div className="relative flex items-center max-w-[8rem] border border-gray-300 rounded-sm">
-                  <button className=" text-xl flex items-center border-r-gray-300 hover:bg-gray-200 border rounded-s-lg p-2 h-6">
-                    -
-                  </button>
-                  <div className="bg-gray-50 border-x-0 p-2 h-6  text-gray-900  flex items-center">
-                    0
-                  </div>
-                  <button className=" text-xl flex items-center border-l-gray-300 hover:bg-gray-200 border rounded-e-lg p-2 h-6 ">
-                    +
-                  </button>
-                </div>
-              </div>
+              <Counter />
               <button className="text-[18px] font-semibold text-[#292D32] p-1 border border-[#f2f2f2]">
                 Delete
               </button>

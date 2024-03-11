@@ -6,7 +6,7 @@ const Newsletter = () => {
       <section className="container w-[80%] flex flex-col mt-6 rounded-lg ">
         <div
           id="subscribe-div"
-          className="bg-[#FF7900] relative rounded-3xl text-white p-8 flex justify-between"
+          className="bg-[#FF7900] relative rounded-3xl text-white p-2 sm:p-4 lg:p-8 flex justify-between"
         >
           <div id="left-div" className="w-[45%] flex flex-col justify-center">
             <h3 className="font-bold text-2xl">Subscribe to Our Newsletters</h3>

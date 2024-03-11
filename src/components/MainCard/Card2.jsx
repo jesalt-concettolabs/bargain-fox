@@ -1,5 +1,6 @@
+import Price from "../CardSubComponent/Price";
+import StarImg from "../CardSubComponent/StarImg";
 import "./card2.scss";
-import starImg from "/assets/4stars.png";
 import star2Img from "/assets/Polygon 2.svg";
 
 const Card2 = ({ data, btnClass }) => {
@@ -23,30 +24,10 @@ const Card2 = ({ data, btnClass }) => {
           {cardTitle.slice(0, 60)}
           {cardTitle.length > 60 ? "..." : ""}
         </p>
-        <div className="flex items-center h-8 w-20 sm:h-10 sm:w-28">
-          <img src={starImg} alt="starImg" width="100%" height="100%" />
-        </div>
+        <StarImg />
       </div>
       <div className="flex items-center justify-between px-2">
-        <div className="flex items-center">
-          <div className="flex gap-2">
-            <h5
-              id="price"
-              className="text-[#292D32] text-sm sm:text-2xl font-bold"
-            >
-              <sup id="dollar" className="text-[12px] sm:text-xl font-semibold">
-                $
-              </sup>
-              {cardPrice}
-            </h5>
-            <span
-              id="notPrice"
-              className="text-[#292D32] text-[12px] sm:text-sm text-center flex justify-center items-center"
-            >
-              <strike>${cardNotPrice}</strike>
-            </span>
-          </div>
-        </div>
+        <Price cardNotPrice={cardNotPrice} cardPrice={cardPrice} />
         <div id="discountDiv" className="relative">
           <div id="discountImg" className="w-10 h-10">
             <img src={star2Img} alt="start2Img" width="100%" height="100%" />

@@ -78,29 +78,29 @@ const Navbar = () => {
               </div>
               <div
                 id="user-hover"
-                className="hidden absolute bg-[#FFFFFF] shadow-md rounded-md px-4 pt-7 mt-9 z-[9999]"
+                className="hidden absolute w-40 bg-[#FFFFFF] shadow-md rounded-md pt-7 mt-9 z-[9999]"
               >
                 <button
                   onClick={() => setShow(true)}
-                  className="bg-[#FF7900] text-white text-sm font-bold p-2 rounded-[56px]"
+                  className="bg-[#FF7900] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
                 >
                   Login/Register
                 </button>
                 <div>
-                  <ul className="flex flex-col gap-4 text-[16px] mt-2 text-left text-[#292D32] p-2">
-                    <li>
+                  <ul className="flex flex-col gap-2 text-[16px] mt-2 text-left text-[#292D32]">
+                    <li className="hover:bg-black hover:text-white pl-2 py-1">
                       <Link to={"/"}>Your Profile</Link>
                     </li>
-                    <li>
+                    <li className="hover:bg-black hover:text-white pl-2 py-1">
                       <Link to={"/"}>Your Orders</Link>
                     </li>
-                    <li>
+                    <li className="hover:bg-black hover:text-white pl-2 py-1">
                       <Link to={"/"}>Address</Link>
                     </li>
-                    <li>
+                    <li className="hover:bg-black hover:text-white pl-2 py-1">
                       <Link to={"/"}>Notifications</Link>
                     </li>
-                    <li>
+                    <li className="hover:bg-black hover:text-white pl-2 py-1">
                       <Link to={"/"}>Wishlist</Link>
                     </li>
                   </ul>
