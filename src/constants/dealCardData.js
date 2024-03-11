@@ -4,12 +4,11 @@ import shoe2Img from "/assets/shoes.png";
 import manImg from "/assets/man.png";
 import sunglassImg from "/assets/sunglasses.png";
 import ringImg from "/assets/gold-ring.png";
-import img6 from "/assets/prdImg5.png";
 
 export const dealCardData = [
   {
     id: 1,
-    dealCardImage: img6,
+    dealCardImage: womanImg,
     dealCardName: "Women's Western Clothing",
     dealCardText: "Upto 40% off",
     dealCardLink: "/",

@@ -1,5 +1,3 @@
-import "./heroCard.scss";
-
 const HeroCard = ({ data }) => {
   const { heroCardImg, heroCardName } = data;
   return (

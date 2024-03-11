@@ -86,7 +86,7 @@ const ProductListing = () => {
           <div className="flex flex-col gap-3 mt-5">
             <div
               id="product-card-div"
-              className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 "
+              className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
             >
               {gardenCardData &&
                 gardenCardData.map((item) => {

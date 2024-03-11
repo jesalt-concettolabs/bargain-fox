@@ -70,7 +70,15 @@ const AddressForm = ({ show, handleClose }) => {
                 >
                   Add Delivery Address
                 </Typography>
-
+                <div>
+                  <select className="bg-transparent border border-blue-gray-200 text-blue-gray-500 text-sm rounded-lg block w-full p-2.5">
+                    <option selected>Choose a country</option>
+                    <option value="IN">India</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="FR">France</option>
+                  </select>
+                </div>
                 <Input
                   required
                   autoComplete="off"

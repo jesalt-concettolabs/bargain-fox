@@ -10,6 +10,10 @@ import SubCard from "../components/DetailSubCard/SubCard";
 import oneStar from "/assets/onestar.png";
 import { Progress } from "@material-tailwind/react";
 import ReviewCard from "../components/ReviewCard/ReviewCard";
+import fbIcon from "/assets/fb.png";
+import copyLinkIcon from "/assets/copyLink.png";
+import emailIcon from "/assets/email.png";
+import pinIcon from "/assets/pinterest.png";
 import prdImg1 from "/assets/prdImg1.png";
 import prdImg2 from "/assets/prdImg2.png";
 import prdImg3 from "/assets/prdImg3.png";
@@ -18,7 +22,7 @@ import prdImg5 from "/assets/prdImg5.png";
 import prdImg6 from "/assets/prdImg6.png";
 import ProductImgSlider from "../components/ProductImageSlider/ProductImgSlider";
 import Breadcrumb from "../components/BreadsScrumb/Breadcrumb";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const colors = ["#F76F3D", "#000000", "#327E07", "#8185E8", "#1B3497"];
 
@@ -93,6 +97,7 @@ const customerReviews = [
 ];
 
 const ProductDetails = () => {
+  const [hoverDiv, setHoverDiv] = useState(false);
   const navigate = useNavigate();
   const [imageChange, setImageChange] = useState(prdImg1);
   const handleChange = (item) => {
@@ -122,16 +127,50 @@ const ProductDetails = () => {
                 <img
                   src={shareLogo}
                   alt="shareLogo"
-                  className="cursor-pointer "
+                  className="cursor-pointer"
+                  onMouseEnter={() => setHoverDiv(true)}
+                  onMouseLeave={() => setHoverDiv(false)}
                 />
               </div>
-              <ul className="absolute hidden bg-white border mt-40 max-w-sm border-gray-300 rounded">
-                <li>Hello</li>
-                <li>Hello</li>
-                <li>Hello</li>
-                <li>Hello</li>
-                <li>Hello</li>
-                <li>Hello</li>
+              <ul
+                onMouseEnter={() => setHoverDiv(true)}
+                onMouseLeave={() => setHoverDiv(false)}
+                className={`absolute  right-1 w-36 ${
+                  hoverDiv ? "block" : "hidden"
+                }  p-3 shadow-md bg-white border mt-[182px] max-w-sm border-gray-300 rounded-md z-[9995]`}
+              >
+                <Link>
+                  <li className="flex border-b pb-2 border-b-gray-200 justify-between items-center hover:text-[#ff7900]">
+                    Email
+                    <span>
+                      <img src={emailIcon} alt="emailIcon" />
+                    </span>
+                  </li>
+                </Link>
+                <Link>
+                  <li className="flex pt-1 border-b pb-2 border-b-gray-200 justify-between items-center hover:text-[#ff7900]">
+                    Pinterest
+                    <span>
+                      <img src={pinIcon} alt="pinIcon" />
+                    </span>
+                  </li>
+                </Link>
+                <Link>
+                  <li className="flex pt-1 border-b pb-2 border-b-gray-200 justify-between items-center hover:text-[#ff7900]">
+                    Facebook
+                    <span>
+                      <img src={fbIcon} alt="fbIcon" />
+                    </span>
+                  </li>
+                </Link>
+                <Link>
+                  <li className="flex pt-1 justify-between items-center hover:text-[#ff7900]">
+                    Copy Link
+                    <span>
+                      <img src={copyLinkIcon} alt="CopyIcon" />
+                    </span>
+                  </li>
+                </Link>
               </ul>
             </div>
           </div>
