@@ -9,8 +9,8 @@ import NewMenu from "../components/NewMenu/NewMenu";
 const HomePage = () => {
   return (
     <>
-      {/* <Hero /> */}
-      <NewMenu />
+      <Hero />
+      {/* <NewMenu /> */}
       <Deals />
       <Trending />
       <Graden />

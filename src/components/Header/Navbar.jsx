@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { RxHamburgerMenu } from "react-icons/rx";
 import "./navbar.scss";
 import logo from "/assets/main-logo-white-.com_350x.png";
 import searchIcon from "/assets/search-normal.svg";
@@ -8,6 +7,7 @@ import heartLogo from "/assets/whishlist.svg";
 import shoppingCart from "/assets/shopping-cart.svg";
 import Signup from "../../pages/Signup";
 import { useState } from "react";
+import MobileSideMenu from "../MobileSideMenu/MobileSideMenu";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
@@ -114,9 +114,7 @@ const Navbar = () => {
         <div id="mobile-header" className="hidden">
           <div className="flex justify-between">
             <div className="flex gap-2 justify-center items-center">
-              <Link to={"/"}>
-                <RxHamburgerMenu className="h-7 w-7" />
-              </Link>
+              <MobileSideMenu />
               <Link to={"/"}>
                 <img
                   src={logo}
