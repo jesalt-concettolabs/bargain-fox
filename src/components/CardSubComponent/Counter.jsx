@@ -1,5 +1,3 @@
-import React from "react";
-
 const Counter = () => {
   return (
     <div className="py-3 flex gap-4">

@@ -1,35 +1,7 @@
 import "./footer.scss";
-import fbIcon from "/assets/fb-icon.svg";
-import twitterIcon from "/assets/Vector.svg";
-import instaIcon from "/assets/instagram.svg";
-import pinIcon from "/assets/pinterest.svg";
 import FooterMenu from "./FooterMenu";
 import { Link } from "react-router-dom";
-
-const menuItems = [
-  {
-    id: 1,
-    list1: ["Delivery", "Returns", "Help Centre"],
-    title: "Help",
-  },
-  {
-    id: 2,
-    list1: ["About Us", "Our Blogs", "Contact Us"],
-    title: "About Us",
-  },
-  {
-    id: 3,
-    list1: [
-      "Your Orders",
-      "Checkout",
-      "Download the App",
-      "FastFox Subscription",
-    ],
-    title: "Your Account",
-  },
-];
-
-const footerIcons = [fbIcon, twitterIcon, instaIcon, pinIcon];
+import { footerIcons, menuItems } from "../../constants/dealCardData";
 
 const Footer = () => {
   return (

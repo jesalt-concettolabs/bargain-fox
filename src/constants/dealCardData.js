@@ -11,6 +11,14 @@ import visaIcon from "/assets/visa.png";
 import prdImg1 from "/assets/flowers.png";
 import prdImg2 from "/assets/prdImg5.png";
 import prdImg3 from "/assets/prdImg6.png";
+import fbIcon from "/assets/fb.png";
+import copyLinkIcon from "/assets/copyLink.png";
+import emailIcon from "/assets/email.png";
+import pinIcon from "/assets/pinterest.png";
+import twitterFotIcon from "/assets/Vector.svg";
+import instaFotIcon from "/assets/instagram.svg";
+import pinFotIcon from "/assets/pinterest.svg";
+import fbFotIcon from "/assets/fb-icon.svg";
 
 export const dealCardData = [
   {
@@ -106,5 +114,58 @@ export const cartDetails = [
     prdPrice: "12",
     prdNotPrice: "38.98",
     discPercentage: "-55%",
+  },
+];
+
+export const detailHoverData = [
+  {
+    id: 1,
+    cardName: "Email",
+    cardImg: emailIcon,
+  },
+  {
+    id: 2,
+    cardName: "Pinterest",
+    cardImg: pinIcon,
+  },
+  {
+    id: 3,
+    cardName: "Facebook",
+    cardImg: fbIcon,
+  },
+  {
+    id: 4,
+    cardName: "Copy Link",
+    cardImg: copyLinkIcon,
+  },
+];
+
+export const footerIcons = [
+  fbFotIcon,
+  twitterFotIcon,
+  instaFotIcon,
+  pinFotIcon,
+];
+
+export const menuItems = [
+  {
+    id: 1,
+    list1: ["Delivery", "Returns", "Help Centre"],
+    title: "Help",
+  },
+  {
+    id: 2,
+    list1: ["About Us", "Our Blogs", "Contact Us"],
+    title: "About Us",
+  },
+  {
+    id: 3,
+    list1: [
+      "Your Orders",
+      "Checkout",
+      "Download the App",
+      "FastFox Subscription",
+    ],
+    title: "Your Account",
   },
 ];

@@ -128,7 +128,7 @@ const Signup = ({ show, handleClose }) => {
                   required
                   autoComplete="off"
                   label="Number"
-                  type={"text"}
+                  type={"number"}
                   name="phoneNumber"
                   onChange={formik.handleChange}
                   value={formik.values.phoneNumber}
