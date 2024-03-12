@@ -36,7 +36,10 @@ const Footer = () => {
     <main className="mx-auto bg-[#222222]">
       <section className="container w-[80%] mt-6">
         <div className="pt-[3rem]">
-          <div id="list-mainDiv" className="flex justify-between pb-4">
+          <div
+            id="list-mainDiv"
+            className="flex  flex-row w-full justify-between gap-3 sm:gap-0 pb-4"
+          >
             {menuItems.map((item) => (
               <FooterMenu title={item.title} list={item.list1} key={item.id} />
             ))}

@@ -1,5 +1,7 @@
+import StarImg from "../CardSubComponent/StarImg";
+
 const ReviewCard = ({ reviewDetail }) => {
-  const { imgUrl, custName, ratingDesc, ratingStar, ratingDate } = reviewDetail;
+  const { imgUrl, custName, ratingDesc, ratingDate } = reviewDetail;
   return (
     <div className="flex flex-col gap-3 border border-[#f0f0f0]">
       <div className="flex items-center gap-4">
@@ -12,9 +14,7 @@ const ReviewCard = ({ reviewDetail }) => {
         {ratingDesc}
       </div>
       <div className="flex items-center gap-2">
-        <div>
-          <img src={ratingStar} alt="cardRating" />
-        </div>
+        <StarImg />
         <span className="text-[#A4A4B8] text-center text-lg">{ratingDate}</span>
       </div>
     </div>

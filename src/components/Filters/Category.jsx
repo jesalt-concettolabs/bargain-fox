@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Checkbox } from "pretty-checkbox-react";
-
 import "@djthoms/pretty-checkbox";
 
 const discountNames = [
@@ -55,7 +54,7 @@ const Category = () => {
                 id={`discount`}
                 name="discount"
                 className={`cursor-pointer`}
-                // value={data.label}
+                value={data.label}
                 // checked={checkedIndex === index}
                 // onChange={() => handleCheck(index)}
               />

@@ -1,5 +1,4 @@
 import flowerImg from "/assets/flowers.png";
-import starLogo from "/assets/4stars.png";
 
 export const silderSetting = {
   dots: false,
@@ -79,7 +78,6 @@ export const customerReviews = [
     custName: "Celina Peterburg",
     ratingDesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit sed atque, impedit modi veniam sunt corrupti earum perspiciatis, aliquam natus esse cupiditate quia libero blanditiis, omnis fugiat similique in ducimu",
-    ratingStar: starLogo,
     ratingDate: "10 July 2021",
   },
   {
@@ -88,7 +86,6 @@ export const customerReviews = [
     custName: "loremhkjhk",
     ratingDesc:
       "A very good quality fabric top. Same as shown. Fitting is just perfect. And as expected. All over I liked this top very much. Low price . Love it !",
-    ratingStar: starLogo,
     ratingDate: "10 July 2021",
   },
   {
@@ -97,7 +94,6 @@ export const customerReviews = [
     custName: "ewgfnlanfclknc",
     ratingDesc:
       "A very good quality fabric top. Same as shown. Fitting is just perfect. And as expected. All over I liked this top very much. Low price . Love it !",
-    ratingStar: starLogo,
     ratingDate: "10 July 2021",
   },
 ];
