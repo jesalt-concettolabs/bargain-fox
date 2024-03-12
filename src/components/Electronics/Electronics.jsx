@@ -1,7 +1,5 @@
-import "../Garden-part/garden.scss";
 import { Link } from "react-router-dom";
 import Card2 from "../MainCard/Card2";
-import rightArrow from "/assets/Group 24.svg";
 import Slider from "react-slick";
 import { electronicCardData } from "../../constants/electronicCardData";
 import CardHeader from "../CardHeader/CardHeader";

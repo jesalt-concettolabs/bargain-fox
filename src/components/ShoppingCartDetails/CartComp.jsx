@@ -1,4 +1,3 @@
-import "./cartcomp.scss";
 import Counter from "../CardSubComponent/Counter";
 import Price from "../CardSubComponent/Price";
 

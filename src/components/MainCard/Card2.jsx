@@ -1,6 +1,5 @@
 import Price from "../CardSubComponent/Price";
 import StarImg from "../CardSubComponent/StarImg";
-import "./card2.scss";
 import star2Img from "/assets/Polygon 2.svg";
 
 const Card2 = ({ data, btnClass }) => {

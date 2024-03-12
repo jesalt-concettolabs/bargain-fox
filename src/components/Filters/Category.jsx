@@ -13,13 +13,7 @@ const discountNames = [
     label: "Women's Dresses",
   },
   {
-    label: "Women's Blouses & Shirts",
-  },
-  {
     label: "Women's Two-piece Outfilts",
-  },
-  {
-    label: "Women's Jumpsuits & Playsuits",
   },
   {
     label: "Women's Bottomwears",

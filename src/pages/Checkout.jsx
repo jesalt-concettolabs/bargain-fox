@@ -1,28 +1,8 @@
 import { useState } from "react";
 import addressIcon from "/assets/addressIcon.svg";
-import americanIcon from "/assets/american.png";
-import masterCardIcon from "/assets/mastercard.png";
-import paypalIcon from "/assets/paypal.png";
-import visaIcon from "/assets/visa.png";
 import AddressForm from "../components/AddressComp/AddressForm";
 import EachAddress from "../components/AddressComp/EachAddress";
-
-const paymentIcons = [paypalIcon, visaIcon, masterCardIcon, americanIcon];
-
-const userAddress = [
-  {
-    id: 1,
-    addName: "Stephen Parker",
-    addDescp: "22 Walden Road, Greenland, UK, KW14 3XY",
-    addPhone: "+44 9876543210",
-  },
-  {
-    id: 2,
-    addName: "Jhon Doe",
-    addDescp: "22 Gandhi Road Ahmedabad",
-    addPhone: "+91 464544534",
-  },
-];
+import { paymentIcons, userAddress } from "../constants/dealCardData";
 
 const Checkout = () => {
   const [show, setShow] = useState(false);

@@ -1,5 +1,3 @@
-import "./deals.scss";
-import rightArrow from "/assets/Group 24.svg";
 import DealSilder from "../DealSlider/DealSilder";
 import CardHeader from "../CardHeader/CardHeader";
 

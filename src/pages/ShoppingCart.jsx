@@ -1,38 +1,6 @@
 import Order from "../components/OrderSummary/Order";
 import CartComp from "../components/ShoppingCartDetails/CartComp";
-import prdImg1 from "/assets/flowers.png";
-import prdImg2 from "/assets/prdImg5.png";
-import prdImg3 from "/assets/prdImg6.png";
-
-const cartDetails = [
-  {
-    id: 1,
-    cartImg: prdImg1,
-    prdName:
-      "Tie Strap Wide Leg Jumpsuit, Casual jfvbndkjsvnc dcbndwnvcewd ceoiwncdec d bduiscbjcnsjcn  bub eucbwxnewsa  nbwosxn  Sleeveless Jumpsuit For Spring & Summer, Women's Clothing",
-    prdPrice: "12",
-    prdNotPrice: "38.98",
-    discPercentage: "-65%",
-  },
-  {
-    id: 2,
-    cartImg: prdImg2,
-    prdName:
-      "Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's Clothing  ufhckjchkcn kc chncoicslj oichoisc n   ",
-    prdPrice: "12",
-    prdNotPrice: "38.98",
-    discPercentage: "-25%",
-  },
-  {
-    id: 3,
-    cartImg: prdImg3,
-    prdName:
-      "Tie Strap Wide Leg Jumpsuit, Casual Sleeveless Jumpsuit For Spring & Summer, Women's Clothing",
-    prdPrice: "12",
-    prdNotPrice: "38.98",
-    discPercentage: "-55%",
-  },
-];
+import { cartDetails } from "../constants/dealCardData";
 
 const ShoppingCart = () => {
   return (

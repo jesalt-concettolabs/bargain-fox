@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import Card2 from "../MainCard/Card2";
-import rightArrow from "/assets/Group 24.svg";
 import Slider from "react-slick";
-import "./garden.scss";
 import { gardenCardData } from "../../constants/gardenCardData";
 import CardHeader from "../CardHeader/CardHeader";
 import { silderSetting } from "../../constants/sliderSetting";

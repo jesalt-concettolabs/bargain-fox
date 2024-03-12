@@ -5,7 +5,6 @@ import CustomerReview from "../components/Filters/CustomerReview";
 import Discount from "../components/Filters/Discount";
 import Price from "../components/Filters/Price";
 import Card2 from "../components/MainCard/Card2";
-import gardenCardImg1 from "/assets/alleins.png";
 import { Link } from "react-router-dom";
 import { gardenCardData } from "../constants/gardenCardData";
 

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "./trending.scss";
 import CardHeader from "../CardHeader/CardHeader";
 import TrendingCard from "../Cards/TrendingCard";
 import { trendingCardData } from "../../constants/trendingCardData";
