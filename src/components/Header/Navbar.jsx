@@ -12,7 +12,6 @@ import MobileSideMenu from "../MobileSideMenu/MobileSideMenu";
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const handleBtn = () => {
-    console.log("Button clicked Navbar");
     setShow(false);
   };
 
@@ -78,7 +77,7 @@ const Navbar = () => {
               </div>
               <div
                 id="user-hover"
-                className="hidden absolute w-40 bg-[#FFFFFF] shadow-md rounded-md pt-7 mt-9 z-[9999]"
+                className="hidden absolute w-48 right-10 p-2 bg-[#FFFFFF] shadow-md rounded-md pt-7 mt-9 z-[9999]"
               >
                 <button
                   onClick={() => setShow(true)}
@@ -87,7 +86,7 @@ const Navbar = () => {
                   Login/Register
                 </button>
                 <div>
-                  <ul className="flex flex-col gap-2 text-[16px] mt-2 text-left text-[#292D32]">
+                  <ul className="flex flex-col gap-2 text-[16px] mt-5 text-left text-[#292D32]">
                     <li className="hover:bg-black hover:text-white pl-2 py-1">
                       <Link to={"/"}>Your Profile</Link>
                     </li>

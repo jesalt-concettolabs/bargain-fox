@@ -17,9 +17,9 @@ const Checkout = () => {
   };
 
   const handleBtn = () => {
-    console.log("Button clicked Address");
     setShow(false);
   };
+
   return (
     <main className="container block md:flex gap-10">
       {show && <AddressForm show={show} handleClose={handleBtn} />}

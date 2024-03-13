@@ -59,10 +59,7 @@ const ProductDetails = () => {
           </div>
           <div className="flex items-center gap-7 py-4">
             <Price cardNotPrice={"15"} cardPrice={"8"} />
-            <div
-              id="discountDiv"
-              className="relative px-2 py-1 bg-[#2569F3] rounded-3xl text-sm text-white font-normal"
-            >
+            <div className="relative px-2 py-1 bg-[#2569F3] rounded-3xl text-sm text-white font-normal">
               65% off
             </div>
           </div>
