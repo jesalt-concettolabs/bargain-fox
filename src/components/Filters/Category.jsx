@@ -52,7 +52,7 @@ const Category = () => {
                 // checked={checkedIndex === index}
                 // onChange={() => handleCheck(index)}
               />
-              <span className=" text-[#000000] text-[16px] font-normal text-left ">
+              <span className=" text-[#000000] font-normal text-left ">
                 {data.label} off or more
               </span>
             </label>

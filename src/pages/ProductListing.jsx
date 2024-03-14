@@ -7,12 +7,12 @@ import Price from "../components/Filters/Price";
 import Card2 from "../components/MainCard/Card2";
 import { Link } from "react-router-dom";
 import { gardenCardData } from "../constants/gardenCardData";
+import closeIcon from "/assets/close.png";
 
 const ProductListing = () => {
   const [activeClose, setActiveClose] = useState(false);
 
   const handleFilter = () => {
-    console.log("clicked!");
     setActiveClose((prev) => !prev);
   };
 
@@ -39,9 +39,8 @@ const ProductListing = () => {
               onClick={handleFilter}
             >
               <img
-                src="https://concetto-web.bargainfox.com/images/svg/close.svg"
+                src={closeIcon}
                 alt="filterClose"
-                className="bg-black"
                 height="20px"
                 width="20px"
               />

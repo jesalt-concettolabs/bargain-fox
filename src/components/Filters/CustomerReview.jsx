@@ -55,7 +55,7 @@ const CustomerReview = () => {
                 checked={checkedIndex === index}
                 onChange={() => handleCheck(index)}
               />
-              <img src={data.imgUrl} alt="imgs" />{" "}
+              <img src={data.imgUrl} alt="imgs" />
               <span className=" pl-2 text-[#000000] text-[16px] font-normal text-left ">
                 & up
               </span>
