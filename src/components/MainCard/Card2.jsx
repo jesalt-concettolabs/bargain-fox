@@ -1,27 +1,57 @@
+import { useState } from "react";
 import Price from "../CardSubComponent/Price";
 import StarImg from "../CardSubComponent/StarImg";
 import star2Img from "/assets/Polygon 2.svg";
+import deleteIcon from "/assets/delete.png";
+import wishIcon from "/assets/heart.png";
+import Loader from "../Spinner/Spinner";
 
 const Card2 = ({ data, btnClass }) => {
   const { cardImage, cardTitle, cardPrice, cardNotPrice, cardDiscount } = data;
+  const [wishClicked, setWishClicked] = useState(false);
+  const [loader, setLoader] = useState(false);
+
+  const handleDelete = (e) => {
+    console.log("Deleted");
+    e.preventDefault();
+  };
+
+  const handleWish = (e) => {
+    console.log("Wish clicked");
+    setLoader(true);
+    setTimeout(() => {
+      setLoader(false);
+      setWishClicked((prev) => !prev);
+    }, 1000);
+    e.preventDefault();
+  };
+
   return (
     <div className="relative mr-6 flex max-w-[24rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
       <div className="relative  m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
         <img src={cardImage} alt="card-img" width="100%" height="100%" />
-        <div className="absolute h-7 w-7 rounded-full bg-white top-2 right-2">
-          <img
-            src={cardImage}
-            alt={cardPrice}
-            width="100%"
-            height="100%"
-            className="rounded-full"
-          />
+        <div
+          className={`${
+            wishClicked ? "bg-[#ff7900]" : "bg-white"
+          } absolute h-8 w-8 rounded-full top-2 right-2`}
+        >
+          {loader ? (
+            <Loader />
+          ) : (
+            <img
+              src={`${btnClass ? `${deleteIcon}` : `${wishIcon}`}`}
+              alt={cardPrice}
+              width="100%"
+              height="100%"
+              className="rounded-full z-[999] p-2"
+              onClick={btnClass ? handleDelete : handleWish}
+            />
+          )}
         </div>
       </div>
       <div className="px-2">
         <p id="mainCardTitle" className="block mt-3 text-sm text-[#292D32]">
-          {cardTitle.slice(0, 60)}
-          {cardTitle.length > 60 ? "..." : ""}
+          {cardTitle}
         </p>
         <StarImg />
       </div>
