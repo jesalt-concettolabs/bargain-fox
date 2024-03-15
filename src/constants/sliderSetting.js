@@ -1,38 +1,28 @@
 import flowerImg from "/assets/flowers.png";
+import dealImg from "/assets/deals.png";
+import trendImg from "/assets/Group 905725.png";
+import clearanceImg from "/assets/artboard.png";
 
-export const silderSetting = {
-  dots: false,
-  infinite: false,
-  speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: false,
-        dots: false,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
-};
-
+export const trendingSubCardData = [
+  {
+    id: 1,
+    cardName: "Deals of the Week",
+    cardLink: "/",
+    cardImg: dealImg,
+  },
+  {
+    id: 2,
+    cardName: "Trending",
+    cardLink: "/",
+    cardImg: trendImg,
+  },
+  {
+    id: 3,
+    cardName: "Clearance",
+    cardLink: "/",
+    cardImg: clearanceImg,
+  },
+];
 export const producrDesc = [
   "Stylish design: Fashionable lapel coat with a solid color that will never go out of style",
   "Versatile: Perfect for fall and winter, suitable for both casual and formal occasions",

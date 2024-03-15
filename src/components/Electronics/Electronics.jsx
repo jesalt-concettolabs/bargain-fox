@@ -1,26 +1,20 @@
-import { Link } from "react-router-dom";
-import Card2 from "../MainCard/Card2";
-import Slider from "react-slick";
 import { electronicCardData } from "../../constants/electronicCardData";
 import CardHeader from "../CardHeader/CardHeader";
-import { silderSetting } from "../../constants/sliderSetting";
+import SliderComponent from "../Slider/SliderComponent";
 
 const Electronics = () => {
   return (
     <main>
       <section className="container w-[80%] flex flex-col gap-4 mt-6">
         <CardHeader cardTitle="Electronics" />
-        <div className="slider-container">
-          <Slider {...silderSetting}>
-            {electronicCardData.map((item) => (
-              <div key={item.id}>
-                <Link to={item.cardUrl}>
-                  <Card2 data={item} />
-                </Link>
-              </div>
-            ))}
-          </Slider>
-        </div>
+        <SliderComponent
+          data={electronicCardData}
+          xlSlide={4}
+          lgSlide={3}
+          mdSlide={2}
+          smSlide={1}
+          mainCardStatus="true"
+        />
       </section>
     </main>
   );

@@ -49,23 +49,7 @@ const CartComp = ({ list }) => {
           </div>
         </div>
         <div className="sm:hidden flex flex-col gap-2 ">
-          <div className="pt-3 flex gap-4">
-            <span className="flex items-center font-semibold text-[#A4A4B8] ">
-              Quantity:
-            </span>
-
-            <div className="relative flex items-center max-w-[8rem] border border-gray-300 rounded-sm">
-              <button className=" text-xl flex items-center border-r-gray-300 hover:bg-gray-200 border rounded-s-lg p-2 h-6">
-                -
-              </button>
-              <div className="bg-gray-50 border-x-0 p-2 h-6  text-gray-900  flex items-center">
-                0
-              </div>
-              <button className=" text-xl flex items-center border-l-gray-300 hover:bg-gray-200 border rounded-e-lg p-2 h-6 ">
-                +
-              </button>
-            </div>
-          </div>
+          <Counter />
           <div className="flex gap-3">
             <button className=" font-semibold text-[#292D32] p-1 border border-[#f2f2f2]">
               Delete
