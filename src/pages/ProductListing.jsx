@@ -1,13 +1,10 @@
 import { useState } from "react";
 import Dropdown from "../components/DropDown/Dropdown";
-import Category from "../components/Filters/Category";
-import CustomerReview from "../components/Filters/CustomerReview";
-import Discount from "../components/Filters/Discount";
-import Price from "../components/Filters/Price";
 import Card2 from "../components/MainCard/Card2";
 import { Link } from "react-router-dom";
 import { gardenCardData } from "../constants/gardenCardData";
 import closeIcon from "/assets/close.png";
+import Filter from "../components/Filters/Filter";
 
 const ProductListing = () => {
   const [activeClose, setActiveClose] = useState(false);
@@ -21,10 +18,7 @@ const ProductListing = () => {
       <div className="flex ">
         <section className={`lg:w-[20%] lg:pr-5 hidden lg:block`}>
           <span className="text-[#A4A4B8] text-2xl font-bold ">Filters</span>
-          <Category />
-          <CustomerReview />
-          <Discount />
-          <Price />
+          <Filter />
         </section>
         {/* Small screen */}
         <section
@@ -47,10 +41,7 @@ const ProductListing = () => {
             </div>
           </div>
           <div className="w-[100%] md:w-[70%]">
-            <Category />
-            <CustomerReview />
-            <Discount />
-            <Price />
+            <Filter />
           </div>
         </section>
         <section

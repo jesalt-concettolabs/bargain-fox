@@ -43,3 +43,60 @@ export const heroCardData = [
     heroCardUrl: "/",
   },
 ];
+
+export const filterDiscountNames = [
+  {
+    label: "90% off or more",
+  },
+  {
+    label: "80% off or more",
+  },
+  {
+    label: "70% off or more",
+  },
+  {
+    label: "60% off or more",
+  },
+  {
+    label: "50% off or more",
+  },
+  {
+    label: "40% off or more",
+  },
+];
+
+export const filterPriceNames = [
+  {
+    label: "Under $10",
+  },
+  {
+    label: "$10 - $25",
+  },
+  {
+    label: "$25 - $50",
+  },
+  {
+    label: "$50 - $100",
+  },
+  {
+    label: "Over $100",
+  },
+];
+
+export const filterCategoryNames = [
+  {
+    label: "Women's T-shirts",
+  },
+  {
+    label: "Women's Tank Tops",
+  },
+  {
+    label: "Women's Dresses",
+  },
+  {
+    label: "Women's Twopiece Outfilts",
+  },
+  {
+    label: "Women's Bottomwears",
+  },
+];

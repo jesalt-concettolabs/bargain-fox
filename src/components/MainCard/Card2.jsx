@@ -26,6 +26,11 @@ const Card2 = ({ data, btnClass }) => {
     e.preventDefault();
   };
 
+  const handleCart = (e) => {
+    e.preventDefault();
+    console.log("Add to cart clicked");
+  };
+
   return (
     <div className="relative mr-6 flex max-w-[24rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
       <div className="relative  m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
@@ -71,6 +76,7 @@ const Card2 = ({ data, btnClass }) => {
         </div>
       </div>
       <button
+        onClick={handleCart}
         className={`${
           btnClass === "true" ? "block" : "hidden"
         } p-1 bg-[#ff7900] rounded-[25px] font-semibold text-white my-1`}
