@@ -3,7 +3,7 @@ import { Drawer } from "@material-tailwind/react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import closeIcon from "/assets/close.png";
 import { Link } from "react-router-dom";
-import Signup from "../../pages/Signup";
+import Signup from "../../pages/LoginForm";
 
 const MobileSideMenu = () => {
   const [open, setOpen] = useState(false);

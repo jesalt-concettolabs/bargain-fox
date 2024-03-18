@@ -5,19 +5,47 @@ import searchIcon from "/assets/search-normal.svg";
 import userlogo from "/assets/user.svg";
 import heartLogo from "/assets/whishlist.svg";
 import shoppingCart from "/assets/shopping-cart.svg";
-import Signup from "../../pages/Signup";
+import LoginForm from "../../pages/LoginForm";
 import { useState } from "react";
 import MobileSideMenu from "../MobileSideMenu/MobileSideMenu";
+import OTPVerification from "../../pages/OTPVerification";
+import SignupForm from "../../pages/SignupForm";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
+  const [showOtp, setShowOtp] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
+
   const handleBtn = () => {
     setShow(false);
   };
 
+  const handleSignupClose = () => {
+    setShowSignup(false);
+  };
+
+  const handleOtp = () => {
+    setShow(false);
+    setShowOtp(true);
+  };
+
+  const handleVerify = () => {
+    setShowOtp(false);
+    setShowSignup(true);
+  };
+
   return (
     <main>
-      {show && <Signup show={show} handleClose={handleBtn} />}
+      {show && (
+        <LoginForm show={show} handleClose={handleBtn} handleOtp={handleOtp} />
+      )}
+      {showOtp && (
+        <OTPVerification show={showOtp} handleVerify={handleVerify} />
+      )}
+      {showSignup && (
+        <SignupForm show={showSignup} handleClose={handleSignupClose} />
+      )}
+
       <header className="container">
         {/* Main Header */}
         <div id="main-header" className="flex justify-between items-center">

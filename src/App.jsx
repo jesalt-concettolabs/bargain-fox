@@ -1,4 +1,3 @@
-import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
@@ -7,6 +6,7 @@ import ProductDetails from "./pages/ProductDetails";
 import ShoppingCart from "./pages/ShoppingCart";
 import Checkout from "./pages/Checkout";
 import WhishList from "./pages/WhishList";
+import AuthProvider from "./context/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +41,12 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App = () => <RouterProvider router={router} />;
+const App = () => {
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
+};
 
 export default App;
