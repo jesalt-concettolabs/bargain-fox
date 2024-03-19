@@ -6,7 +6,6 @@ import ProductDetails from "./pages/ProductDetails";
 import ShoppingCart from "./pages/ShoppingCart";
 import Checkout from "./pages/Checkout";
 import WhishList from "./pages/WhishList";
-import AuthProvider from "./context/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -43,9 +42,9 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <AuthProvider>
+    <>
       <RouterProvider router={router} />
-    </AuthProvider>
+    </>
   );
 };
 

@@ -11,20 +11,28 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import googleLogo from "/assets/google.png";
 import closeIcon from "/assets/close.png";
-import { useAuth } from "../context/AuthContext";
+import axios from "axios";
+import { sendOTP } from "../api/constant";
+import { useDispatch } from "react-redux";
+import { addUserDetail } from "../reducers/loginDetailSlice";
 
 const LoginForm = ({ show, handleClose, handleOtp }) => {
   const [loading, setLoading] = useState(false);
-
-  const auth = useAuth();
+  const dispatch = useDispatch();
 
   const handleLoginSubmit = async (values, { resetForm }) => {
     setLoading(true);
     try {
-      const loda = auth.loginAction(values);
-      console.log("loda: ", loda);
-
-      setTimeout(() => (resetForm(), handleOtp()), 2000);
+      const response = await axios.post(sendOTP, values, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const userInfo = await response.config.data;
+      let parsed_data = JSON.parse(userInfo);
+      let userEmail = parsed_data.email;
+      dispatch(addUserDetail(userEmail));
+      setTimeout(() => (resetForm(), handleOtp()), 1000);
     } catch (error) {
       console.log("loginSubmitError: ", error);
     }

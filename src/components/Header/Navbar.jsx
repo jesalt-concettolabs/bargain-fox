@@ -34,13 +34,21 @@ const Navbar = () => {
     setShowSignup(true);
   };
 
+  const handleOTPClose = () => {
+    setShowOtp(false);
+  };
+
   return (
     <main>
       {show && (
         <LoginForm show={show} handleClose={handleBtn} handleOtp={handleOtp} />
       )}
       {showOtp && (
-        <OTPVerification show={showOtp} handleVerify={handleVerify} />
+        <OTPVerification
+          show={showOtp}
+          handleVerify={handleVerify}
+          handleClose={handleOTPClose}
+        />
       )}
       {showSignup && (
         <SignupForm show={showSignup} handleClose={handleSignupClose} />

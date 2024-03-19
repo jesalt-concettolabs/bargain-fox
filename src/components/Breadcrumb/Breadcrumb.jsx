@@ -11,7 +11,7 @@ const Breadcrumb = () => {
       {pathnames.length > 0 && (
         <Link
           to={"/"}
-          className="capitalize font-normal text-sm text-[#A4A4B8] hover:text-[#A4A4B8]"
+          className="capitalize font-normal hover:text-[#ff7900] text-sm text-[#A4A4B8]"
         >
           Home
         </Link>
