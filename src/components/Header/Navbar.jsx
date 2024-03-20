@@ -6,15 +6,19 @@ import userlogo from "/assets/user.svg";
 import heartLogo from "/assets/whishlist.svg";
 import shoppingCart from "/assets/shopping-cart.svg";
 import LoginForm from "../../pages/LoginForm";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MobileSideMenu from "../MobileSideMenu/MobileSideMenu";
 import OTPVerification from "../../pages/OTPVerification";
 import SignupForm from "../../pages/SignupForm";
+import { UserContext } from "../../context/UserContext";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const { userData } = useContext(UserContext);
+
+  const userName = userData.name;
 
   const handleBtn = () => {
     setShow(false);
@@ -108,7 +112,11 @@ const Navbar = () => {
                   className="text-sm flex flex-col text-[#292D32]"
                 >
                   <span className="text-left">Hello there,</span>
-                  <span className="font-bold">SIGN IN/REGISTER</span>
+                  {userName !== "" ? (
+                    <span className="font-bold capitalize">{userName}</span>
+                  ) : (
+                    <span className="font-bold">SIGN IN/REGISTER</span>
+                  )}
                 </div>
               </div>
               <div

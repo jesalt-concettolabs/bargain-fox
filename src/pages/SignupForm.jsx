@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Dialog,
   Card,
@@ -10,17 +10,51 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import closeIcon from "/assets/close.png";
+import axios from "axios";
+import { registerUser } from "../api/constant";
+import { UserContext } from "../context/UserContext";
+import { useSelector } from "react-redux";
 
 const SignupForm = ({ show, handleClose }) => {
   const [loading, setLoading] = useState(false);
 
-  const handleRegisterSubmit = async (values, { resetForm }) => {
+  const userLoginDetail = useSelector(
+    (state) => state.loginDetail.userLoginData
+  );
+
+  let loginNumber;
+  let loginEmail;
+  if (!isNaN(userLoginDetail)) {
+    loginNumber = userLoginDetail;
+  } else {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(userLoginDetail)) {
+      loginEmail = userLoginDetail;
+    } else {
+      console.log("Invalid input");
+    }
+  }
+  console.log(loginNumber, loginEmail);
+
+  const { setUserData } = useContext(UserContext);
+
+  const handleRegisterSubmit = async (values) => {
     setLoading(true);
-    console.log("Register Details: ", values);
-    setTimeout(() => {
-      setLoading(false);
-      resetForm();
-    }, 1000 * 2);
+    try {
+      const response = await axios.post(registerUser, values);
+      const newUser = await response.data.result;
+      if (response.status === 200) {
+        setUserData(newUser);
+        setTimeout(() => {
+          setLoading(false);
+          handleClose();
+        }, 1000);
+      } else {
+        console.log("newuser error");
+      }
+    } catch (error) {
+      console.log("User register error: ", error);
+    }
   };
 
   const validationSchema = Yup.object().shape({
@@ -34,8 +68,8 @@ const SignupForm = ({ show, handleClose }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      email: "",
-      mobile: "",
+      email: loginEmail ? loginEmail : "",
+      mobile: loginNumber ? loginNumber : "",
     },
     validationSchema: validationSchema,
     onSubmit: handleRegisterSubmit,

@@ -23,11 +23,7 @@ const LoginForm = ({ show, handleClose, handleOtp }) => {
   const handleLoginSubmit = async (values, { resetForm }) => {
     setLoading(true);
     try {
-      const response = await axios.post(sendOTP, values, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(sendOTP, values);
       const userInfo = await response.config.data;
       let parsed_data = JSON.parse(userInfo);
       let userEmail = parsed_data.email;

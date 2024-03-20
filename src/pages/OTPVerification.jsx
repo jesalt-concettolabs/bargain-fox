@@ -1,32 +1,33 @@
 import { Dialog } from "@material-tailwind/react";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import closeIcon from "/assets/close.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { verifyOTP } from "../api/constant";
 import axios from "axios";
+import { addUserOTPDetail } from "../reducers/loginOTPSlice";
+import { UserContext } from "../context/UserContext";
 
 let currentOTPIndex = 0;
 
 const OTPVerification = ({ show, handleVerify, handleClose }) => {
   const [error, setError] = useState(false);
   const [disableBtn, setDisableBtn] = useState(true);
+  const dispatch = useDispatch();
+
+  const { setUserData } = useContext(UserContext);
 
   const handleSubmit = async () => {
     const enteredOTP = otp.join("");
+    dispatch(addUserOTPDetail(enteredOTP));
     let userInfo;
 
     if (enteredOTP == "000000") {
       setError(false);
       try {
-        const response = await axios.post(
-          verifyOTP,
-          { otp: enteredOTP, email },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await axios.post(verifyOTP, {
+          otp: enteredOTP,
+          email,
+        });
         userInfo = await response.data;
         console.log("Verfied Data: ", userInfo);
       } catch (error) {
@@ -44,6 +45,7 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
       userInfo.result.is_new_user == false &&
       userInfo.status === 200
     ) {
+      setUserData(userInfo.result);
       setTimeout(() => {
         handleClose();
       }, 500);
