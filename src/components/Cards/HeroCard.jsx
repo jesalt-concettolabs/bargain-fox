@@ -1,16 +1,16 @@
 const HeroCard = ({ data }) => {
-  const { heroCardImg, heroCardName } = data;
+  const { thumbnail_image_url, seo_title, title } = data;
   return (
     <main className="relative flex flex-col justify-center items-center">
       <section className="flex flex-col gap-2 justify-center items-center">
         <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full">
           <img
-            src={heroCardImg}
-            alt={heroCardName}
+            src={thumbnail_image_url}
+            alt={seo_title}
             className="h-full w-full rounded-full object-cover"
           />
         </div>
-        <span className="font-normal text-center ">{heroCardName}</span>
+        <span className="font-normal text-center ">{title}</span>
       </section>
     </main>
   );

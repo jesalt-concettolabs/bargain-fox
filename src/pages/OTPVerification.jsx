@@ -2,7 +2,7 @@ import { Dialog } from "@material-tailwind/react";
 import React, { useState, useRef, useEffect, useContext } from "react";
 import closeIcon from "/assets/close.png";
 import { useDispatch, useSelector } from "react-redux";
-import { verifyOTP } from "../api/constant";
+import { sendOTP, verifyOTP } from "../api/constant";
 import axios from "axios";
 import { addUserOTPDetail } from "../reducers/loginOTPSlice";
 import { UserContext } from "../context/UserContext";
@@ -12,6 +12,40 @@ let currentOTPIndex = 0;
 const OTPVerification = ({ show, handleVerify, handleClose }) => {
   const [error, setError] = useState(false);
   const [disableBtn, setDisableBtn] = useState(true);
+  const [resendDisabled, setResendDisabled] = useState(false);
+  const [seconds, setSeconds] = useState(30);
+
+  const userEmail = useSelector((state) => state.loginDetail);
+  const email = userEmail.userLoginData;
+
+  const handleResend = async () => {
+    setError(false);
+    try {
+      setResendDisabled(true);
+
+      const response = await axios.post(sendOTP, { email: email });
+      console.log("reset btn clicked: ", response.status);
+
+      setOtp(new Array(6).fill(""));
+
+      setSeconds(30);
+
+      setTimeout(() => {
+        setResendDisabled(false);
+      }, 30000);
+    } catch (error) {
+      console.log("resend otp error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    const timer =
+      seconds > 0 && setInterval(() => setSeconds(seconds - 1), 1000);
+    return () => clearInterval(timer);
+  }, [seconds]);
+
+  const formattedSeconds = seconds.toString().padStart(2, "0");
+
   const dispatch = useDispatch();
 
   const { setUserData } = useContext(UserContext);
@@ -83,20 +117,14 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
     inputRef.current?.focus();
   }, [activeOTPIndex]);
 
-  const userEmail = useSelector((state) => state.loginDetail);
-  const email = userEmail.userLoginData;
-
   return (
     <>
       <Dialog open={show} handler={handleClose} size={"xs"}>
         <div className="relative flex  flex-col justify-center overflow-hidden">
-          <div
-            className="absolute top-4 right-4 cursor-pointer"
-            onClick={handleClose}
-          >
-            <img src={closeIcon} alt="closeicon" />
-          </div>
-          <div className="relative px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
+          <div className="relative px-6 py-6 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
+            <div className="float-end cursor-pointer" onClick={handleClose}>
+              <img src={closeIcon} alt="closeicon" />
+            </div>
             <div className="mx-auto flex w-full max-w-md flex-col space-y-4">
               <div className="flex flex-col items-center justify-center text-center space-y-2">
                 <div className="text-[#292D32] text-2xl font-semibold">
@@ -135,8 +163,24 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
                   </div>
                   {error && <p className="text-red-400">OTP is invalid</p>}
                   <div className="flex justify-between items-center text-[16px] font-normal">
-                    <p className="text-[#292D32]">Expires in 00:30</p>
-                    <button className="text-[#ff7900]">Resend Code</button>
+                    <div>
+                      {formattedSeconds != 0 && (
+                        <p className="text-[#292D32]">
+                          Expires in 00:{formattedSeconds}
+                        </p>
+                      )}
+                    </div>
+                    {formattedSeconds == 0 && (
+                      <button
+                        onClick={handleResend}
+                        disabled={resendDisabled}
+                        className={`${
+                          resendDisabled ? "opacity-50 cursor-not-allowed" : ""
+                        } text-[#ff7900]`}
+                      >
+                        Resend Code
+                      </button>
+                    )}
                   </div>
                   <button
                     onClick={handleSubmit}

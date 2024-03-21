@@ -27,7 +27,7 @@ const MobileSideMenu = () => {
   return (
     <>
       <RxHamburgerMenu onClick={openDrawer} className="w-7 h-7" />
-      <Drawer open={open} onClose={closeDrawer} className="p-10 w-[80%]">
+      <Drawer open={open} onClose={closeDrawer} className="p-10 w-[90%]">
         {show && <Signup show={show} handleClose={handleBtn} />}
 
         <img

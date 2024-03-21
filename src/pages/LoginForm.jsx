@@ -27,8 +27,10 @@ const LoginForm = ({ show, handleClose, handleOtp }) => {
       const userInfo = await response.config.data;
       let parsed_data = JSON.parse(userInfo);
       let userEmail = parsed_data.email;
-      dispatch(addUserDetail(userEmail));
-      setTimeout(() => (resetForm(), handleOtp()), 1000);
+      if (response.status === 200) {
+        dispatch(addUserDetail(userEmail));
+        setTimeout(() => (resetForm(), handleOtp()), 1000);
+      }
     } catch (error) {
       console.log("loginSubmitError: ", error);
     }

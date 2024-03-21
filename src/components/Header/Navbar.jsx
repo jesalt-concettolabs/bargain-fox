@@ -129,6 +129,7 @@ const Navbar = () => {
                 >
                   Login/Register
                 </button>
+
                 <div>
                   <ul className="flex flex-col gap-2 text-[16px] mt-5 text-left text-[#292D32]">
                     <li className="hover:bg-black hover:text-white pl-2 py-1">

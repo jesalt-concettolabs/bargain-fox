@@ -1,4 +1,6 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useState } from "react";
+
+export const UserContext = createContext();
 
 const UserIntialValue = {
   apple_access_token: null,
@@ -46,22 +48,11 @@ const UserIntialValue = {
   updated_at: "",
 };
 
-const userInitialState = {
-  userData: UserIntialValue,
-  setUserData: () => {},
-};
-
-export const UserContext = createContext(userInitialState);
-
 export function UserContextProvider({ children }) {
-  const [userData, setUserData] = useState(userInitialState.userData);
-
-  const userContextValue = useMemo(() => {
-    return { userData, setUserData };
-  }, [userData]);
+  const [userData, setUserData] = useState(UserIntialValue);
 
   return (
-    <UserContext.Provider value={userContextValue}>
+    <UserContext.Provider value={{ userData, setUserData }}>
       {children}
     </UserContext.Provider>
   );
