@@ -19,7 +19,6 @@ const Hero = () => {
       console.log("Category API error: ", error);
     }
   };
-  console.log(heroData);
   return (
     <main>
       <section className="container flex items-center justify-center">

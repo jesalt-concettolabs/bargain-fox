@@ -14,6 +14,10 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
   const [disableBtn, setDisableBtn] = useState(true);
   const [resendDisabled, setResendDisabled] = useState(false);
   const [seconds, setSeconds] = useState(30);
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [activeOTPIndex, setActiveOTPIndex] = useState(0);
+
+  const inputRef = useRef(null);
 
   const userEmail = useSelector((state) => state.loginDetail);
   const email = userEmail.userLoginData;
@@ -63,7 +67,6 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
           email,
         });
         userInfo = await response.data;
-        console.log("Verfied Data: ", userInfo);
       } catch (error) {
         console.log("verifing error: ", error);
       }
@@ -80,16 +83,12 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
       userInfo.status === 200
     ) {
       setUserData(userInfo.result);
+      localStorage.setItem("token", userInfo.result.token);
       setTimeout(() => {
         handleClose();
       }, 500);
     }
   };
-
-  const [otp, setOtp] = useState(new Array(6).fill(""));
-  const [activeOTPIndex, setActiveOTPIndex] = useState(0);
-
-  const inputRef = useRef(null);
 
   const handleOnChange = ({ target }) => {
     const { value } = target;

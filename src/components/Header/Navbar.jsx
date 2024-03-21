@@ -10,15 +10,18 @@ import { useContext, useState } from "react";
 import MobileSideMenu from "../MobileSideMenu/MobileSideMenu";
 import OTPVerification from "../../pages/OTPVerification";
 import SignupForm from "../../pages/SignupForm";
-import { UserContext } from "../../context/UserContext";
+import { UserContext, UserIntialValue } from "../../context/UserContext";
+import { logoutUser } from "../../api/constant";
+import axios from "axios";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
-  const { userData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
 
   const userName = userData.name;
+  const token = localStorage.getItem("token");
 
   const handleBtn = () => {
     setShow(false);
@@ -40,6 +43,22 @@ const Navbar = () => {
 
   const handleOTPClose = () => {
     setShowOtp(false);
+  };
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get(logoutUser, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (response.status === 200) {
+        localStorage.removeItem("token");
+        setUserData(UserIntialValue);
+      }
+    } catch (error) {
+      console.log("Current user api: ", error);
+    }
   };
 
   return (
@@ -112,7 +131,7 @@ const Navbar = () => {
                   className="text-sm flex flex-col text-[#292D32]"
                 >
                   <span className="text-left">Hello there,</span>
-                  {userName !== "" ? (
+                  {token ? (
                     <span className="font-bold capitalize">{userName}</span>
                   ) : (
                     <span className="font-bold">SIGN IN/REGISTER</span>
@@ -123,12 +142,21 @@ const Navbar = () => {
                 id="user-hover"
                 className="hidden absolute w-48 right-10 p-2 bg-[#FFFFFF] shadow-md rounded-md pt-7 mt-9 z-[9999]"
               >
-                <button
-                  onClick={() => setShow(true)}
-                  className="bg-[#FF7900] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
-                >
-                  Login/Register
-                </button>
+                {!token ? (
+                  <button
+                    onClick={() => setShow(true)}
+                    className="bg-[#FF7900] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
+                  >
+                    Login/Register
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleLogout}
+                    className="bg-[#FF7900] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
+                  >
+                    Logout
+                  </button>
+                )}
 
                 <div>
                   <ul className="flex flex-col gap-2 text-[16px] mt-5 text-left text-[#292D32]">

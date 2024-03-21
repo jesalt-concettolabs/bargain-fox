@@ -1,8 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import axios from "axios";
+import { createContext, useContext, useState, useEffect } from "react";
+import { currentUser } from "../api/constant";
 
 export const UserContext = createContext();
 
-const UserIntialValue = {
+export const UserIntialValue = {
   apple_access_token: null,
   apple_id: null,
   apple_refresh_token: null,
@@ -30,7 +32,7 @@ const UserIntialValue = {
   fast_fox_subscription: 0,
   fast_fox_subscription_end_date: null,
   fastfox_instrument_id: null,
-  id: 15,
+  id: null,
   is_admin_vendor: 0,
   is_block: 0,
   is_fastfox_csv_import: 0,
@@ -40,7 +42,7 @@ const UserIntialValue = {
   mobile: "",
   name: "",
   next_token: "",
-  role_id: 3,
+  role_id: null,
   social_id: null,
   social_type: null,
   step: null,
@@ -50,6 +52,26 @@ const UserIntialValue = {
 
 export function UserContextProvider({ children }) {
   const [userData, setUserData] = useState(UserIntialValue);
+
+  const getCurrentUserDetails = async () => {
+    try {
+      const response = await axios.get(currentUser, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setUserData(response.data.result);
+    } catch (error) {
+      console.log("Current user api: ", error);
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      getCurrentUserDetails();
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={{ userData, setUserData }}>

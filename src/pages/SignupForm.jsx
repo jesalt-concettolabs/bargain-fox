@@ -21,20 +21,7 @@ const SignupForm = ({ show, handleClose }) => {
   const userLoginDetail = useSelector(
     (state) => state.loginDetail.userLoginData
   );
-
-  let loginNumber;
-  let loginEmail;
-  if (!isNaN(userLoginDetail)) {
-    loginNumber = userLoginDetail;
-  } else {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (emailRegex.test(userLoginDetail)) {
-      loginEmail = userLoginDetail;
-    } else {
-      console.log("Invalid input");
-    }
-  }
-  console.log(loginNumber, loginEmail);
+  const isNumber = /^\d+$/.test(userLoginDetail);
 
   const { setUserData } = useContext(UserContext);
 
@@ -45,6 +32,7 @@ const SignupForm = ({ show, handleClose }) => {
       const newUser = await response.data.result;
       if (response.status === 200) {
         setUserData(newUser);
+        localStorage.setItem("token", newUser.token);
         setTimeout(() => {
           setLoading(false);
           handleClose();
@@ -68,8 +56,8 @@ const SignupForm = ({ show, handleClose }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      email: loginEmail ? loginEmail : "",
-      mobile: loginNumber ? loginNumber : "",
+      email: !isNumber ? userLoginDetail : "",
+      mobile: isNumber ? userLoginDetail : "",
     },
     validationSchema: validationSchema,
     onSubmit: handleRegisterSubmit,
