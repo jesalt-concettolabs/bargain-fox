@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   userLoginData: null,
+  userLoginOTP: null,
 };
 
 const loginDetailSlice = createSlice({
@@ -11,9 +12,12 @@ const loginDetailSlice = createSlice({
     addUserDetail: (state, action) => {
       state.userLoginData = action.payload;
     },
+    addLoginOTP: (state, action) => {
+      state.userLoginOTP = action.payload;
+    },
   },
 });
 
-export const { addUserDetail } = loginDetailSlice.actions;
+export const { addUserDetail, addLoginOTP } = loginDetailSlice.actions;
 
 export default loginDetailSlice.reducer;

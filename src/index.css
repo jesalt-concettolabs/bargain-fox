@@ -68,19 +68,10 @@ input[type="number"] {
 #shoppingCartName,
 #mainCardTitle {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-@media only screen and (max-width: 920px) {
-  #shoppingCartName {
-    -webkit-line-clamp: 1;
-  }
-  #mainCardTitle {
-    -webkit-line-clamp: 1;
-  }
 }
 
 ::-webkit-scrollbar {

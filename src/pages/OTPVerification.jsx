@@ -4,8 +4,8 @@ import closeIcon from "/assets/close.png";
 import { useDispatch, useSelector } from "react-redux";
 import { sendOTP, verifyOTP } from "../api/constant";
 import axios from "axios";
-import { addUserOTPDetail } from "../reducers/loginOTPSlice";
 import { UserContext } from "../context/UserContext";
+import { addLoginOTP } from "../reducers/loginDetailSlice";
 
 let currentOTPIndex = 0;
 
@@ -56,7 +56,7 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
 
   const handleSubmit = async () => {
     const enteredOTP = otp.join("");
-    dispatch(addUserOTPDetail(enteredOTP));
+    dispatch(addLoginOTP(enteredOTP));
     let userInfo;
 
     if (enteredOTP == "000000") {

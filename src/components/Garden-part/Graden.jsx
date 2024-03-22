@@ -11,7 +11,6 @@ const Graden = () => {
     try {
       const response = await axios.post(productList);
       setGardenData(response.data.result.data);
-      console.log(response.data.result);
     } catch (error) {
       console.log("Produclist API Error: ", error);
     }

@@ -1,6 +1,9 @@
 #main-sliders {
   .slick-next:before,
   .slick-prev:before {
-    color: transparent;
+    background-image: none;
+  }
+  .slick-arrow {
+    background: none;
   }
 }

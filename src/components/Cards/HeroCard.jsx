@@ -10,7 +10,7 @@ const HeroCard = ({ data }) => {
             className="h-full w-full rounded-full object-cover"
           />
         </div>
-        <span className="font-normal text-center ">{title}</span>
+        <span className="font-normal text-center min-h-14">{title}</span>
       </section>
     </main>
   );

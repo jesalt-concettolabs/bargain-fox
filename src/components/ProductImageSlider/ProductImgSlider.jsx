@@ -1,7 +1,6 @@
 import Slider from "react-slick";
 import prdImg1 from "/assets/prdImg1.png";
 import flowerImg from "/assets/flowers.png";
-
 import prdImg2 from "/assets/prdImg2.png";
 import prdImg3 from "/assets/prdImg3.png";
 import prdImg4 from "/assets/prdImg4.png";

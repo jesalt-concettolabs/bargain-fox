@@ -13,12 +13,16 @@ import SignupForm from "../../pages/SignupForm";
 import { UserContext, UserIntialValue } from "../../context/UserContext";
 import { logoutUser } from "../../api/constant";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const { userData, setUserData } = useContext(UserContext);
+
+  const userEmail = useSelector((state) => state.loginDetail.userLoginOTP);
+  console.log("first: ", userEmail);
 
   const userName = userData.name;
   const token = localStorage.getItem("token");

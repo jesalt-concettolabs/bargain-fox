@@ -1,17 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dropdown from "../components/DropDown/Dropdown";
 import Card2 from "../components/MainCard/Card2";
 import { Link } from "react-router-dom";
-import { gardenCardData } from "../constants/gardenCardData";
 import closeIcon from "/assets/close.png";
 import Filter from "../components/Filters/Filter";
+import axios from "axios";
+import { productList } from "../api/constant";
 
 const ProductListing = () => {
   const [activeClose, setActiveClose] = useState(false);
+  const [productData, setProductData] = useState([]);
 
   const handleFilter = () => {
     setActiveClose((prev) => !prev);
   };
+
+  const productDataAPI = async () => {
+    try {
+      const response = await axios.post(productList);
+      setProductData(response.data.result.data);
+    } catch (error) {
+      console.log("Produclist API Error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    productDataAPI();
+  }, []);
 
   return (
     <main className="container">
@@ -77,16 +92,15 @@ const ProductListing = () => {
               id="product-card-div"
               className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
             >
-              {gardenCardData &&
-                gardenCardData.map((item) => {
-                  return (
-                    <div key={item.id}>
-                      <Link to={item.cardUrl}>
-                        <Card2 data={item} />
-                      </Link>
-                    </div>
-                  );
-                })}
+              {productData.map((item) => {
+                return (
+                  <div key={item.id}>
+                    <Link to={"/"}>
+                      <Card2 data={item} />
+                    </Link>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
