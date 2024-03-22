@@ -32,7 +32,7 @@ const Card2 = ({ data, btnClass }) => {
   };
 
   return (
-    <div className="relative mr-6 flex max-w-[24rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+    <div className="relative bg-white flex max-w-[24rem] flex-col overflow-hidden rounded-xl  bg-clip-border text-gray-700 shadow-md">
       <div className="relative  m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
         <div className="w-56 h-56">
           <img

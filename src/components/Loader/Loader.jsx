@@ -1,0 +1,15 @@
+import React from "react";
+
+const Loader = () => {
+  return (
+    <div className="relative flex justify-center items-center">
+      <div className="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-[#ff7900]"></div>
+      <img
+        src="https://bargainfox-dev.concettoprojects.com/images/category-placeholder.svg"
+        className="rounded-full h-28 w-28"
+      />
+    </div>
+  );
+};
+
+export default Loader;

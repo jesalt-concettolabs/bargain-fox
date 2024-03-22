@@ -142,7 +142,11 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
                   <p className="text-sm font-medium text-[#000000B3]">
                     Verification Code
                   </p>
-                  <div className={"flex justify-between gap-6 items-center"}>
+                  <div
+                    className={
+                      "flex justify-between gap-2 sm:gap-6 items-center"
+                    }
+                  >
                     {otp.map((_, index) => {
                       return (
                         <React.Fragment key={index}>
