@@ -19,6 +19,7 @@ const ProductListing = () => {
     try {
       const response = await axios.post(productList);
       setProductData(response.data.result.data);
+      console.log("Product Data: ", response);
     } catch (error) {
       console.log("Produclist API Error: ", error);
     }
@@ -92,9 +93,9 @@ const ProductListing = () => {
               id="product-card-div"
               className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
             >
-              {productData.map((item) => {
+              {productData.map((item, index) => {
                 return (
-                  <div key={item.id}>
+                  <div key={index}>
                     <Link to={"/"}>
                       <Card2 data={item} />
                     </Link>

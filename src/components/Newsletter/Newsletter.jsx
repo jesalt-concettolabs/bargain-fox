@@ -25,7 +25,6 @@ const Newsletter = () => {
           setLetterEmail("");
         }
       } catch (error) {
-        console.log("Newsletter API error: ", error.response.data);
         if (error.response.data.status === 422) {
           toast.error(error.response.data.message);
           setDisable(false);
