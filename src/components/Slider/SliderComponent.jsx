@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Card1 from "../Card1/Card1";
 import Card2 from "../MainCard/Card2";
 import TrendingCard from "../Cards/TrendingCard";
+import "./slider.scss";
 
 const SliderComponent = ({
   data,
@@ -52,17 +53,19 @@ const SliderComponent = ({
   );
 
   return (
-    <div className="slider-container w-full">
-      <Slider {...sliderSettings}>
-        {data.map((item, index) => (
-          <Link to={"/"} key={index}>
-            {mainCardStatus && <Card2 data={item} />}
-            {trendingCardStatus && <TrendingCard data={item} />}
-            {dealCardStatus && <Card1 data={item} />}
-          </Link>
-        ))}
-      </Slider>
-    </div>
+    <main id="main-slider">
+      <div className="slider-container w-full">
+        <Slider {...sliderSettings}>
+          {data.map((item, index) => (
+            <Link to={"/"} key={index}>
+              {mainCardStatus && <Card2 data={item} />}
+              {trendingCardStatus && <TrendingCard data={item} />}
+              {dealCardStatus && <Card1 data={item} />}
+            </Link>
+          ))}
+        </Slider>
+      </div>
+    </main>
   );
 };
 

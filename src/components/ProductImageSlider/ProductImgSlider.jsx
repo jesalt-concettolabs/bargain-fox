@@ -29,25 +29,27 @@ const ProductImgSlider = ({ onClick }) => {
     verticalSwiping: true,
   };
   return (
-    <div className="slider-container" id="main-sliders">
-      <Slider {...settings}>
-        {productImages.map((item, index) => (
-          <div
-            key={index}
-            className="w-[100px] h-[100px] overflow-hidden cursor-pointer"
-          >
-            <img
-              src={item}
-              alt="product images"
-              width="150px"
-              height="150px"
-              className="object-contain overflow-hidden"
-              onClick={() => onClick(item)}
-            />
-          </div>
-        ))}
-      </Slider>
-    </div>
+    <main id="product-detail-slider">
+      <div className="slider-container">
+        <Slider {...settings}>
+          {productImages.map((item, index) => (
+            <div
+              key={index}
+              className="w-[100px] h-[100px] overflow-hidden outline-none cursor-pointer"
+            >
+              <img
+                src={item}
+                alt="product images"
+                width="150px"
+                height="150px"
+                className="object-contain overflow-hidden"
+                onClick={() => onClick(item)}
+              />
+            </div>
+          ))}
+        </Slider>
+      </div>
+    </main>
   );
 };
 

@@ -1,9 +1,12 @@
-#main-sliders {
-  .slick-next:before,
-  .slick-prev:before {
-    background-image: none;
-  }
-  .slick-arrow {
-    background: none;
+#product-detail-slider {
+  .slider-container {
+    .slick-next:before,
+    .slick-prev:before {
+      background-image: none;
+    }
+    .slick-arrow {
+      background: none;
+      display: none !important;
+    }
   }
 }

@@ -33,43 +33,6 @@ input[type="number"] {
   padding: 20px;
 }
 
-.slick-track {
-  display: flex;
-  gap: 16px;
-}
-
-.slick-arrow::before {
-  content: "";
-  background: url("/assets/rightArrowSlider.png") no-repeat 50%;
-  background-size: contain;
-  height: 20px;
-  display: block;
-}
-.slick-arrow {
-  background: #f2f2f8;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  padding: 0;
-}
-
-.slick-next:hover,
-.slick-prev:hover {
-  background-color: #f2f2f8;
-}
-
-.slick-prev {
-  left: -45px;
-}
-
-.slick-next {
-  right: -45px;
-}
-
-.slick-prev::before {
-  transform: rotate(180deg);
-}
-
 #shoppingCartName,
 #mainCardTitle {
   display: -webkit-box;
