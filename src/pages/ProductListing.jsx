@@ -6,9 +6,11 @@ import closeIcon from "/assets/close.png";
 import Filter from "../components/Filters/Filter";
 import axios from "axios";
 import { productList } from "../api/constant";
+import Loader from "../components/Loader/Loader";
 
 const ProductListing = () => {
   const [activeClose, setActiveClose] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState([]);
 
   const handleFilter = () => {
@@ -16,10 +18,11 @@ const ProductListing = () => {
   };
 
   const productDataAPI = async () => {
+    setLoading(true);
     try {
       const response = await axios.post(productList);
       setProductData(response.data.result.data);
-      console.log("Product Data: ", response);
+      setLoading(false);
     } catch (error) {
       console.log("Produclist API Error: ", error);
     }
@@ -28,6 +31,14 @@ const ProductListing = () => {
   useEffect(() => {
     productDataAPI();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="h-[80vh] w-[100vw] flex justify-center items-center">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <main className="container">

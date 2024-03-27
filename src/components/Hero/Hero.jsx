@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import bannerImg from "/assets/banner.png";
 import HeroCard from "../Cards/HeroCard";
 import { useEffect, useState } from "react";
@@ -38,9 +37,7 @@ const Hero = () => {
           {heroData &&
             heroData.map((item) => (
               <div key={item.id}>
-                <Link to={"/"}>
-                  <HeroCard data={item} />
-                </Link>
+                <HeroCard data={item} />
               </div>
             ))}
         </div>

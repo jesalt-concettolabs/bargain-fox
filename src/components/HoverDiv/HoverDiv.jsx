@@ -1,60 +1,52 @@
-import { useState } from "react";
-import { tabMenu } from "../../constants/trendingCardData";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const HoverDiv = () => {
-  const [activeTab, setActiveTab] = useState("first");
+const HoverDiv = ({ data }) => {
+  const [activeList, setActiveList] = useState(0);
 
-  const handleTabHover = (eventKey) => {
-    setActiveTab(eventKey);
+  const handleMouseEnter = (index) => {
+    setActiveList(index);
+  };
+
+  const handleMouseLeave = (index) => {
+    setActiveList(index);
   };
 
   return (
-    <div className="absolute py-3 z-[999] flex flex-col justify-between items-center bg-white w-[450px] h-[250px] top-[150px] left-5 mt-2 rounded-[25px]">
-      <div className="flex gap-[8rem]">
-        <div className="flex flex-col gap-3">
-          {tabMenu.map((tabmenu) => (
-            <div key={tabmenu.id}>
-              <button
-                onMouseEnter={() => handleTabHover(tabmenu.id)}
-                className={
-                  activeTab === tabmenu.id ? "text-black" : "text-gray-600"
-                }
-              >
-                {tabmenu.menu}
-              </button>
-            </div>
-          ))}
+    <div className="absolute py-3 z-[999] bg-white w-max h-auto top-40 -left-28 mt-2 rounded-[25px]">
+      <div className="flex gap-24 justify-between px-8 py-3">
+        <div>
+          <ul>
+            {data.map(({ id, title, slug }, index) => (
+              <Link to={`product-list/${slug}`} key={id}>
+                <li
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={() => handleMouseLeave(index)}
+                  className={`${
+                    activeList === index
+                      ? "text-[#292D32] bg-[#f5f5fc]"
+                      : "text-[#A4A4B8]"
+                  } font-semibold pb-3 px-2 text-[18px]`}
+                >
+                  {title}
+                </li>
+              </Link>
+            ))}
+          </ul>
         </div>
-        {/* <div className="ml-28"> */}
-        <div className="flex flex-col gap-3">
-          <div className={activeTab === "first" ? "" : "hidden"}>
-            <div className="flex flex-col gap-3">
-              <p>Appliances & Accessories</p>
-              <p>Cleaning & Household</p>
-              <p>Lighting</p>
-              <p>Bathroom</p>
-              <p>Furnishings</p>
-              <p>Decor</p>
-            </div>
-          </div>
-          <div className={activeTab === "second" ? "" : "hidden"}>
-            <div className="flex flex-col gap-3">
-              <p>Appliances</p>
-              <p>Utensils, Tools & Gadgets</p>
-              <p>Cooking & Baking</p>
-              <p>Tableware</p>
-            </div>
-          </div>
-          <div className={activeTab === "third" ? "" : "hidden"}>
-            <div className="flex flex-col gap-3">
-              <p>Storage & Organisation</p>
-              <p>Supplies</p>
-              <p>Printers</p>
-              <p>Shredders</p>
-            </div>
-          </div>
+        <div>
+          {activeList !== null && (
+            <ul className="flex flex-col gap-3">
+              {data[activeList].collection.map(({ id, title, slug }) => (
+                <Link to={`product-list/${slug}`} key={id}>
+                  <li className="text-[#292D32] hover:text-[#ff7900] text-[16px] font-normal">
+                    {title}
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          )}
         </div>
-        {/* </div> */}
       </div>
     </div>
   );
