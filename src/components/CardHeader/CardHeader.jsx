@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import rightArrow from "/assets/Group 24.svg";
 
-const CardHeader = ({ cardTitle }) => {
+const CardHeader = ({ cardTitle, path }) => {
   return (
     <div className="w-full flex items-center justify-between">
       <div id="deal-heading" className="flex">
@@ -10,7 +10,7 @@ const CardHeader = ({ cardTitle }) => {
           {cardTitle}
         </span>
       </div>
-      <Link to={"/"}>
+      <Link to={path}>
         <div
           id="view-deal-head"
           className="flex gap-2 justify-center items-center"

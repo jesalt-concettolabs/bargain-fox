@@ -6,7 +6,7 @@ const Deals = () => {
   return (
     <main>
       <section className="container w-[80%] flex flex-col gap-4 justify-center items-center mt-6">
-        <CardHeader cardTitle="Deals of the Day" />
+        <CardHeader cardTitle="Deals of the Day" path="/product-list" />
         <div className="w-full">
           <SliderComponent
             data={dealCardData}

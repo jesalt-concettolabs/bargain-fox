@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Dropdown from "../components/DropDown/Dropdown";
 import Card2 from "../components/MainCard/Card2";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import closeIcon from "/assets/close.png";
 import Filter from "../components/Filters/Filter";
 import axios from "axios";
@@ -10,8 +10,16 @@ import Loader from "../components/Loader/Loader";
 
 const ProductListing = () => {
   const [activeClose, setActiveClose] = useState(false);
+  const [emptyData, setEmptyData] = useState(false);
   const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState([]);
+  const location = useLocation();
+
+  const params = new URLSearchParams(location.search);
+  const sort_by = params.get("sort_by");
+  const searchText = params.get("searchText");
+
+  const { categoryId, subCategoryId, collectionId } = useParams();
 
   const handleFilter = () => {
     setActiveClose((prev) => !prev);
@@ -20,23 +28,55 @@ const ProductListing = () => {
   const productDataAPI = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(productList);
-      setProductData(response.data.result.data);
-      setLoading(false);
+      let postData = {};
+      if (categoryId) {
+        postData.category_id = categoryId;
+      }
+      if (subCategoryId) {
+        postData.sub_category_id = subCategoryId;
+      }
+      if (collectionId) {
+        postData.collection_id = collectionId;
+      }
+      if (sort_by) {
+        postData.sort_by = sort_by;
+      }
+      if (searchText) {
+        postData.search = searchText;
+      }
+
+      const response = await axios.post(productList, postData);
+      if (response.status === 200) {
+        setProductData(response.data.result.data);
+        setLoading(false);
+        if (response.data.result.data.length === 0) {
+          setEmptyData(true);
+        } else {
+          setEmptyData(false);
+        }
+      }
     } catch (error) {
-      console.log("Produclist API Error: ", error);
+      console.log("Product List API Error: ", error);
     }
   };
 
   useEffect(() => {
     productDataAPI();
-  }, []);
+  }, [categoryId, subCategoryId, collectionId, searchText]);
 
   if (loading) {
     return (
       <div className="h-[80vh] w-[100vw] flex justify-center items-center">
         <Loader />
       </div>
+    );
+  }
+
+  if (emptyData) {
+    return (
+      <h1 className="h-[80vh] w-[100vw] text-[#292D32] flex justify-center items-center">
+        No Data Found
+      </h1>
     );
   }
 

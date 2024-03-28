@@ -7,7 +7,7 @@ const Trending = () => {
   return (
     <main>
       <section className="container w-[80%] flex flex-col gap-4 mt-6">
-        <CardHeader cardTitle="Trending on BargainFox" />
+        <CardHeader cardTitle="Trending on BargainFox" path="/product-list" />
         <SliderComponent
           data={trendingCardData}
           xlSlide={6}

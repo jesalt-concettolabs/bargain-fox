@@ -23,7 +23,7 @@ const Electronics = () => {
   return (
     <main>
       <section className="container w-[80%] flex flex-col gap-4 mt-6">
-        <CardHeader cardTitle="Electronics" />
+        <CardHeader cardTitle="Electronics" path="/product-list/electronics" />
         <SliderComponent
           data={electronicData}
           xlSlide={4}

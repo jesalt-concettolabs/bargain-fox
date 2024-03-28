@@ -20,7 +20,7 @@ const HeroCard = ({ data }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <Link to={`product-list/${slug}`}>
+      <Link to={`/${slug}`}>
         <section className="flex flex-col gap-2 justify-center items-center">
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full">
             <img
@@ -40,10 +40,7 @@ const HeroCard = ({ data }) => {
 
       <div className="hidden md:block">
         {isHovered && data.subcategory != "" && (
-          <HoverDiv
-            // baseRoute={`product-list/${slug}`}
-            data={data.subcategory}
-          />
+          <HoverDiv baseRoute={`${slug}`} data={data} />
         )}
       </div>
     </main>

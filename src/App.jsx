@@ -17,8 +17,17 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/product-list/:slug?",
+        path: "/product-list",
         element: <ProductListing />,
+      },
+      {
+        path: "",
+        children: [
+          {
+            path: ":categoryId?/:subCategoryId?/:collectionId?/:sort_by?",
+            element: <ProductListing />,
+          },
+        ],
       },
       {
         path: "/product-detail",
@@ -31,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <Checkout />,
+      },
+      {
+        path: "/search-result",
+        element: <ProductListing />,
       },
       // {
       //   path: "/wishlist",

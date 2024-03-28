@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbar.scss";
 import logo from "/assets/main-logo-white-.com_350x.png";
 import searchIcon from "/assets/search-normal.svg";
@@ -18,10 +18,22 @@ const Navbar = () => {
   const [show, setShow] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const { userData, setUserData } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const userName = userData.name;
   const token = localStorage.getItem("token");
+
+  const handleSearch = () => {
+    if (searchValue) {
+      let path = "/search-result";
+      path += `/?searchText=${searchValue}`;
+      navigate(path);
+      setSearchValue("");
+    }
+  };
 
   const handleBtn = () => {
     setShow(false);
@@ -96,9 +108,15 @@ const Navbar = () => {
               type="text"
               className="h-[35px] p-1 outline-none text-[#707070] w-[95%]"
               id="search-input"
+              value={searchValue}
+              autoComplete="off"
+              onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search Products"
             />
-            <button className="bg-[#FF7900] p-2 rounded-r-lg w-[35px] h-[35px] flex justify-center items-center">
+            <button
+              onClick={handleSearch}
+              className="bg-[#FF7900] outline-none p-2 rounded-r-lg w-[35px] h-[35px] flex justify-center items-center"
+            >
               <img src={searchIcon} alt="search-icon" />
             </button>
           </div>
@@ -225,15 +243,21 @@ const Navbar = () => {
           </div>
           <div
             id="search-bar"
-            className="flex w-[500px] mt-2 items-center border-2 border-solid border-[#F5F5FC] rounded-[10px]"
+            className="flex  w-[500px] mt-2 items-center border-2 border-solid border-[#F5F5FC] rounded-[10px]"
           >
             <input
               type="text"
               className="h-[35px] p-1 outline-none text-[#707070] w-[95%]"
               id="search-input"
+              value={searchValue}
+              autoComplete="off"
+              onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search Products"
             />
-            <button className="bg-[#FF7900] p-2 rounded-r-lg w-[35px] h-[35px] flex justify-center items-center">
+            <button
+              onClick={handleSearch}
+              className="bg-[#FF7900] outline-none p-2 rounded-r-lg w-[35px] h-[35px] flex justify-center items-center"
+            >
               <img src={searchIcon} alt="search-icon" />
             </button>
           </div>

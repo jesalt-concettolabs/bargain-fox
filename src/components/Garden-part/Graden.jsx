@@ -23,7 +23,10 @@ const Graden = () => {
   return (
     <main>
       <section className="container w-[80%] flex flex-col gap-4 mt-6">
-        <CardHeader cardTitle=" Garden & DIY" />
+        <CardHeader
+          cardTitle=" Garden & DIY"
+          path="/product-list/sports-leisure/garden-diy/gardening"
+        />
         <SliderComponent
           data={gardenData}
           xlSlide={4}

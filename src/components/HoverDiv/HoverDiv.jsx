@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 const HoverDiv = ({ data }) => {
   const [activeList, setActiveList] = useState(0);
+  const subData = data.subcategory;
+  const { slug: mainSlug } = data;
 
   const handleMouseEnter = (index) => {
     setActiveList(index);
@@ -17,8 +19,8 @@ const HoverDiv = ({ data }) => {
       <div className="flex gap-24 justify-between px-8 py-3">
         <div>
           <ul>
-            {data.map(({ id, title, slug }, index) => (
-              <Link to={`product-list/${slug}`} key={id}>
+            {subData.map(({ id, title, slug }, index) => (
+              <Link to={`/${mainSlug}/${slug}`} key={id}>
                 <li
                   onMouseEnter={() => handleMouseEnter(index)}
                   onMouseLeave={() => handleMouseLeave(index)}
@@ -37,8 +39,11 @@ const HoverDiv = ({ data }) => {
         <div>
           {activeList !== null && (
             <ul className="flex flex-col gap-3">
-              {data[activeList].collection.map(({ id, title, slug }) => (
-                <Link to={`product-list/${slug}`} key={id}>
+              {subData[activeList].collection.map(({ id, title, slug }) => (
+                <Link
+                  to={`/${mainSlug}/${subData[activeList].slug}/${slug}`}
+                  key={id}
+                >
                   <li className="text-[#292D32] hover:text-[#ff7900] text-[16px] font-normal">
                     {title}
                   </li>
