@@ -16,7 +16,7 @@ const ProductListing = () => {
   const location = useLocation();
 
   const params = new URLSearchParams(location.search);
-  const sort_by = params.get("sort_by");
+  const sort_by = location.search.slice(9);
   const searchText = params.get("searchText");
 
   const { categoryId, subCategoryId, collectionId } = useParams();
@@ -40,6 +40,7 @@ const ProductListing = () => {
       }
       if (sort_by) {
         postData.sort_by = sort_by;
+        console.log(postData.sort_by);
       }
       if (searchText) {
         postData.search = searchText;
@@ -62,15 +63,7 @@ const ProductListing = () => {
 
   useEffect(() => {
     productDataAPI();
-  }, [categoryId, subCategoryId, collectionId, searchText]);
-
-  if (loading) {
-    return (
-      <div className="h-[80vh] w-[100vw] flex justify-center items-center">
-        <Loader />
-      </div>
-    );
-  }
+  }, [categoryId, subCategoryId, collectionId, searchText, sort_by]);
 
   if (emptyData) {
     return (
@@ -139,22 +132,28 @@ const ProductListing = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3 mt-5">
-            <div
-              id="product-card-div"
-              className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
-            >
-              {productData.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <Link to={"/"}>
-                      <Card2 data={item} />
-                    </Link>
-                  </div>
-                );
-              })}
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <Loader />
             </div>
-          </div>
+          ) : (
+            <div className="flex flex-col gap-3 mt-5">
+              <div
+                id="product-card-div"
+                className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+              >
+                {productData.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <Link to={"/"}>
+                        <Card2 data={item} />
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </section>
       </div>
     </main>

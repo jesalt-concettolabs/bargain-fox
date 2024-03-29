@@ -1,7 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./navbar.scss";
 import logo from "/assets/main-logo-white-.com_350x.png";
-import searchIcon from "/assets/search-normal.svg";
 import userlogo from "/assets/user.svg";
 import heartLogo from "/assets/whishlist.svg";
 import shoppingCart from "/assets/shopping-cart.svg";
@@ -13,27 +12,16 @@ import SignupForm from "../../pages/SignupForm";
 import { UserContext, UserIntialValue } from "../../context/UserContext";
 import { logoutUser } from "../../api/constant";
 import axios from "axios";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
   const { userData, setUserData } = useContext(UserContext);
-
-  const navigate = useNavigate();
 
   const userName = userData.name;
   const token = localStorage.getItem("token");
-
-  const handleSearch = () => {
-    if (searchValue) {
-      let path = "/search-result";
-      path += `/?searchText=${searchValue}`;
-      navigate(path);
-      setSearchValue("");
-    }
-  };
 
   const handleBtn = () => {
     setShow(false);
@@ -100,26 +88,7 @@ const Navbar = () => {
               id="nav-logo"
             />
           </Link>
-          <div
-            id="search-bar"
-            className="flex w-[500px] items-center border-2 border-solid border-[#F5F5FC] rounded-[10px]"
-          >
-            <input
-              type="text"
-              className="h-[35px] p-1 outline-none text-[#707070] w-[95%]"
-              id="search-input"
-              value={searchValue}
-              autoComplete="off"
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Search Products"
-            />
-            <button
-              onClick={handleSearch}
-              className="bg-[#FF7900] outline-none p-2 rounded-r-lg w-[35px] h-[35px] flex justify-center items-center"
-            >
-              <img src={searchIcon} alt="search-icon" />
-            </button>
-          </div>
+          <SearchBar />
           <div className="flex items-center gap-[30px]">
             <Link to={"/wishlist"}>
               <div className="relative">
@@ -241,7 +210,8 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div
+          <SearchBar />
+          {/* <div
             id="search-bar"
             className="flex  w-[500px] mt-2 items-center border-2 border-solid border-[#F5F5FC] rounded-[10px]"
           >
@@ -260,7 +230,7 @@ const Navbar = () => {
             >
               <img src={searchIcon} alt="search-icon" />
             </button>
-          </div>
+          </div> */}
         </div>
       </header>
     </main>

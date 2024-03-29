@@ -1,15 +1,20 @@
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const Dropdown = () => {
-  const { categoryId, subCategoryId, collectionId } = useParams();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const searchText = params.get("searchText");
+  const initialSelectedValue = params.get("sort_by") || "highest_price";
+  const [selectedValue, setSelectedValue] = useState(initialSelectedValue);
   const navigate = useNavigate();
-  console.log("first", searchText);
+  const { categoryId, subCategoryId, collectionId } = useParams();
 
   const handleFilter = (e) => {
     const filterValue = e.target.value;
+
+    setSelectedValue(filterValue);
+
     if (searchText) {
       let path = "/search-result";
       path += `/?searchText=${searchText}`;
@@ -26,12 +31,16 @@ const Dropdown = () => {
       if (collectionId) {
         path += `/${collectionId}`;
       }
-
       path += `/?sort_by=${filterValue}`;
-
       navigate(path);
     }
   };
+
+  useEffect(() => {
+    const newParams = new URLSearchParams(location.search);
+    const newSelectedValue = newParams.get("sort_by") || "highest_price";
+    setSelectedValue(newSelectedValue);
+  }, [location.search]);
 
   return (
     <div className="flex justify-center items-center border rounded-2xl p-1">
@@ -40,7 +49,7 @@ const Dropdown = () => {
       </span>
       <div>
         <select
-          id="hs-hidden-select"
+          value={selectedValue}
           onChange={handleFilter}
           className="py-2 px-4 block w-full bg-transparent rounded-lg text-sm disabled:opacity-50 outline-none"
         >

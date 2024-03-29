@@ -8,7 +8,13 @@ import Loader from "../Spinner/Spinner";
 
 const Card2 = ({ data, btnClass }) => {
   const productImageUrl = data.product_images[0].product_image_url;
-  const { description, my_sale_price, main_rrp, percentage_discount } = data;
+  const {
+    description,
+    my_sale_price,
+    main_rrp,
+    percentage_discount,
+    sale_price,
+  } = data;
   const [wishClicked, setWishClicked] = useState(false);
   const [loader, setLoader] = useState(false);
 
@@ -73,7 +79,10 @@ const Card2 = ({ data, btnClass }) => {
       <StarImg />
 
       <div className="flex items-center justify-between px-2">
-        <Price cardNotPrice={main_rrp} cardPrice={my_sale_price} />
+        <Price
+          cardNotPrice={main_rrp}
+          cardPrice={my_sale_price || sale_price}
+        />
         <div id="discountDiv" className="relative">
           <div id="discountImg" className="w-10 h-10">
             <img src={star2Img} alt="start2Img" width="100%" height="100%" />
