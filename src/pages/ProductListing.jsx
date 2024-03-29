@@ -40,7 +40,6 @@ const ProductListing = () => {
       }
       if (sort_by) {
         postData.sort_by = sort_by;
-        console.log(postData.sort_by);
       }
       if (searchText) {
         postData.search = searchText;
@@ -133,7 +132,7 @@ const ProductListing = () => {
             </div>
           </div>
           {loading ? (
-            <div className="flex justify-center items-center">
+            <div className="w-[70vw] h-[60vh] flex justify-center items-center">
               <Loader />
             </div>
           ) : (

@@ -5,7 +5,7 @@ const Dropdown = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const searchText = params.get("searchText");
-  const initialSelectedValue = params.get("sort_by") || "highest_price";
+  const initialSelectedValue = params.get("sort_by") || "top_customes_reviews";
   const [selectedValue, setSelectedValue] = useState(initialSelectedValue);
   const navigate = useNavigate();
   const { categoryId, subCategoryId, collectionId } = useParams();
@@ -38,7 +38,7 @@ const Dropdown = () => {
 
   useEffect(() => {
     const newParams = new URLSearchParams(location.search);
-    const newSelectedValue = newParams.get("sort_by") || "highest_price";
+    const newSelectedValue = newParams.get("sort_by") || "top_customes_reviews";
     setSelectedValue(newSelectedValue);
   }, [location.search]);
 

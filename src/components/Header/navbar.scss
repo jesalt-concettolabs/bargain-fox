@@ -10,7 +10,8 @@
     width: 145px;
   }
 
-  #search-bar {
+  #search-bar,
+  #search-data {
     width: 400px;
   }
 
@@ -27,7 +28,8 @@
         width: 125px;
       }
 
-      #search-bar {
+      #search-bar,
+      #search-data {
         width: 350px;
       }
       #user-div {
@@ -41,7 +43,8 @@
 
 /* md */
 @media (max-width: 768px) {
-  #search-bar {
+  #search-bar,
+  #search-data {
     width: 100%;
   }
   #main-header {

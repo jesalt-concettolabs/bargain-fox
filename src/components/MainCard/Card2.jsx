@@ -46,7 +46,7 @@ const Card2 = ({ data, btnClass }) => {
             alt="card-img"
             width="100%"
             height="100%"
-            className="h-full w-full object-contain"
+            className="h-full w-full object-cover"
           />
         </div>
         <div

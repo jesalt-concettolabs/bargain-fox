@@ -42,6 +42,8 @@ input[type="number"] {
   text-overflow: ellipsis;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
+/* #form-div {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+} */
