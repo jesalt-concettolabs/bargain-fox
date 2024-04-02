@@ -7,27 +7,21 @@ import {
 import CheckboxComponent from "../Checkbox/Checkbox";
 
 const Filter = () => {
-  const [conditionCheckedValues, setConditionCheckedValues] = useState([]);
-  const [discountCheckedValues, setDiscountCheckedValues] = useState([]);
-  const [priceCheckedValues, setPriceCheckedValues] = useState([]);
+  const [checkedValues, setCheckedValues] = useState({
+    condition: [],
+    discount: [],
+    price: [],
+  });
 
-  // console.log(
-  //   "first",
-  //   conditionCheckedValues,
-  //   discountCheckedValues,
-  //   priceCheckedValues
-  // );
+  console.log("first", checkedValues);
 
-  const handleConditionChange = (value) => {
-    setConditionCheckedValues([value]);
-  };
-
-  const handleDiscountChange = (value) => {
-    setDiscountCheckedValues([value]);
-  };
-
-  const handlePriceChange = (value) => {
-    setPriceCheckedValues([value]);
+  const handleChange = (type, value) => {
+    setCheckedValues({
+      ...checkedValues,
+      [type]: checkedValues[type].includes(value)
+        ? checkedValues[type].filter((val) => val !== value)
+        : [value],
+    });
   };
 
   return (
@@ -35,23 +29,20 @@ const Filter = () => {
       <CheckboxComponent
         data={filterCategoryNames}
         title={"Condition"}
-        checkedValues={conditionCheckedValues}
-        setCheckedValues={setConditionCheckedValues}
-        handleChange={handleConditionChange}
+        checkedValues={checkedValues.condition}
+        handleChange={(value) => handleChange("condition", value)}
       />
       <CheckboxComponent
         data={filterDiscountNames}
         title={"Discount"}
-        checkedValues={discountCheckedValues}
-        setCheckedValues={setDiscountCheckedValues}
-        handleChange={handleDiscountChange}
+        checkedValues={checkedValues.discount}
+        handleChange={(value) => handleChange("discount", value)}
       />
       <CheckboxComponent
         data={filterPriceNames}
         title={"Price"}
-        checkedValues={priceCheckedValues}
-        setCheckedValues={setPriceCheckedValues}
-        handleChange={handlePriceChange}
+        checkedValues={checkedValues.price}
+        handleChange={(value) => handleChange("price", value)}
       />
     </>
   );

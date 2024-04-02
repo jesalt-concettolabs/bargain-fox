@@ -1,105 +1,49 @@
-import kitchenImg from "/assets/Image 11.png";
-import healthBeautyImg from "/assets/Image 12.png";
-import electronicImg from "/assets/Image 14.png";
-import toysImg from "/assets/Image 15.png";
-import sportsImg from "/assets/Image 17.png";
-import clearnceImg from "/assets/Image 19.png";
-
-export const heroCardData = [
-  {
-    id: 1,
-    heroCardImg: kitchenImg,
-    heroCardName: "Home & Kitchen",
-    heroCardUrl: "/product-list",
-  },
-  {
-    id: 2,
-    heroCardImg: healthBeautyImg,
-    heroCardName: "Healthy & Beauty",
-    heroCardUrl: "/product-detail",
-  },
-  {
-    id: 3,
-    heroCardImg: electronicImg,
-    heroCardName: "Electronics",
-    heroCardUrl: "/",
-  },
-  {
-    id: 4,
-    heroCardImg: toysImg,
-    heroCardName: "Toys & Carfts",
-    heroCardUrl: "/",
-  },
-  {
-    id: 5,
-    heroCardImg: sportsImg,
-    heroCardName: "Sports & Leisure",
-    heroCardUrl: "/",
-  },
-  {
-    id: 6,
-    heroCardImg: clearnceImg,
-    heroCardName: "Clearance",
-    heroCardUrl: "/",
-  },
-];
-
 export const filterDiscountNames = [
-  {
-    label: "90% off or more",
-  },
-  {
-    label: "80% off or more",
-  },
-  {
-    label: "70% off or more",
-  },
-  {
-    label: "60% off or more",
-  },
-  {
-    label: "50% off or more",
-  },
-  {
-    label: "40% off or more",
-  },
+  { id: 1, label: "90% off or more", slug: "90" },
+  { id: 2, label: "80% off or more", slug: "80" },
+  { id: 3, label: "70% off or more", slug: "70" },
+  { id: 4, label: "60% off or more", slug: "60" },
+  { id: 5, label: "50% off or more", slug: "50" },
+  { id: 6, label: "40% off or more", slug: "40" },
 ];
 
 export const filterPriceNames = [
-  {
-    label: "Under $10",
-  },
-  {
-    label: "$10 - $25",
-  },
-  {
-    label: "$25 - $50",
-  },
-  {
-    label: "$50 - $100",
-  },
-  {
-    label: "Over $100",
-  },
+  { id: 1, label: "Under £10", slug: "0-10" },
+  { id: 2, label: "£10 - £25", slug: "10-25" },
+  { id: 3, label: "£25 - £50", slug: "25-50" },
+  { id: 4, label: "£50 - £100", slug: "50-100" },
+  { id: 5, label: "Over £100", slug: "100-0" },
 ];
 
 export const filterCategoryNames = [
   {
+    id: 1,
     label: "Brand New",
+    slug: "brand-new",
   },
   {
+    id: 2,
     label: "Open Box",
+    slug: "open-box",
   },
   {
+    id: 3,
     label: "Like New",
+    slug: "like-new",
   },
   {
+    id: 4,
     label: "Very Good",
+    slug: "very-good",
   },
   {
+    id: 5,
     label: "Good",
+    slug: "good",
   },
   {
+    id: 6,
     label: "Acceptable",
+    slug: "acceptable",
   },
 ];
