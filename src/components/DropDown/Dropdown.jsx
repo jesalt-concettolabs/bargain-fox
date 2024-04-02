@@ -16,9 +16,9 @@ const Dropdown = () => {
     setSelectedValue(filterValue);
 
     if (searchText) {
-      let path = "/search-result";
-      path += `/?searchText=${searchText}`;
-      path += `&?sort_by=${filterValue}`;
+      let path = "";
+      path += `?searchText=${searchText}`;
+      path += `&sort_by=${filterValue}`;
       navigate(path);
     } else {
       let path = "";
@@ -31,7 +31,7 @@ const Dropdown = () => {
       if (collectionId) {
         path += `/${collectionId}`;
       }
-      path += `/?sort_by=${filterValue}`;
+      path += `?sort_by=${filterValue}`;
       navigate(path);
     }
   };

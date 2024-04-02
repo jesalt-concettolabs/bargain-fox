@@ -7,17 +7,21 @@ import Filter from "../components/Filters/Filter";
 import axios from "axios";
 import { productList } from "../api/constant";
 import Loader from "../components/Loader/Loader";
+import Pagination from "../components/pagination/Pagination";
+import NoDataFound from "../components/NoDataFound/NoDataFound";
 
 const ProductListing = () => {
   const [activeClose, setActiveClose] = useState(false);
   const [emptyData, setEmptyData] = useState(false);
+  const [allResponse, setAllResponse] = useState([]);
   const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState([]);
   const location = useLocation();
 
   const params = new URLSearchParams(location.search);
-  const sort_by = location.search.slice(9);
+  const sort_by = params.get("sort_by");
   const searchText = params.get("searchText");
+  const discoutValue = params.get("discount");
 
   const { categoryId, subCategoryId, collectionId } = useParams();
 
@@ -44,9 +48,13 @@ const ProductListing = () => {
       if (searchText) {
         postData.search = searchText;
       }
+      if (discoutValue) {
+        postData.discount = discoutValue;
+      }
 
       const response = await axios.post(productList, postData);
       if (response.status === 200) {
+        setAllResponse(response.data.result);
         setProductData(response.data.result.data);
         setLoading(false);
         if (response.data.result.data.length === 0) {
@@ -63,14 +71,6 @@ const ProductListing = () => {
   useEffect(() => {
     productDataAPI();
   }, [categoryId, subCategoryId, collectionId, searchText, sort_by]);
-
-  if (emptyData) {
-    return (
-      <h1 className="h-[80vh] w-[100vw] text-[#292D32] flex justify-center items-center">
-        No Data Found
-      </h1>
-    );
-  }
 
   return (
     <main className="container">
@@ -137,20 +137,29 @@ const ProductListing = () => {
             </div>
           ) : (
             <div className="flex flex-col gap-3 mt-5">
-              <div
-                id="product-card-div"
-                className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
-              >
-                {productData.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <Link to={"/"}>
-                        <Card2 data={item} />
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
+              {emptyData ? (
+                <NoDataFound />
+              ) : (
+                <div
+                  id="product-card-div"
+                  className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+                >
+                  {productData.map((item, index) => {
+                    return (
+                      <div key={index}>
+                        <Link to={"/"}>
+                          <Card2 data={item} />
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+          {allResponse.total > 10 && (
+            <div className="flex justify-center mt-6">
+              <Pagination totalPage={allResponse.last_page} />
             </div>
           )}
         </section>

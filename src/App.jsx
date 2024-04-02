@@ -5,7 +5,6 @@ import ProductListing from "./pages/ProductListing";
 import ProductDetails from "./pages/ProductDetails";
 import ShoppingCart from "./pages/ShoppingCart";
 import Checkout from "./pages/Checkout";
-// import WhishList from "./pages/WhishList";
 
 const router = createBrowserRouter([
   {
@@ -17,14 +16,14 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/product-list",
+        path: "/product-list/:page?",
         element: <ProductListing />,
       },
       {
-        path: "",
+        path: "/",
         children: [
           {
-            path: ":categoryId?/:subCategoryId?/:collectionId?/:sort_by?",
+            path: ":categoryId?/:subCategoryId?/:collectionId?/:page?/:sort_by?",
             element: <ProductListing />,
           },
         ],
@@ -42,13 +41,9 @@ const router = createBrowserRouter([
         element: <Checkout />,
       },
       {
-        path: "/search-result",
+        path: "/search",
         element: <ProductListing />,
       },
-      // {
-      //   path: "/wishlist",
-      //   element: <WhishList />,
-      // },
     ],
   },
 ]);

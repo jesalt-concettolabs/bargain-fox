@@ -1,8 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import { Button, IconButton } from "@material-tailwind/react";
+import rightArrow from "/assets/arrowPage.svg";
+import leftArrow from "/assets/arrowPage.svg";
 
-const Pagination = () => {
-  const [active, setActive] = React.useState(1);
+const Pagination = ({ totalPage }) => {
+  const [active, setActive] = useState(1);
 
   const getItemProps = (index) => ({
     variant: active === index ? "filled" : "text",
@@ -11,7 +13,7 @@ const Pagination = () => {
   });
 
   const next = () => {
-    if (active === 5) return;
+    if (active === totalPage) return;
 
     setActive(active + 1);
   };
@@ -22,30 +24,46 @@ const Pagination = () => {
     setActive(active - 1);
   };
 
+  const iconButtons = [];
+  for (let number = 1; number <= totalPage; number++) {
+    iconButtons.push(
+      <IconButton key={number} {...getItemProps(number)}>
+        {number}
+      </IconButton>
+    );
+  }
+
   return (
     <div className="flex items-center gap-4">
       <Button
         variant="text"
-        className="flex items-center gap-2"
+        className="flex items-center justify-center gap-3"
         onClick={prev}
         disabled={active === 1}
       >
+        <span>
+          <img
+            src={leftArrow}
+            alt="leftArrow"
+            className="rotate-180"
+            height={"7px"}
+            width={"7px"}
+          />
+        </span>
         Previous
       </Button>
-      <div className="flex items-center gap-2">
-        <IconButton {...getItemProps(1)}>1</IconButton>
-        <IconButton {...getItemProps(2)}>2</IconButton>
-        <IconButton {...getItemProps(3)}>3</IconButton>
-        <IconButton {...getItemProps(4)}>4</IconButton>
-        <IconButton {...getItemProps(5)}>5</IconButton>
-      </div>
+      <div className="flex items-center gap-2">{iconButtons}</div>
+
       <Button
         variant="text"
-        className="flex items-center gap-2"
+        className="flex items-center justify-center gap-2"
         onClick={next}
-        disabled={active === 5}
+        disabled={active === totalPage}
       >
         Next
+        <span>
+          <img src={rightArrow} alt="rightArrow" height={"7px"} width={"7px"} />
+        </span>
       </Button>
     </div>
   );

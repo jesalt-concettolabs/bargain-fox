@@ -60,8 +60,8 @@ const SearchBar = () => {
     setSearchData([]);
     setDataFound(false);
     if (searchValue) {
-      let path = "/search-result";
-      path += `/?searchText=${searchValue}`;
+      let path = "/search";
+      path += `?searchText=${searchValue}`;
       navigate(path);
       setSearchValue("");
     }

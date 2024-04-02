@@ -85,18 +85,21 @@ export const filterPriceNames = [
 
 export const filterCategoryNames = [
   {
-    label: "Women's T-shirts",
+    label: "Brand New",
   },
   {
-    label: "Women's Tank Tops",
+    label: "Open Box",
   },
   {
-    label: "Women's Dresses",
+    label: "Like New",
   },
   {
-    label: "Women's Twopiece Outfilts",
+    label: "Very Good",
   },
   {
-    label: "Women's Bottomwears",
+    label: "Good",
+  },
+  {
+    label: "Acceptable",
   },
 ];
