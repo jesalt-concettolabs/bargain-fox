@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   filterCategoryNames,
   filterDiscountNames,
@@ -10,6 +10,13 @@ const Filter = () => {
   const [conditionCheckedValues, setConditionCheckedValues] = useState([]);
   const [discountCheckedValues, setDiscountCheckedValues] = useState([]);
   const [priceCheckedValues, setPriceCheckedValues] = useState([]);
+
+  // console.log(
+  //   "first",
+  //   conditionCheckedValues,
+  //   discountCheckedValues,
+  //   priceCheckedValues
+  // );
 
   const handleConditionChange = (value) => {
     setConditionCheckedValues([value]);

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import Dropdown from "../components/DropDown/Dropdown";
-import Card2 from "../components/MainCard/Card2";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import closeIcon from "/assets/close.png";
 import Filter from "../components/Filters/Filter";
 import axios from "axios";
@@ -9,20 +7,16 @@ import { productList } from "../api/constant";
 import Loader from "../components/Loader/Loader";
 import Pagination from "../components/pagination/Pagination";
 import NoDataFound from "../components/NoDataFound/NoDataFound";
+import Card2 from "../components/MainCard/Card2";
+import Dropdown from "../components/DropDown/Dropdown";
 
 const ProductListing = () => {
   const [activeClose, setActiveClose] = useState(false);
   const [emptyData, setEmptyData] = useState(false);
-  const [allResponse, setAllResponse] = useState([]);
   const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState([]);
+  const [allResponse, setAllResponse] = useState({});
   const location = useLocation();
-
-  const params = new URLSearchParams(location.search);
-  const sort_by = params.get("sort_by");
-  const searchText = params.get("searchText");
-  const discoutValue = params.get("discount");
-
   const { categoryId, subCategoryId, collectionId } = useParams();
 
   const handleFilter = () => {
@@ -32,45 +26,30 @@ const ProductListing = () => {
   const productDataAPI = async () => {
     setLoading(true);
     try {
-      let postData = {};
-      if (categoryId) {
-        postData.category_id = categoryId;
-      }
-      if (subCategoryId) {
-        postData.sub_category_id = subCategoryId;
-      }
-      if (collectionId) {
-        postData.collection_id = collectionId;
-      }
-      if (sort_by) {
-        postData.sort_by = sort_by;
-      }
-      if (searchText) {
-        postData.search = searchText;
-      }
-      if (discoutValue) {
-        postData.discount = discoutValue;
-      }
+      const postData = {
+        category_id: categoryId,
+        sub_category_id: subCategoryId,
+        collection_id: collectionId,
+        sort_by: new URLSearchParams(location.search).get("sort_by"),
+        search: new URLSearchParams(location.search).get("searchText"),
+        page: new URLSearchParams(location.search).get("page"),
+      };
 
       const response = await axios.post(productList, postData);
       if (response.status === 200) {
         setAllResponse(response.data.result);
         setProductData(response.data.result.data);
         setLoading(false);
-        if (response.data.result.data.length === 0) {
-          setEmptyData(true);
-        } else {
-          setEmptyData(false);
-        }
+        setEmptyData(response.data.result.data.length === 0);
       }
     } catch (error) {
-      console.log("Product List API Error: ", error);
+      console.error("Product List API Error: ", error);
     }
   };
 
   useEffect(() => {
     productDataAPI();
-  }, [categoryId, subCategoryId, collectionId, searchText, sort_by]);
+  }, [categoryId, subCategoryId, collectionId, location.search]);
 
   return (
     <main className="container">
@@ -144,15 +123,13 @@ const ProductListing = () => {
                   id="product-card-div"
                   className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
                 >
-                  {productData.map((item, index) => {
-                    return (
-                      <div key={index}>
-                        <Link to={"/"}>
-                          <Card2 data={item} />
-                        </Link>
-                      </div>
-                    );
-                  })}
+                  {productData.map((item, index) => (
+                    <div key={index}>
+                      <Link to={"/"}>
+                        <Card2 data={item} />
+                      </Link>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>

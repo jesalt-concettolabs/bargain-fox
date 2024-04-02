@@ -1,7 +1,6 @@
 import React from "react";
 import { Checkbox } from "pretty-checkbox-react";
 import "@djthoms/pretty-checkbox";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const CheckboxComponent = ({
   data,
@@ -9,36 +8,10 @@ const CheckboxComponent = ({
   checkedValues,
   setCheckedValues,
 }) => {
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const searchText = params.get("searchText");
-  const navigate = useNavigate();
-  const { categoryId, subCategoryId, collectionId } = useParams();
-
   const handleCheck = (index, label) => {
     const updatedCheckedValues = checkedValues.includes(label)
       ? checkedValues.filter((value) => value !== label)
       : [label];
-
-    let path = "";
-
-    if (searchText) {
-      path += `?searchText=${searchText}&condition=${label}`;
-      navigate(path);
-    } else {
-      if (categoryId) {
-        path += `/${categoryId}`;
-      }
-      if (subCategoryId) {
-        path += `/${subCategoryId}`;
-      }
-      if (collectionId) {
-        path += `/${collectionId}`;
-      }
-      path += `?condition=${label}`;
-      navigate(path);
-    }
-
     setCheckedValues(updatedCheckedValues);
   };
 

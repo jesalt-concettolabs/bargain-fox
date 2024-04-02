@@ -12,12 +12,11 @@ const Dropdown = () => {
 
   const handleFilter = (e) => {
     const filterValue = e.target.value;
-
     setSelectedValue(filterValue);
-
     if (searchText) {
       let path = "";
       path += `?searchText=${searchText}`;
+      path += `&page=1`;
       path += `&sort_by=${filterValue}`;
       navigate(path);
     } else {
@@ -31,7 +30,8 @@ const Dropdown = () => {
       if (collectionId) {
         path += `/${collectionId}`;
       }
-      path += `?sort_by=${filterValue}`;
+      path += `?page=1`;
+      path += `&sort_by=${filterValue}`;
       navigate(path);
     }
   };

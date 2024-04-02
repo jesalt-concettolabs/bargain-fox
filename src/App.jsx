@@ -16,14 +16,14 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/product-list/:page?",
+        path: "/product-lists",
         element: <ProductListing />,
       },
       {
         path: "/",
         children: [
           {
-            path: ":categoryId?/:subCategoryId?/:collectionId?/:page?/:sort_by?",
+            path: ":categoryId?/:subCategoryId?/:collectionId?/:sort_by?",
             element: <ProductListing />,
           },
         ],
