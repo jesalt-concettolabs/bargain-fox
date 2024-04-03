@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, IconButton } from "@material-tailwind/react";
 import rightArrow from "/assets/arrowPage.svg";
 import leftArrow from "/assets/arrowPage.svg";
@@ -9,6 +9,13 @@ const Pagination = ({ totalPage }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
+
+  useEffect(() => {
+    const pageParam = params.get("page");
+    if (pageParam) {
+      setActive(parseInt(pageParam));
+    }
+  }, [location.search]);
 
   const getItemProps = (index) => ({
     variant: active === index ? "filled" : "text",

@@ -33,6 +33,12 @@ const ProductListing = () => {
         sort_by: new URLSearchParams(location.search).get("sort_by"),
         search: new URLSearchParams(location.search).get("searchText"),
         page: new URLSearchParams(location.search).get("page"),
+        per_page: 12,
+        condition: new URLSearchParams(location.search).get("condition"),
+        discount: new URLSearchParams(location.search).get("discount"),
+        price_range: new URLSearchParams(location.search).get("price_range"),
+        min_price: new URLSearchParams(location.search).get("min_price"),
+        max_price: new URLSearchParams(location.search).get("max_price"),
       };
 
       const response = await axios.post(productList, postData);
@@ -53,7 +59,7 @@ const ProductListing = () => {
 
   return (
     <main className="container">
-      <div className="flex ">
+      <div className="flex">
         <section className={`lg:w-[20%] lg:pr-5 hidden lg:block`}>
           <span className="text-[#A4A4B8] text-2xl font-bold ">Filters</span>
           <Filter />
@@ -134,13 +140,13 @@ const ProductListing = () => {
               )}
             </div>
           )}
-          {allResponse.total > 10 && (
-            <div className="flex justify-center mt-6">
-              <Pagination totalPage={allResponse.last_page} />
-            </div>
-          )}
         </section>
       </div>
+      {allResponse.total > 10 && (
+        <div className="flex justify-center mt-6">
+          <Pagination totalPage={allResponse.last_page} />
+        </div>
+      )}
     </main>
   );
 };

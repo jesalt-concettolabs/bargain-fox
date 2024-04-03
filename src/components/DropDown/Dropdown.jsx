@@ -9,14 +9,39 @@ const Dropdown = () => {
   const [selectedValue, setSelectedValue] = useState(initialSelectedValue);
   const navigate = useNavigate();
   const { categoryId, subCategoryId, collectionId } = useParams();
+  const conditionValue = params.get("condition");
+  const discountValue = params.get("discount");
+  const priceValue = params.get("price_range");
+  const min_priceValue = params.get("min_price");
+  const max_priceValue = params.get("max_price");
+
+  const filterData =
+    (conditionValue ? `&condition=${conditionValue}` : "") +
+    (discountValue ? `&discount=${discountValue}` : "") +
+    (priceValue ? `&price_range=${priceValue}` : "") +
+    (min_priceValue ? `&min_price=${min_priceValue}` : "") +
+    (max_priceValue ? `&max_price=${max_priceValue}` : "");
 
   const handleFilter = (e) => {
     const filterValue = e.target.value;
     setSelectedValue(filterValue);
-    if (searchText) {
+    if (searchText && filterData) {
       let path = "";
       path += `?searchText=${searchText}`;
       path += `&page=1`;
+      path += `${filterData}`;
+      path += `&sort_by=${filterValue}`;
+      navigate(path);
+    } else if (searchText) {
+      let path = "";
+      path += `?searchText=${searchText}`;
+      path += `&page=1`;
+      path += `&sort_by=${filterValue}`;
+      navigate(path);
+    } else if (filterData) {
+      let path = "";
+      path += `?page=1`;
+      path += `${filterData}`;
       path += `&sort_by=${filterValue}`;
       navigate(path);
     } else {
