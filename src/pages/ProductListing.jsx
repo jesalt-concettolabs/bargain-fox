@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import closeIcon from "/assets/close.png";
 import Filter from "../components/Filters/Filter";
 import axios from "axios";
@@ -131,7 +131,9 @@ const ProductListing = () => {
                 >
                   {productData.map((item, index) => (
                     <div key={index}>
-                      <Link to={"/"}>
+                      <Link
+                        to={`/product-detail/${item.slug}/${item.unique_id}`}
+                      >
                         <Card2 data={item} />
                       </Link>
                     </div>

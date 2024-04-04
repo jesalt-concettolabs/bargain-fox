@@ -14,7 +14,7 @@ const ReviewCard = ({ reviewDetail }) => {
         {ratingDesc}
       </div>
       <div className="flex items-center gap-2">
-        <StarImg />
+        <StarImg rating={4} />
         <span className="text-[#A4A4B8] text-center text-lg">{ratingDate}</span>
       </div>
     </div>

@@ -5,6 +5,7 @@ import ProductListing from "./pages/ProductListing";
 import ProductDetails from "./pages/ProductDetails";
 import ShoppingCart from "./pages/ShoppingCart";
 import Checkout from "./pages/Checkout";
+import WhishList from "./pages/WhishList";
 
 const router = createBrowserRouter([
   {
@@ -20,16 +21,11 @@ const router = createBrowserRouter([
         element: <ProductListing />,
       },
       {
-        path: "/",
-        children: [
-          {
-            path: ":categoryId?/:subCategoryId?/:collectionId?/:sort_by?",
-            element: <ProductListing />,
-          },
-        ],
+        path: ":categoryId?/:subCategoryId?/:collectionId?/:sort_by?",
+        element: <ProductListing />,
       },
       {
-        path: "/product-detail",
+        path: "product-detail/:productSlug?/:productId?",
         element: <ProductDetails />,
       },
       {
@@ -43,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <ProductListing />,
+      },
+      {
+        path: "/wishlist",
+        element: <WhishList />,
       },
     ],
   },

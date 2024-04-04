@@ -89,43 +89,47 @@ const SearchBar = () => {
           <img src={searchIcon} alt="search-icon" />
         </button>
       </div>
-      {loading ? (
-        <div className="absolute flex w-full justify-center">
-          <Spinner />
-        </div>
-      ) : dataFound ? (
-        <p className="absolute flex w-full justify-center text-[#292D32]">
-          No search result found
-        </p>
-      ) : (
-        <div
-          id="search-data"
-          className="absolute w-[500px] h-auto max-h-[400px] overflow-y-auto rounded-b-md flex flex-col gap-3 bg-white z-[999999] p-2"
-        >
-          {searchData.map((item, index) => {
-            return (
-              <Link
-                to={"/product-detail"}
-                key={index}
-                onClick={() => {
-                  setSearchData([]), setSearchValue("");
-                }}
-              >
-                <div className="flex justify-between items-center gap-3">
-                  <div className="flex gap-5">
-                    <img
-                      src={item.product_images[0].product_image_url}
-                      alt={item.name}
-                      width={25}
-                      style={{ maxHeight: "25px", borderRadius: "20px" }}
-                    />
-                    <p>{item.name}</p>
-                  </div>
-                  <img src={searchArrow} alt="search-arrow" />
-                </div>
-              </Link>
-            );
-          })}
+      {searchData.length > 0 && (
+        <div>
+          {loading ? (
+            <div className="absolute flex w-full justify-center">
+              <Spinner />
+            </div>
+          ) : dataFound ? (
+            <p className="absolute flex w-full justify-center text-[#292D32]">
+              No search result found
+            </p>
+          ) : (
+            <div
+              id="search-data"
+              className="absolute w-[500px] h-auto max-h-[400px] overflow-y-auto rounded-b-md flex flex-col gap-3 bg-white z-[999999] p-2"
+            >
+              {searchData.map((item, index) => {
+                return (
+                  <Link
+                    to={`/product-detail/${item.slug}/${item.unique_id}`}
+                    key={index}
+                    onClick={() => {
+                      setSearchData([]), setSearchValue("");
+                    }}
+                  >
+                    <div className="flex justify-between items-center gap-3">
+                      <div className="flex gap-5">
+                        <img
+                          src={item.product_images[0].product_image_url}
+                          alt={item.name}
+                          width={25}
+                          style={{ maxHeight: "25px", borderRadius: "20px" }}
+                        />
+                        <p>{item.name}</p>
+                      </div>
+                      <img src={searchArrow} alt="search-arrow" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
     </div>
