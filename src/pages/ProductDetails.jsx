@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import correctLogo from "/assets/correctLogo.png";
 import timerlogo from "/assets/timer.png";
 import vanLogo from "/assets/van.png";
+import personLogo from "/assets/person.svg";
+import circleLogo from "/assets/Ellipse.svg";
 import warrantyLogo from "/assets/warranty.png";
 import SubCard from "../components/DetailSubCard/SubCard";
 import oneStar from "/assets/onestar.png";
@@ -22,43 +24,55 @@ import Loader from "../components/Loader/Loader";
 const ProductDetails = () => {
   const navigate = useNavigate();
   const [imageChange, setImageChange] = useState(prdImg1);
-  const [productDetailData, setProductDetailData] = useState([]);
+  const [productDetailData, setProductDetailData] = useState({});
   const [counterValue, setCounterValue] = useState(1);
   const [loading, setLoading] = useState(false);
   const { productSlug, productId } = useParams();
-  const [productPath, setProductPath] = useState([]);
 
-  console.log("product path: ", productPath);
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (productDetailData) {
-        const itemSlug = productDetailData?.slug;
-        const categorySlug = productDetailData?.category_info[0]?.slug;
-        const subcategorySlug =
-          productDetailData?.category_info[0]?.subcategory[0]?.slug;
-        const collectionSlug =
-          productDetailData?.category_info[0]?.subcategory[0]?.collection[0]
-            ?.slug;
-
-        const updatedProductPath = [];
-        if (categorySlug) {
-          updatedProductPath.push(categorySlug);
-        }
-        if (subcategorySlug) {
-          updatedProductPath.push(subcategorySlug);
-        }
-        if (collectionSlug) {
-          updatedProductPath.push(collectionSlug);
-        }
-        if (itemSlug) {
-          updatedProductPath.push(itemSlug);
-        }
-
-        setProductPath(updatedProductPath);
-      }
-    }, 2000);
-  }, [productDetailData]);
+  const initialVariationData = {
+    avg_rating: null,
+    cart_qty_count: null,
+    category_id: null,
+    category_info: null,
+    collection_id: null,
+    color: null,
+    description: null,
+    discount_percentage: null,
+    discount_value: null,
+    expected_delivery: null,
+    fastfox_enabled: null,
+    id: null,
+    is_added_cart: null,
+    is_discount_on: null,
+    is_out_stock: null,
+    is_purchased: null,
+    is_wishlisted: null,
+    main_rrp: null,
+    minimum_sale_price: null,
+    name: null,
+    parent_id: null,
+    percentage_discount: null,
+    price: null,
+    product_condition: null,
+    product_images: null,
+    product_specification: null,
+    product_view: null,
+    purchase_count: null,
+    rating_count: null,
+    review: null,
+    sale_price: null,
+    size: null,
+    size_chart: null,
+    slug: null,
+    standard_expected_delivery: null,
+    stock: null,
+    sub_category_id: null,
+    total_review: null,
+    unique_id: null,
+    variation_list: null,
+  };
+  const [variationData, setVariationData] = useState(initialVariationData);
+  console.log("variaton Data", variationData);
 
   const totalStarRating = `${
     productDetailData?.rating_count?.five_rating +
@@ -67,6 +81,14 @@ const ProductDetails = () => {
     productDetailData?.rating_count?.two_rating +
     productDetailData?.rating_count?.one_rating
   }`;
+
+  const imgUrl =
+    Object.keys(productDetailData).length == 0
+      ? ""
+      : productDetailData.variation_list &&
+        productDetailData.variation_list.length > 0
+      ? productDetailData.variation_list[0].product_images[0].product_image_url
+      : productDetailData.product_images[0].product_image_url;
 
   const productDetailAPI = async () => {
     setLoading(true);
@@ -77,7 +99,10 @@ const ProductDetails = () => {
       if (response.status === 200) {
         setLoading(false);
         setProductDetailData(response.data.result);
-        console.log(response.data.result);
+        console.log("first", response.data.result);
+        if (response.data.result.variation_list.length > 0) {
+          setVariationData();
+        }
       } else {
         setLoading(true);
       }
@@ -115,7 +140,7 @@ const ProductDetails = () => {
           </div>
           <div className="w-[70%] h-[350px] sm:w-[400px] sm:h-[500px] mx-auto">
             <img
-              src={imageChange}
+              src={imgUrl}
               alt="flowerImg"
               className="w-full h-full object-contain"
             />
@@ -150,12 +175,14 @@ const ProductDetails = () => {
             </div>
           </div>
           {productDetailData?.product_condition && (
-            <div className="flex items-center text-[#A4A4B8] text-lg font-semibold">
-              Condition :
+            <p className="flex items-center gap-1">
+              <span className="text-[#A4A4B8] text-lg font-semibold">
+                Condition:
+              </span>
               <span className="font-normal text-[#292D32]">
                 {productDetailData?.product_condition.title}
               </span>
-            </div>
+            </p>
           )}
           {productDetailData?.color?.length > 0 && (
             <div className="flex flex-col gap-1">
@@ -205,8 +232,12 @@ const ProductDetails = () => {
                 title="6 month warranty with the Bargain Fox guarantee"
               />
             </div>
-            <div className="text-end py-2 text-[#292D32] text-[14px] mt-4 font-semibold">
-              {productDetailData?.product_view} People looked at this product
+            <div className="flex gap-4 items-center justify-end py-2  text-[#292D32] text-[14px] mt-4 font-semibold">
+              <span className="flex gap-1">
+                <img src={personLogo} alt="person" />
+                <span>{productDetailData?.product_view}</span>
+              </span>
+              People looked at this product
             </div>
             <div className="py-2 flex gap-3 justify-between items-center">
               <button
@@ -300,6 +331,19 @@ const ProductDetails = () => {
                 </p>
               </div>
             </div>
+            {productDetailData?.product_specification && (
+              <div className="flex flex-col gap-3">
+                {productDetailData?.product_specification.map((item) => (
+                  <div key={item.id} className="flex gap-3 items-center">
+                    <img src={circleLogo} alt="circle" />
+                    <p className="text-sm sm:text-[16px] text-[#292D32] flex gap-1">
+                      <span className="font-bold">{item.spec_name}:</span>
+                      {item.spec_value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
