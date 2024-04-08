@@ -9,7 +9,7 @@ const Counter = ({ handlePlus, handleMinus, count, stock }) => {
         <button
           onClick={handleMinus}
           disabled={count <= 1}
-          className={`text-2xl flex items-center justify-center border-r-gray-300 hover:bg-gray-200 border rounded-s-lg p-3 h-8`}
+          className={`text-2xl outline-none flex items-center justify-center border-r-gray-300 hover:bg-gray-200 border rounded-s-lg p-3 h-8`}
         >
           -
         </button>
@@ -19,7 +19,7 @@ const Counter = ({ handlePlus, handleMinus, count, stock }) => {
         <button
           onClick={handlePlus}
           disabled={count >= stock}
-          className="text-2xl flex items-center justify-center border-l-gray-300 hover:bg-gray-200 border rounded-e-lg p-3 h-8 "
+          className="text-2xl flex outline-none items-center justify-center border-l-gray-300 hover:bg-gray-200 border rounded-e-lg p-3 h-8 "
         >
           +
         </button>
