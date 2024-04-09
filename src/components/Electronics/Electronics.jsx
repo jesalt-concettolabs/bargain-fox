@@ -9,8 +9,12 @@ const Electronics = () => {
 
   const electronicDataAPI = async () => {
     try {
-      const response = await axios.post(productList);
-      setElectronicData(response.data.result.data);
+      const response = await axios.post(productList, {
+        category_id: "electronics",
+      });
+      if (response.status === 200) {
+        setElectronicData(response.data.result.data);
+      }
     } catch (error) {
       console.log("Produclist API Error: ", error);
     }
@@ -23,15 +27,17 @@ const Electronics = () => {
   return (
     <main>
       <section className="container w-[80%] flex flex-col gap-4 mt-6">
-        <CardHeader cardTitle="Electronics" path="/product-list/electronics" />
-        <SliderComponent
-          data={electronicData}
-          xlSlide={4}
-          lgSlide={3}
-          mdSlide={2}
-          smSlide={1}
-          mainCardStatus="true"
-        />
+        <CardHeader cardTitle="Electronics" path="/electronics" />
+        {electronicData && (
+          <SliderComponent
+            data={electronicData}
+            xlSlide={4}
+            lgSlide={3}
+            mdSlide={2}
+            smSlide={1}
+            mainCardStatus="true"
+          />
+        )}
       </section>
     </main>
   );

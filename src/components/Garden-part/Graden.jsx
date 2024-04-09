@@ -5,12 +5,16 @@ import { productList } from "../../api/constant";
 import { useEffect, useState } from "react";
 
 const Graden = () => {
-  const [gardenData, setGardenData] = useState([]);
+  const [gardenData, setGardenData] = useState();
 
   const gardenDataAPI = async () => {
     try {
-      const response = await axios.post(productList);
-      setGardenData(response.data.result.data);
+      const response = await axios.post(productList, {
+        sub_category_id: "garden-diy",
+      });
+      if (response.status === 200) {
+        setGardenData(response.data.result.data);
+      }
     } catch (error) {
       console.log("Produclist API Error: ", error);
     }
@@ -25,16 +29,18 @@ const Graden = () => {
       <section className="container w-[80%] flex flex-col gap-4 mt-6">
         <CardHeader
           cardTitle=" Garden & DIY"
-          path="/product-list/sports-leisure/garden-diy/gardening"
+          path="/sports-leisure/garden-diy"
         />
-        <SliderComponent
-          data={gardenData}
-          xlSlide={4}
-          lgSlide={3}
-          mdSlide={2}
-          smSlide={1}
-          mainCardStatus="true"
-        />
+        {gardenData && (
+          <SliderComponent
+            data={gardenData}
+            xlSlide={4}
+            lgSlide={3}
+            mdSlide={2}
+            smSlide={1}
+            mainCardStatus="true"
+          />
+        )}
       </section>
     </main>
   );

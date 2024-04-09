@@ -6,7 +6,7 @@ const ProductImgSlider = ({ onClick, imagesData }) => {
     dots: false,
     infinite: false,
     arrow: false,
-    slidesToShow: imagesData.length,
+    slidesToShow: imagesData.length > 3 ? 4 : imagesData.length,
     slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
@@ -18,14 +18,12 @@ const ProductImgSlider = ({ onClick, imagesData }) => {
           {imagesData.map((item, index) => (
             <div
               key={index}
-              className="w-[100px] h-[100px] overflow-hidden outline-none cursor-pointer"
+              className="w-[70px] h-[120px] object-cover overflow-hidden outline-none cursor-pointer"
             >
               <img
                 src={item.product_image_url}
                 alt="product images"
-                width="150px"
-                height="150px"
-                className="object-contain overflow-hidden"
+                className="object-cover h-auto w-auto overflow-hidden"
                 onClick={() => onClick(item.product_image_url)}
               />
             </div>

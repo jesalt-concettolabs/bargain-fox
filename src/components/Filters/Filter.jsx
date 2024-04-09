@@ -57,7 +57,9 @@ const Filter = () => {
       if (collectionId) {
         path += `/${collectionId}`;
       }
-      navigate(path);
+      if (`${window.location.pathname}${window.location.search}` != path) {
+        navigate(path);
+      }
     }
   }, [checkedValues, searchText]);
 

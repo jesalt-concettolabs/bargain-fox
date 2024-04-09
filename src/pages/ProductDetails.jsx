@@ -9,17 +9,19 @@ import SubCard from "../components/DetailSubCard/SubCard";
 import oneStar from "/assets/onestar.png";
 import { Progress } from "@material-tailwind/react";
 import ReviewCard from "../components/ReviewCard/ReviewCard";
-import prdImg1 from "/assets/prdImg1.png";
 import ProductImgSlider from "../components/ProductImageSlider/ProductImgSlider";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import StarImg from "../components/CardSubComponent/StarImg";
 import Price from "../components/CardSubComponent/Price";
 import DetailHover from "../components/CardSubComponent/DetailHover";
-import { customerReviews, sizes } from "../constants/sliderSetting";
+import { customerReviews } from "../constants/sliderSetting";
 import Counter from "../components/CardSubComponent/Counter";
 import axios from "axios";
 import { productDetail } from "../api/constant";
 import Loader from "../components/Loader/Loader";
+import LoginForm from "./LoginForm";
+import OTPVerification from "./OTPVerification";
+import SignupForm from "./SignupForm";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -27,9 +29,39 @@ const ProductDetails = () => {
   const [counterValue, setCounterValue] = useState(1);
   const [loading, setLoading] = useState(false);
   const { productSlug, productId } = useParams();
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const location = useLocation();
+  const skuData = new URLSearchParams(location.search).get("sku");
+  const [addCart, setAddCart] = useState(false);
+  const userToken = localStorage.getItem("token");
+  const [show, setShow] = useState(false);
+  const [showOtp, setShowOtp] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
+
+  const handleBtn = () => {
+    setShow(false);
+  };
+
+  const handleSignupClose = () => {
+    setShowSignup(false);
+  };
+
+  const handleOtp = () => {
+    setShow(false);
+    setShowOtp(true);
+  };
+
+  const handleVerify = () => {
+    setShowOtp(false);
+    setShowSignup(true);
+  };
+
+  const handleOTPClose = () => {
+    setShowOtp(false);
+  };
 
   const initialVariationData = {
-    product_variation_id: null,
+    color_id: null,
     avg_rating: null,
     cart_qty_count: null,
     category_id: null,
@@ -59,6 +91,7 @@ const ProductDetails = () => {
     product_view: null,
     purchase_count: null,
     rating_count: null,
+    sku: null,
     review: null,
     sale_price: null,
     size: null,
@@ -70,12 +103,12 @@ const ProductDetails = () => {
     unique_id: null,
     variation_list: null,
     color_name: null,
+    vendor_id: null,
+    vendor_info: null,
   };
 
   const [productDetailData, setProductDetailData] =
     useState(initialVariationData);
-
-  console.log("product detail Data: ", productDetailData);
 
   const totalStarRating = `${
     productDetailData?.rating_count?.five_rating +
@@ -84,6 +117,9 @@ const ProductDetails = () => {
     productDetailData?.rating_count?.two_rating +
     productDetailData?.rating_count?.one_rating
   }`;
+  const discountPrice = parseInt(
+    productDetailData?.percentage_discount?.split(".")
+  );
 
   const productDetailAPI = async () => {
     setLoading(true);
@@ -91,15 +127,16 @@ const ProductDetails = () => {
       const response = await axios.get(
         `${productDetail}/${productSlug}/${productId}`
       );
+      console.log("main response", response.data.result);
       if (response.status === 200) {
         setLoading(false);
-        console.log(
-          "hello",
-          response.data.result.product_images[0].product_image_url
-        );
-        setImageChange(
-          response.data.result?.product_images[0]?.product_image_url
-        );
+        if (response.data.result.variation_list == false) {
+          setImageChange(
+            response.data.result?.product_images[0]?.product_image_url
+          );
+          setCounterValue(response.data.result?.cart_qty_count);
+        }
+
         setProductDetailData({
           ...productDetailData,
           avg_rating: response.data.result.avg_rating,
@@ -135,6 +172,7 @@ const ProductDetails = () => {
           sale_price: response.data.result.sale_price,
           size: response.data.result.size,
           slug: response.data.result.slug,
+          sku: response.data.result.sku,
           standard_expected_delivery:
             response.data.result.standard_expected_delivery,
           stock: response.data.result.stock,
@@ -142,37 +180,52 @@ const ProductDetails = () => {
           total_review: response.data.result.total_review,
           unique_id: response.data.result.unique_id,
           variation_list: response.data.result.variation_list,
+          vendor_id: response.data.result.vendor_id,
+          vendor_info: response.data.result.vendor_info,
         });
+
         if (
           response.data.result.variation_list &&
           response.data.result.variation_list.length > 0
         ) {
-          console.log("inside variation");
+          const filterSkuData = response.data.result.variation_list.filter(
+            (item) => item.sku === skuData
+          );
+          setImageChange(filterSkuData[0].product_images[0]?.product_image_url);
           setProductDetailData((prevData) => ({
             ...prevData,
-            cart_qty_count:
-              response.data.result.variation_list[0].cart_qty_count,
+            cart_qty_count: filterSkuData[0].cart_qty_count,
             color_name: response.data.result.color[0]?.variation_name,
-            description: response.data.result.variation_list[0].description,
-            discount_value:
-              response.data.result.variation_list[0].discount_value,
-            is_added_cart: response.data.result.variation_list[0].is_added_cart,
-            is_out_stock: response.data.result.variation_list[0].is_out_stock,
-            is_purchased: response.data.result.variation_list[0].is_purchased,
-            is_wishlisted: response.data.result.variation_list[0].is_wishlisted,
-            main_rrp: response.data.result.variation_list[0].rrp,
-            minimum_sale_price:
-              response.data.result.variation_list[0].sale_price,
-            name: response.data.result.variation_list[0].name,
-            percentage_discount:
-              response.data.result.variation_list[0].percentage_discount,
-            product_condition:
-              response.data.result.variation_list[0].product_condition,
-            product_images:
-              response.data.result.variation_list[0].product_images,
-            stock: response.data.result.variation_list[0].stock,
-            product_variation_id: response.data.result.variation_list[0].color,
+            description: filterSkuData[0].description,
+            discount_value: filterSkuData[0].discount_value,
+            is_added_cart: filterSkuData[0].is_added_cart,
+            is_out_stock: filterSkuData[0].is_out_stock,
+            is_purchased: filterSkuData[0].is_purchased,
+            is_wishlisted: filterSkuData[0].is_wishlisted,
+            main_rrp: filterSkuData[0].rrp,
+            minimum_sale_price: filterSkuData[0].sale_price,
+            name: filterSkuData[0].name,
+            percentage_discount: filterSkuData[0].percentage_discount,
+            product_condition: filterSkuData[0].product_condition,
+            product_images: filterSkuData[0].product_images,
+            stock: filterSkuData[0].stock,
+            color_id: filterSkuData[0].color,
+            sku: filterSkuData[0].sku,
           }));
+          setTimeout(() => {
+            const variationColorName = response.data.result.color
+              ? response.data.result.color.find(
+                  (item) => item.variation_id == filterSkuData[0].color
+                )
+              : null;
+
+            if (variationColorName) {
+              setProductDetailData((prevData) => ({
+                ...prevData,
+                color_name: variationColorName.variation_name,
+              }));
+            }
+          }, 100);
         }
       }
     } catch (error) {
@@ -182,7 +235,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     productDetailAPI();
-  }, []);
+  }, [productId, productSlug]);
 
   const handleChange = (item) => {
     setImageChange(item);
@@ -194,6 +247,23 @@ const ProductDetails = () => {
 
   const handleMinus = () => {
     setCounterValue(counterValue - 1);
+  };
+
+  const handleAddCart = (e) => {
+    if (userToken) {
+      e.preventDefault();
+      setAddCart(true);
+    } else {
+      setShow(true);
+    }
+  };
+
+  const handleBuyNow = () => {
+    if (userToken) {
+      navigate("/checkout");
+    } else {
+      setShow(true);
+    }
   };
 
   const handleColorChange = (id) => {
@@ -208,7 +278,15 @@ const ProductDetails = () => {
       color_name: selectedVariationColor.variation_name,
     }));
 
+    const updatedSearchParam = new URLSearchParams(location.search);
+    updatedSearchParam.set("sku", selectedVariationData.sku);
+    navigate({ search: updatedSearchParam.toString() });
+
     if (selectedVariationData) {
+      setImageChange(
+        selectedVariationData?.product_images[0]?.product_image_url
+      );
+      setCounterValue(selectedVariationData.cart_qty_count);
       setProductDetailData((prevData) => ({
         ...prevData,
         cart_qty_count: selectedVariationData.cart_qty_count,
@@ -226,6 +304,7 @@ const ProductDetails = () => {
         product_images: selectedVariationData.product_images,
         stock: selectedVariationData.stock,
         product_variation_id: selectedVariationData.color,
+        sku: selectedVariationData.sku,
       }));
     }
   };
@@ -235,6 +314,7 @@ const ProductDetails = () => {
       (variation) => variation.size === id
     );
     if (selectedSizeData) {
+      setCounterValue(selectedSizeData.cart_qty_count);
       setProductDetailData((prevData) => ({
         ...prevData,
         cart_qty_count: selectedSizeData.cart_qty_count,
@@ -263,6 +343,23 @@ const ProductDetails = () => {
   return (
     productDetailData && (
       <main className="container flex flex-col gap-10">
+        {show && (
+          <LoginForm
+            show={show}
+            handleClose={handleBtn}
+            handleOtp={handleOtp}
+          />
+        )}
+        {showOtp && (
+          <OTPVerification
+            show={showOtp}
+            handleVerify={handleVerify}
+            handleClose={handleOTPClose}
+          />
+        )}
+        {showSignup && (
+          <SignupForm show={showSignup} handleClose={handleSignupClose} />
+        )}
         <section className="block lg:flex lg:gap-[50px]">
           {productDetailData.product_images &&
             productDetailData.product_images.length > 0 && (
@@ -298,21 +395,24 @@ const ProductDetails = () => {
               </div>
               <div className="text-[#292D32] text-[16px] font-semibold mt-2 sm:mt-0">
                 <span className="text-[#A4A4B8] font-normal ">sold, by </span>
-                Bargainfox
+                {productDetailData?.vendor_info?.trading_name}
               </div>
             </div>
-            <div className="flex items-center gap-7 py-4">
-              <Price
-                cardNotPrice={productDetailData.main_rrp}
-                cardPrice={
-                  productDetailData.minimum_sale_price ||
-                  productDetailData.sale_price
-                }
-              />
-              <div className="relative px-2 py-1 bg-[#2569F3] rounded-3xl text-sm text-white font-normal">
-                {productDetailData.percentage_discount}% off
+            {productDetailData && (
+              <div className="flex items-center gap-7 py-4">
+                <Price
+                  cardNotPrice={productDetailData.main_rrp}
+                  cardPrice={
+                    productDetailData.minimum_sale_price ||
+                    productDetailData.sale_price
+                  }
+                />
+
+                <div className="relative px-2 py-1 bg-[#2569F3] rounded-3xl text-sm text-white font-normal">
+                  {discountPrice}% off
+                </div>
               </div>
-            </div>
+            )}
             {productDetailData.product_condition && (
               <p className="flex items-center gap-1">
                 <span className="text-[#A4A4B8] text-lg font-semibold">
@@ -390,14 +490,25 @@ const ProductDetails = () => {
                 People looked at this product
               </div>
               <div className="py-2 flex gap-3 justify-between items-center">
+                {addCart ? (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault(), navigate("/cart");
+                    }}
+                    className="bg-[#198754] py-1 text-white font-normal rounded-[25px] w-full"
+                  >
+                    Go to Cart
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleAddCart}
+                    className="bg-[#FF7900] py-1 text-white hover:bg-black border border-[#ff7900] hover:border-none hover:text-white font-normal rounded-[25px] w-full"
+                  >
+                    Add to Cart
+                  </button>
+                )}
                 <button
-                  onClick={() => navigate("/")}
-                  className="bg-[#FF7900] py-1 text-white hover:bg-black border border-[#ff7900] hover:border-none hover:text-white font-normal rounded-[25px] w-full"
-                >
-                  Add to Cart
-                </button>
-                <button
-                  onClick={() => navigate("/cart")}
+                  onClick={handleBuyNow}
                   className="bg-[#FF79001A] py-1 transition-all ease-in-out border border-[#FF7900] hover:bg-[#ff7900] hover:text-white  w-full rounded-[25px]"
                 >
                   Buy now
@@ -410,7 +521,7 @@ const ProductDetails = () => {
           </div>
         </section>
         <section className="flex flex-col-reverse lg:flex lg:flex-row lg:gap-[50px]">
-          <div className="lg:w-[50%] flex flex-col">
+          <div className="lg:w-[50%] flex flex-col mt-5 lg:mt-0">
             <h3 className="text-2xl text-[#000000] font-semibold ">
               Customer Reviews
             </h3>
@@ -479,9 +590,21 @@ const ProductDetails = () => {
               </h2>
               <div className="py-4 flex flex-col gap-3">
                 <div className="flex gap-2 items-center">
-                  <p className="text-sm sm:text-[16px] text-[#292D32] font-normal">
+                  <p
+                    className={`text-sm sm:text-[16px] text-[#292D32] font-normal ${
+                      showFullDescription ? "" : "truncateId"
+                    }`}
+                  >
                     {productDetailData.description}
                   </p>
+                  {/* {!showFullDescription && (
+                    <button
+                      className="text-[#ff7900]"
+                      onClick={toggleDescription}
+                    >
+                      ...
+                    </button>
+                  )} */}
                 </div>
               </div>
               {productDetailData?.product_specification && (

@@ -5,13 +5,14 @@ import leftArrow from "/assets/arrowPage.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Pagination = ({ totalPage }) => {
-  const [active, setActive] = useState(1);
   const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
+  const pageParam = params.get("page");
+
+  const [active, setActive] = useState(1);
 
   useEffect(() => {
-    const pageParam = params.get("page");
     if (pageParam) {
       setActive(parseInt(pageParam));
     }

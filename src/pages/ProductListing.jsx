@@ -19,6 +19,8 @@ const ProductListing = () => {
   const location = useLocation();
   const { categoryId, subCategoryId, collectionId } = useParams();
 
+  const searchData = new URLSearchParams(location.search).get("searchText");
+
   const handleFilter = () => {
     setActiveClose((prev) => !prev);
   };
@@ -94,9 +96,20 @@ const ProductListing = () => {
           } `}
         >
           <div className="flex justify-between">
-            <span className="hidden lg:block lg:text-[#292D32] lg:text-3xl lg:font-bold">
-              Results
-            </span>
+            <div className="hidden lg:block">
+              {!loading && (
+                <p className="hidden lg:block lg:text-[#292D32] lg:text-xl lg:font-semibold">
+                  Showing {allResponse.from} - {allResponse.to} of{" "}
+                  {allResponse.total} result{" "}
+                  {searchData && (
+                    <span>
+                      for
+                      <span className="text-[#ff7900]"> "{searchData}"</span>
+                    </span>
+                  )}
+                </p>
+              )}
+            </div>
             <div>
               <Dropdown />
             </div>
@@ -132,7 +145,7 @@ const ProductListing = () => {
                   {productData.map((item, index) => (
                     <div key={index}>
                       <Link
-                        to={`/product-detail/${item.slug}/${item.unique_id}`}
+                        to={`/product-detail/${item.slug}/${item.unique_id}?sku=${item.sku}`}
                       >
                         <Card2 data={item} />
                       </Link>
