@@ -107,7 +107,7 @@ const SearchBar = () => {
               {searchData.map((item, index) => {
                 return (
                   <Link
-                    to={`/product-detail/${item.slug}/${item.unique_id}`}
+                    to={`/product-detail/${item.slug}/${item.unique_id}?sku=${item.sku}`}
                     key={index}
                     onClick={() => {
                       setSearchData([]), setSearchValue("");

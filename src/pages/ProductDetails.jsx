@@ -17,11 +17,14 @@ import DetailHover from "../components/CardSubComponent/DetailHover";
 import { customerReviews } from "../constants/sliderSetting";
 import Counter from "../components/CardSubComponent/Counter";
 import axios from "axios";
-import { productDetail } from "../api/constant";
+import { addToCart, productDetail } from "../api/constant";
 import Loader from "../components/Loader/Loader";
 import LoginForm from "./LoginForm";
 import OTPVerification from "./OTPVerification";
 import SignupForm from "./SignupForm";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { addCounterValue } from "../reducers/counterDetailSlice";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -37,6 +40,7 @@ const ProductDetails = () => {
   const [show, setShow] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const dispatch = useDispatch();
 
   const handleBtn = () => {
     setShow(false);
@@ -105,6 +109,8 @@ const ProductDetails = () => {
     color_name: null,
     vendor_id: null,
     vendor_info: null,
+    product_variation_id: null,
+    size_id: null,
   };
 
   const [productDetailData, setProductDetailData] =
@@ -134,7 +140,6 @@ const ProductDetails = () => {
           setImageChange(
             response.data.result?.product_images[0]?.product_image_url
           );
-          setCounterValue(response.data.result?.cart_qty_count);
         }
 
         setProductDetailData({
@@ -191,6 +196,7 @@ const ProductDetails = () => {
           const filterSkuData = response.data.result.variation_list.filter(
             (item) => item.sku === skuData
           );
+          console.log("first", filterSkuData);
           setImageChange(filterSkuData[0].product_images[0]?.product_image_url);
           setProductDetailData((prevData) => ({
             ...prevData,
@@ -211,6 +217,8 @@ const ProductDetails = () => {
             stock: filterSkuData[0].stock,
             color_id: filterSkuData[0].color,
             sku: filterSkuData[0].sku,
+            product_variation_id: filterSkuData[0].product_variation_id,
+            id: filterSkuData[0].product_id,
           }));
           setTimeout(() => {
             const variationColorName = response.data.result.color
@@ -235,7 +243,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     productDetailAPI();
-  }, [productId, productSlug]);
+  }, [productId, productSlug, skuData]);
 
   const handleChange = (item) => {
     setImageChange(item);
@@ -252,7 +260,25 @@ const ProductDetails = () => {
   const handleAddCart = (e) => {
     if (userToken) {
       e.preventDefault();
-      setAddCart(true);
+      const cartData = {
+        product_id: productDetailData.id,
+        quantity: counterValue,
+        product_variation_id: productDetailData.product_variation_id,
+      };
+      const addToCartApi = async () => {
+        const response = await axios.post(addToCart, cartData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        if (response.status === 200) {
+          setAddCart(true);
+          dispatch(addCounterValue(counterValue));
+          console.log("addtocartapi: ", response.data.result);
+          toast.success(response.data.message);
+        }
+      };
+      addToCartApi();
     } else {
       setShow(true);
     }
@@ -286,7 +312,6 @@ const ProductDetails = () => {
       setImageChange(
         selectedVariationData?.product_images[0]?.product_image_url
       );
-      setCounterValue(selectedVariationData.cart_qty_count);
       setProductDetailData((prevData) => ({
         ...prevData,
         cart_qty_count: selectedVariationData.cart_qty_count,
@@ -303,20 +328,23 @@ const ProductDetails = () => {
         product_condition: selectedVariationData.product_condition,
         product_images: selectedVariationData.product_images,
         stock: selectedVariationData.stock,
-        product_variation_id: selectedVariationData.color,
+        product_variation_id: selectedVariationData.product_variation_id,
         sku: selectedVariationData.sku,
+        id: selectedVariationData.product_id,
       }));
     }
   };
 
-  const handelSizeChange = (id) => {
+  const handelSizeChange = (id, colorId) => {
+    console.log("first", id, colorId);
     const selectedSizeData = productDetailData.variation_list.find(
-      (variation) => variation.size === id
+      (variation) => variation.size === id && variation.color == colorId
     );
+    console.log("selectedSize: ", selectedSizeData);
     if (selectedSizeData) {
-      setCounterValue(selectedSizeData.cart_qty_count);
       setProductDetailData((prevData) => ({
         ...prevData,
+        size_id: selectedSizeData.size,
         cart_qty_count: selectedSizeData.cart_qty_count,
         description: selectedSizeData.description,
         discount_value: selectedSizeData.discount_value,
@@ -438,30 +466,51 @@ const ProductDetails = () => {
                     productDetailData?.color.map((color) => (
                       <div
                         key={color.variation_id}
-                        className={`h-5 w-5 rounded-md`}
-                        onClick={() => handleColorChange(color.variation_id)}
-                        style={{ backgroundColor: color.variation_name }}
-                      />
+                        className={
+                          productDetailData.color_name == color.variation_name
+                            ? `p-0.5 border-black border rounded-md`
+                            : `p-0.5 border-transparent`
+                        }
+                      >
+                        <div
+                          className={`h-5 w-5 rounded-md`}
+                          onClick={() => handleColorChange(color.variation_id)}
+                          style={{ backgroundColor: color.variation_name }}
+                        ></div>
+                      </div>
                     ))}
                 </div>
               </div>
             )}
             {productDetailData.size && productDetailData.size.length > 0 && (
-              <div className="flex items-center gap-4 py-2">
+              <div className="flex item-center gap-4 py-2">
                 <span className="flex items-center text-[#A4A4B8] text-lg font-semibold ">
                   Sizes:
                 </span>
-                <p className="flex items-center gap-4 cursor-pointer">
+                <div className="flex items-center gap-4 cursor-pointer">
                   {productDetailData.size.map((item) => (
-                    <span
+                    <div
                       key={item.variation_id}
-                      className={`h-5 w-5 rounded-md`}
-                      onClick={() => handelSizeChange(item.variation_id)}
+                      className={
+                        productDetailData.size_id == item.variation_id
+                          ? `px-1 py-0.5 border border-black rounded-md`
+                          : "px-1 py-0.5 border-transparent"
+                      }
                     >
-                      {item.variation_name}
-                    </span>
+                      <span
+                        className={`h-5 w-5 rounded-md`}
+                        onClick={() =>
+                          handelSizeChange(
+                            item.variation_id,
+                            productDetailData.color_id
+                          )
+                        }
+                      >
+                        {item.variation_name}
+                      </span>
+                    </div>
                   ))}
-                </p>
+                </div>
               </div>
             )}
             <Counter

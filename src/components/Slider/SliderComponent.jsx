@@ -57,7 +57,10 @@ const SliderComponent = ({
       <div className="slider-container w-full">
         <Slider {...sliderSettings}>
           {data.map((item, index) => (
-            <Link to={"/"} key={index}>
+            <Link
+              to={`/product-detail/${item.slug}/${item.unique_id}?sku=${item.sku}`}
+              key={index}
+            >
               {mainCardStatus && <Card2 data={item} />}
               {trendingCardStatus && <TrendingCard data={item} />}
               {dealCardStatus && <Card1 data={item} />}

@@ -13,12 +13,15 @@ import { UserContext, UserIntialValue } from "../../context/UserContext";
 import { logoutUser } from "../../api/constant";
 import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const { userData, setUserData } = useContext(UserContext);
+
+  const productCount = useSelector((state) => state.counterValueDetail);
 
   const userName = userData.name;
   const token = localStorage.getItem("token");
@@ -101,9 +104,13 @@ const Navbar = () => {
             <Link to={"/cart"}>
               <div className="relative">
                 <img src={shoppingCart} alt="shoppingcart-logo" />
-                <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#FF7900] rounded-full flex justify-center items-center">
-                  0
-                </span>
+                {productCount && (
+                  <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#FF7900] rounded-full flex justify-center items-center">
+                    {productCount.counterValue > 0
+                      ? productCount.counterValue
+                      : 0}
+                  </span>
+                )}
               </div>
             </Link>
             <div
