@@ -40,6 +40,7 @@ const ProductDetails = () => {
   const [show, setShow] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const [selectedSizeData, setSelectedSizeData] = useState(false);
   const dispatch = useDispatch();
 
   const handleBtn = () => {
@@ -134,6 +135,7 @@ const ProductDetails = () => {
         `${productDetail}/${productSlug}/${productId}`
       );
       console.log("main response", response.data.result);
+
       if (response.status === 200) {
         setLoading(false);
         if (response.data.result.variation_list == false) {
@@ -141,7 +143,12 @@ const ProductDetails = () => {
             response.data.result?.product_images[0]?.product_image_url
           );
         }
-
+        if (response.data.result.size.length > 0) {
+          setSelectedSizeData(false);
+        } else {
+          setSelectedSizeData(true);
+        }
+        setCounterValue(1);
         setProductDetailData({
           ...productDetailData,
           avg_rating: response.data.result.avg_rating,
@@ -196,7 +203,7 @@ const ProductDetails = () => {
           const filterSkuData = response.data.result.variation_list.filter(
             (item) => item.sku === skuData
           );
-          console.log("first", filterSkuData);
+          setCounterValue(1);
           setImageChange(filterSkuData[0].product_images[0]?.product_image_url);
           setProductDetailData((prevData) => ({
             ...prevData,
@@ -258,41 +265,50 @@ const ProductDetails = () => {
   };
 
   const handleAddCart = (e) => {
-    if (userToken) {
-      e.preventDefault();
-      const cartData = {
-        product_id: productDetailData.id,
-        quantity: counterValue,
-        product_variation_id: productDetailData.product_variation_id,
-      };
-      const addToCartApi = async () => {
-        const response = await axios.post(addToCart, cartData, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        if (response.status === 200) {
-          setAddCart(true);
-          dispatch(addCounterValue(counterValue));
-          console.log("addtocartapi: ", response.data.result);
-          toast.success(response.data.message);
-        }
-      };
-      addToCartApi();
+    if (selectedSizeData) {
+      if (userToken) {
+        e.preventDefault();
+        const cartData = {
+          product_id: productDetailData.id,
+          quantity: counterValue,
+          product_variation_id: productDetailData.product_variation_id,
+        };
+        const addToCartApi = async () => {
+          const response = await axios.post(addToCart, cartData, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          });
+          if (response.status === 200) {
+            setAddCart(true);
+            dispatch(addCounterValue(counterValue));
+            console.log("addtocartapi: ", response.data.result);
+            toast.success(response.data.message);
+          }
+        };
+        addToCartApi();
+      } else {
+        setShow(true);
+      }
     } else {
-      setShow(true);
+      toast.warning("Please select the product size");
     }
   };
 
   const handleBuyNow = () => {
-    if (userToken) {
-      navigate("/checkout");
+    if (selectedSizeData) {
+      if (userToken) {
+        navigate("/checkout");
+      } else {
+        setShow(true);
+      }
     } else {
-      setShow(true);
+      toast.warning("Please select the product size");
     }
   };
 
   const handleColorChange = (id) => {
+    setAddCart(false);
     const selectedVariationData = productDetailData.variation_list.find(
       (variation) => variation.color === id
     );
@@ -309,6 +325,7 @@ const ProductDetails = () => {
     navigate({ search: updatedSearchParam.toString() });
 
     if (selectedVariationData) {
+      setCounterValue(1);
       setImageChange(
         selectedVariationData?.product_images[0]?.product_image_url
       );
@@ -336,12 +353,13 @@ const ProductDetails = () => {
   };
 
   const handelSizeChange = (id, colorId) => {
-    console.log("first", id, colorId);
+    setAddCart(false);
+    setSelectedSizeData(true);
     const selectedSizeData = productDetailData.variation_list.find(
       (variation) => variation.size === id && variation.color == colorId
     );
-    console.log("selectedSize: ", selectedSizeData);
     if (selectedSizeData) {
+      setCounterValue(1);
       setProductDetailData((prevData) => ({
         ...prevData,
         size_id: selectedSizeData.size,

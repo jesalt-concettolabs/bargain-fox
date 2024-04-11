@@ -5,15 +5,16 @@ import userlogo from "/assets/user.svg";
 import heartLogo from "/assets/whishlist.svg";
 import shoppingCart from "/assets/shopping-cart.svg";
 import LoginForm from "../../pages/LoginForm";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MobileSideMenu from "../MobileSideMenu/MobileSideMenu";
 import OTPVerification from "../../pages/OTPVerification";
 import SignupForm from "../../pages/SignupForm";
 import { UserContext, UserIntialValue } from "../../context/UserContext";
-import { logoutUser } from "../../api/constant";
+import { currentCartDetail, logoutUser } from "../../api/constant";
 import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addCounterValue } from "../../reducers/counterDetailSlice";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
@@ -22,9 +23,29 @@ const Navbar = () => {
   const { userData, setUserData } = useContext(UserContext);
 
   const productCount = useSelector((state) => state.counterValueDetail);
+  const dispatch = useDispatch();
 
   const userName = userData.name;
   const token = localStorage.getItem("token");
+
+  const getCurrentCartCount = async () => {
+    try {
+      const response = await axios.get(currentCartDetail, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      dispatch(addCounterValue(response.data.result.cart_item_count));
+    } catch (error) {
+      console.log("Current Cart count api: ", error);
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      getCurrentCartCount();
+    }
+  }, [productCount, token]);
 
   const handleBtn = () => {
     setShow(false);
@@ -58,6 +79,7 @@ const Navbar = () => {
       if (response.status === 200) {
         localStorage.removeItem("token");
         setUserData(UserIntialValue);
+        window.location.reload();
       }
     } catch (error) {
       console.log("Current user api: ", error);

@@ -12,3 +12,4 @@ export const productDetail = `${Base_url}/product/detail`;
 export const addToCart = `${Base_url}/add-to-cart`;
 export const shoppingCartAPI = `${Base_url}/my-cart`;
 export const deleteCartProduct = `${Base_url}/remove-from-cart`;
+export const currentCartDetail = `${Base_url}/cart-item-count`;
