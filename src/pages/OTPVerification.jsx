@@ -186,7 +186,7 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
                         disabled={resendDisabled}
                         className={`${
                           resendDisabled ? "opacity-50 cursor-not-allowed" : ""
-                        } text-[#ff7900]`}
+                        } text-[#0063FF]`}
                       >
                         Resend Code
                       </button>
@@ -197,7 +197,7 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
                     disabled={disableBtn}
                     className={`${
                       disableBtn ? "opacity-50" : ""
-                    } rounded-[25px] w-full mt-5 bg-[#ff7900] text-white font-semibold py-1`}
+                    } rounded-[25px] w-full mt-5 bg-[#0063FF] text-white font-semibold py-1`}
                   >
                     Verify
                   </button>

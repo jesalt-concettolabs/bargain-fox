@@ -84,7 +84,7 @@ const SearchBar = () => {
         />
         <button
           onClick={handleSearch}
-          className="bg-[#FF7900] outline-none p-2 rounded-r-lg w-[35px] h-[35px] flex justify-center items-center"
+          className="bg-[#0063FF] outline-none p-2 rounded-r-lg w-[35px] h-[35px] flex justify-center items-center"
         >
           <img src={searchIcon} alt="search-icon" />
         </button>

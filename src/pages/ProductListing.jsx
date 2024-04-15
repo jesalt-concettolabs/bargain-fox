@@ -46,7 +46,6 @@ const ProductListing = () => {
       const response = await axios.post(productList, postData);
       if (response.status === 200) {
         setAllResponse(response.data.result);
-        console.log("first", response.data.result);
         setProductData(response.data.result.data);
         setLoading(false);
         setEmptyData(response.data.result.data.length === 0);
@@ -105,7 +104,7 @@ const ProductListing = () => {
                   {searchData && (
                     <span>
                       for
-                      <span className="text-[#ff7900]"> "{searchData}"</span>
+                      <span className="text-[#0063FF]"> "{searchData}"</span>
                     </span>
                   )}
                 </p>

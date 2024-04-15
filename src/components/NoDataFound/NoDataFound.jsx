@@ -16,7 +16,7 @@ const NoDataFound = ({ title, emptyImg }) => {
         {title ? title : "No Product Found"}
       </h4>
       <Link to={"/"}>
-        <button className="sm:px-4 sm:py-2 px-2 py-1 text-[12px] sm:text-[16px]  text-center bg-[#ff7900] text-white hover:bg-black hover:text-white rounded-[25px]">
+        <button className="sm:px-4 sm:py-2 px-2 py-1 text-[12px] sm:text-[16px]  text-center bg-[#0063FF] text-white hover:bg-black hover:text-white rounded-[25px]">
           Return to shop
         </button>
       </Link>

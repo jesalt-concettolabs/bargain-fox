@@ -16,3 +16,6 @@ export const currentCartDetail = `${Base_url}/cart-item-count`;
 export const wishListDetail = `${Base_url}/wishlist`;
 export const manageWishListDetail = `${Base_url}/manage-wishlist`;
 export const getWishListCountDetail = `${Base_url}/wishlist-count`;
+export const getUserAddress = `${Base_url}/get-delivery-address`;
+export const storeUserAddress = `${Base_url}/store-delivery-address`;
+export const deleteUserAddress = `${Base_url}/delete-delivery-address`;

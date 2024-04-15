@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./navbar.scss";
-import logo from "/assets/main-logo-white-.com_350x.png";
+import logo from "/assets/eCartlogo.svg";
 import userlogo from "/assets/user.svg";
 import heartLogo from "/assets/whishlist.svg";
 import shoppingCart from "/assets/shopping-cart.svg";
@@ -54,7 +54,6 @@ const Navbar = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log("wish count", response.data.result.wishlistcount);
       dispatch(addCartCounterValue(response.data.result.wishlistcount));
     } catch (error) {
       console.log("Current Cart count api: ", error);
@@ -154,14 +153,14 @@ const Navbar = () => {
           <div className="flex items-center gap-[30px]">
             <div className="relative cursor-pointer" onClick={handleWishList}>
               <img src={heartLogo} alt="heart-logo" />
-              <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#FF7900] rounded-full flex justify-center items-center">
+              <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#0063FF] rounded-full flex justify-center items-center">
                 {cartCount.counterValue > 0 ? cartCount.counterValue : 0}
               </span>
             </div>
             <div className="relative cursor-pointer" onClick={handleCart}>
               <img src={shoppingCart} alt="shoppingcart-logo" />
               {productCount && (
-                <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#FF7900] rounded-full flex justify-center items-center">
+                <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#0063FF] rounded-full flex justify-center items-center">
                   {productCount.counterValue > 0
                     ? productCount.counterValue
                     : 0}
@@ -194,14 +193,14 @@ const Navbar = () => {
                 {!token ? (
                   <button
                     onClick={() => setShow(true)}
-                    className="bg-[#FF7900] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
+                    className="bg-[#0063FF] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
                   >
                     Login/Register
                   </button>
                 ) : (
                   <button
                     onClick={handleLogout}
-                    className="bg-[#FF7900] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
+                    className="bg-[#0063FF] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
                   >
                     Logout
                   </button>
@@ -250,7 +249,7 @@ const Navbar = () => {
               <Link to={"/"}>
                 <div className="relative">
                   <img src={heartLogo} alt="heart-logo" id="whishlist-logo" />
-                  <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#FF7900] rounded-full flex justify-center items-center">
+                  <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#0063FF] rounded-full flex justify-center items-center">
                     0
                   </span>
                 </div>
@@ -262,7 +261,7 @@ const Navbar = () => {
                     alt="shoppingcart-logo"
                     id="cart-logo"
                   />
-                  <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#FF7900] rounded-full flex justify-center items-center">
+                  <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#0063FF] rounded-full flex justify-center items-center">
                     0
                   </span>
                 </div>

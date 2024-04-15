@@ -10,6 +10,8 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import closeIcon from "/assets/close.png";
+import axios from "axios";
+import { storeUserAddress } from "../../api/constant";
 
 const renderInput = (name, label, formik, type = "text") => (
   <>
@@ -31,36 +33,62 @@ const renderInput = (name, label, formik, type = "text") => (
   </>
 );
 
-const AddressForm = ({ show, handleClose }) => {
+const AddressForm = ({ show, handleClose, editAddress, checked, update }) => {
   const [loading, setLoading] = useState(false);
 
+  const storeUserAddressApi = async (values, resetForm) => {
+    try {
+      const response = await axios.post(storeUserAddress, values, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (response.status === 200) {
+        handleClose();
+        update((prev) => !prev);
+        resetForm();
+      }
+    } catch (error) {
+      console.log("Store user Address API error: ", error);
+    }
+  };
+
   const validationSchema = Yup.object().shape({
-    name: Yup.string().min(4).max(25).required("Full Name is required"),
-    phoneNumber: Yup.string()
+    full_name: Yup.string().min(4).max(25).required("Full Name is required"),
+    phone: Yup.string()
       .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits")
       .required("Phone number is required"),
     address: Yup.string().required("Address is required"),
-    apartment: Yup.string()
+    address2: Yup.string()
       .max(50, "Apartment/suite number is too long")
       .required("Apartment number is required"),
+    state: Yup.string().required("State is required"),
     city: Yup.string().min(4).max(25).required("City is required"),
     postcode: Yup.number().required("Postcode number is required"),
+    country: Yup.string().required("Country is required"),
   });
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      address: "",
-      apartment: "",
-      city: "",
-      postcode: "",
-      phoneNumber: "",
+      id: editAddress ? editAddress.id : "",
+      full_name: editAddress ? editAddress.full_name : "",
+      address: editAddress ? editAddress.address : "",
+      address2: editAddress ? editAddress.address2 : "",
+      state: editAddress ? editAddress.state : "",
+      city: editAddress ? editAddress.city : "",
+      postcode: editAddress ? editAddress.postcode : "",
+      phone: editAddress ? editAddress.mobile : "",
+      country: editAddress ? editAddress.country : "India",
     },
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
         setLoading(true);
-        await submitForm(values, resetForm);
+        if (checked != null) {
+          await updateForm(values, resetForm);
+        } else {
+          await submitForm(values, resetForm);
+        }
       } catch (error) {
         console.error("Error:", error);
       } finally {
@@ -69,10 +97,14 @@ const AddressForm = ({ show, handleClose }) => {
     },
   });
 
-  const submitForm = async (values, resetForm) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log("User Address: ", values);
-    resetForm();
+  const submitForm = async (values) => {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    storeUserAddressApi(values);
+  };
+
+  const updateForm = async (values) => {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    storeUserAddressApi(values);
   };
 
   return (
@@ -95,30 +127,43 @@ const AddressForm = ({ show, handleClose }) => {
               variant="h5"
               className="text-center text-sm sm:text-2xl text-[#292D32]"
             >
-              Add Delivery Address
+              {checked != null
+                ? "Update Delivery Address"
+                : "Add Delivery Address"}
             </Typography>
             <div>
-              <select className="bg-transparent border border-blue-gray-200 text-blue-gray-500 text-sm rounded-lg block w-full p-2.5">
-                <option selected>Choose a country</option>
-                <option value="IN">India</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
+              <select
+                className="bg-transparent border border-blue-gray-200 text-blue-gray-500 text-sm rounded-lg block w-full p-2.5"
+                value={formik.values.country}
+                onChange={formik.handleChange}
+                name="country"
+              >
+                <option value="India">India</option>
+                <option value="USA">United States</option>
+                <option value="Canada">Canada</option>
+                <option value="France">France</option>
               </select>
             </div>
-            {renderInput("name", "Full Name", formik)}
+            {renderInput("full_name", "Full Name", formik)}
             {renderInput("address", "Address", formik, "textarea")}
-            {renderInput("apartment", "Apartment", formik)}
+            {renderInput("address2", "Apartment", formik)}
             {renderInput("city", "City", formik)}
+            {renderInput("state", "State", formik)}
             {renderInput("postcode", "Postcode", formik, "number")}
-            {renderInput("phoneNumber", "Phone", formik, "number")}
+            {renderInput("phone", "Phone", formik, "number")}
           </CardBody>
           <CardFooter className="pt-0">
             <button
               type="submit"
-              className="bg-[#FF7900] w-full text-white text-sm font-bold p-2 rounded-[56px]"
+              className="bg-[#0063FF] w-full text-white text-sm font-bold p-2 rounded-[56px]"
             >
-              {loading ? "Loading..." : "Save Address"}
+              {checked != null
+                ? loading
+                  ? "Loading..."
+                  : "Update Address"
+                : loading
+                ? "Loading..."
+                : "Save Address"}
             </button>
           </CardFooter>
         </form>

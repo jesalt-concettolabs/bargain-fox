@@ -107,14 +107,14 @@ const MobileSideMenu = () => {
             {!token ? (
               <button
                 onClick={() => setShow(true)}
-                className="bg-[#FF7900] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
+                className="bg-[#0063FF] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
               >
                 Login/Register
               </button>
             ) : (
               <button
                 onClick={handleLogout}
-                className="bg-[#FF7900] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
+                className="bg-[#0063FF] w-full py-2 px-2 hover:bg-black text-white text-sm font-bold rounded-[56px]"
               >
                 Logout
               </button>

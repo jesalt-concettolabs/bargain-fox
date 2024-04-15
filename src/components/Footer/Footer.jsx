@@ -25,7 +25,7 @@ const Footer = () => {
               {footerIcons.map((icon, index) => (
                 <div key={index}>
                   <Link to={"/"}>
-                    <div className="h-[35px] w-[35px] rounded-full hover:bg-black bg-[#FF7900] flex justify-center items-center">
+                    <div className="h-[35px] w-[35px] rounded-full hover:bg-black bg-[#0063FF] flex justify-center items-center">
                       <img src={icon} alt="footer-icons" />
                     </div>
                   </Link>
@@ -39,11 +39,11 @@ const Footer = () => {
               All rights reserved © 2023 BargainFox.com
             </div>
             <div id="footer-terms" className="text-[#A4A4B8] text-[16px]">
-              <span className="hover:text-[#ff7900]">
+              <span className="hover:text-[#0063FF]">
                 <Link to={"/"}>Terms of Service </Link>
               </span>
               |
-              <span className="hover:text-[#ff7900]">
+              <span className="hover:text-[#0063FF]">
                 <Link to={"/"}> Privacy Policy</Link>
               </span>
             </div>

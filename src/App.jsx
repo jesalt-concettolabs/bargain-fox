@@ -6,6 +6,8 @@ import ProductDetails from "./pages/ProductDetails";
 import ShoppingCart from "./pages/ShoppingCart";
 import Checkout from "./pages/Checkout";
 import WhishList from "./pages/WhishList";
+import Payment from "./pages/Payment";
+import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -33,8 +35,12 @@ const router = createBrowserRouter([
         element: <ShoppingCart />,
       },
       {
-        path: "/checkout",
+        path: "/checkout/address",
         element: <Checkout />,
+      },
+      {
+        path: "/checkout/payment",
+        element: <Payment />,
       },
       {
         path: "/search",
@@ -43,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/wishlist",
         element: <WhishList />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
       },
     ],
   },

@@ -54,7 +54,7 @@ const WhishList = () => {
       );
       if (response.status === 200) {
         setDeleteStatus(response.data);
-        toast.success("Removed from wishlist successfully");
+        toast.success("Product Removed from wishlist");
       }
     } catch (error) {
       console.log("Manage wishlist API error: ", error);

@@ -26,7 +26,7 @@ const DetailHover = () => {
       >
         {detailHoverData.map((item) => (
           <Link key={item.id}>
-            <li className="flex border-b pb-2 border-b-gray-200 justify-between items-center hover:text-[#ff7900]">
+            <li className="flex border-b pb-2 border-b-gray-200 justify-between items-center hover:text-[#0063FF]">
               {item.cardName}
               <span>
                 <img src={item.cardImg} alt={item.cardName} />

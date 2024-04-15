@@ -32,7 +32,7 @@ const HeroCard = ({ data }) => {
           <span className="font-normal text-center min-h-14">{title}</span>
           <div className="hidden md:block">
             {isHovered && (
-              <div className="absolute top-36 z-[9999] mt-2 h-2.5 w-2.5 rounded-full bg-[#ff7900]" />
+              <div className="absolute top-36 z-[9999] mt-2 h-2.5 w-2.5 rounded-full bg-[#0063FF]" />
             )}
           </div>
         </section>

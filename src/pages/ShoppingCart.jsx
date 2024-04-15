@@ -16,7 +16,6 @@ const ShoppingCart = () => {
   const [cartDetails, setCartDetails] = useState();
   const [loading, setLoading] = useState(false);
   const [productCounterValues, setProductCounterValues] = useState({});
-
   const productCount = useSelector((state) => state.counterValueDetail);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
@@ -34,7 +33,6 @@ const ShoppingCart = () => {
           },
         }
       );
-      console.log("cart response: ", response.data.result);
       if (response.status === 200) {
         setCartDetails(response.data.result);
         setLoading(false);
@@ -84,7 +82,6 @@ const ShoppingCart = () => {
     counterValue,
     plusCount
   ) => {
-    console.log("clicked", productId, variationId, counterValue);
     const cartData = {
       product_id: productId,
       quantity: plusCount ? counterValue + 1 : counterValue - 1,
@@ -178,19 +175,22 @@ const ShoppingCart = () => {
                           {item.product_info.name}
                         </p>
 
-                        <div className="flex items-center justify-between pt-4">
-                          <div className="flex items-center gap-3 ">
-                            <Price
-                              cardPrice={item.product_info.sale_price}
-                              cardNotPrice={item.product_info.main_rrp}
-                            />
-                            <span className="text-[#2569F3]">
-                              {item.product_info.percentage_discount > 0
-                                ? `${item.product_info.percentage_discount}%`
-                                : ""}
-                            </span>
-                          </div>
-                        </div>
+                        {item.product_info.sale_price &&
+                          item.product_info.main_rrp && (
+                            <div className="flex items-center justify-between pt-4">
+                              <div className="flex items-center gap-3 ">
+                                <Price
+                                  cardPrice={item.product_info.sale_price}
+                                  cardNotPrice={item.product_info.main_rrp}
+                                />
+                                <span className="text-[#2569F3]">
+                                  {item.product_info.percentage_discount > 0
+                                    ? `${item.product_info.percentage_discount}%`
+                                    : ""}
+                                </span>
+                              </div>
+                            </div>
+                          )}
                       </div>
                       <div className="hidden sm:flex sm:gap-4">
                         <Counter
@@ -254,7 +254,7 @@ const ShoppingCart = () => {
                       {" "}
                       {item.product_info.vendor_info.trading_name},{" "}
                     </span>
-                    <span className="text-[#ff7900] ">
+                    <span className="text-[#0063FF] ">
                       {item.product_info.stock} left
                     </span>
                   </div>

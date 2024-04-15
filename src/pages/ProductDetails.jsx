@@ -134,7 +134,6 @@ const ProductDetails = () => {
       const response = await axios.get(
         `${productDetail}/${productSlug}/${productId}`
       );
-      console.log("main response", response.data.result);
 
       if (response.status === 200) {
         setLoading(false);
@@ -281,7 +280,6 @@ const ProductDetails = () => {
           if (response.status === 200) {
             setAddCart(true);
             dispatch(addCounterValue(counterValue));
-            console.log("addtocartapi: ", response.data.result);
             toast.success(response.data.message);
           }
         };
@@ -568,14 +566,14 @@ const ProductDetails = () => {
                 ) : (
                   <button
                     onClick={handleAddCart}
-                    className="bg-[#FF7900] py-1 text-white hover:bg-black border border-[#ff7900] hover:border-none hover:text-white font-normal rounded-[25px] w-full"
+                    className="bg-[#0063FF] py-1 text-white hover:bg-black border border-[#0063FF] hover:border-none hover:text-white font-normal rounded-[25px] w-full"
                   >
                     Add to Cart
                   </button>
                 )}
                 <button
                   onClick={handleBuyNow}
-                  className="bg-[#FF79001A] py-1 transition-all ease-in-out border border-[#FF7900] hover:bg-[#ff7900] hover:text-white  w-full rounded-[25px]"
+                  className="bg-[#0063FF1A] py-1 transition-all ease-in-out border border-[#0063FF] hover:bg-[#0063FF] hover:text-white  w-full rounded-[25px]"
                 >
                   Buy now
                 </button>
@@ -665,7 +663,7 @@ const ProductDetails = () => {
                   </p>
                   {/* {!showFullDescription && (
                     <button
-                      className="text-[#ff7900]"
+                      className="text-[#0063FF]"
                       onClick={toggleDescription}
                     >
                       ...

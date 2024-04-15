@@ -44,7 +44,7 @@ const HoverDiv = ({ data }) => {
                   to={`/${mainSlug}/${subData[activeList].slug}/${slug}`}
                   key={id}
                 >
-                  <li className="text-[#292D32] hover:text-[#ff7900] text-[16px] font-normal">
+                  <li className="text-[#292D32] hover:text-[#0063FF] text-[16px] font-normal">
                     {title}
                   </li>
                 </Link>

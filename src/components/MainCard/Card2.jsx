@@ -73,7 +73,7 @@ const Card2 = ({ data, btnClass, handleDelete }) => {
         }
       );
       if (response.status === 200) {
-        toast.success("Added to Wishlist successfully");
+        toast.success("Product Added to Wishlist");
         dispatch(addCartCounterValue(wishCount + 1));
       }
     } catch (error) {
@@ -127,7 +127,7 @@ const Card2 = ({ data, btnClass, handleDelete }) => {
           </div>
           <div
             className={`${
-              wishClicked ? "bg-[#ff7900]" : "bg-white"
+              wishClicked ? "bg-[#0063FF]" : "bg-white"
             } absolute h-8 w-8 rounded-full top-2 right-2`}
           >
             {loader ? (
@@ -147,7 +147,7 @@ const Card2 = ({ data, btnClass, handleDelete }) => {
         <div className="px-2">
           <p
             id="mainCardTitle"
-            className="block mt-3 text-sm font-semibold text-[#292D32] hover:text-[#ff7900] capitalize min-h-4"
+            className="block mt-3 text-sm font-semibold text-[#292D32] hover:text-[#0063FF] capitalize min-h-4"
           >
             {description}
           </p>

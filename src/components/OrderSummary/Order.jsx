@@ -34,8 +34,8 @@ const Order = ({ data, productCount }) => {
           <p>${cart_sub_total || grand_total || product_sub_total}</p>
         </div>
         <div>
-          <Link to={"/checkout"}>
-            <button className="w-full flex items-center justify-center rounded-3xl py-2 bg-[#ff7900] text-white">
+          <Link to={"/checkout/address"}>
+            <button className="w-full flex items-center justify-center rounded-3xl py-2 bg-[#0063FF] text-white">
               Proceed to Checkout
             </button>
           </Link>

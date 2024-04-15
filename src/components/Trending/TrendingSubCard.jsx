@@ -18,7 +18,7 @@ const TrendingSubCard = () => {
                 {item.cardName}
               </span>
 
-              <span className="text-center sm:text-[12px] lg:text-[16px] text-[#FF7900] ">
+              <span className="text-center sm:text-[12px] lg:text-[16px] text-[#0063FF] ">
                 View All Products
               </span>
             </div>

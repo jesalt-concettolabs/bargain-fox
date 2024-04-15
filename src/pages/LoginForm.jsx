@@ -112,7 +112,7 @@ const LoginForm = ({ show, handleClose, handleOtp }) => {
               <CardFooter className="pt-0">
                 <button
                   type={"submit"}
-                  className="bg-[#FF7900] w-full text-white text-sm font-bold p-2 rounded-[56px]"
+                  className="bg-[#0063FF] w-full text-white text-sm font-bold p-2 rounded-[56px]"
                 >
                   {loading ? "Loading..." : "Continue"}
                 </button>

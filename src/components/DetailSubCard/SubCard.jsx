@@ -13,7 +13,7 @@ const SubCard = ({ imageURL, title }) => {
       <div className="text-center">
         <p className="text-[#292D32] text-[16px] font-normal">
           {title}{" "}
-          <span className="text-[#ff7900]">
+          <span className="text-[#0063FF]">
             <Link to={"/"}> Read More</Link>
           </span>
         </p>

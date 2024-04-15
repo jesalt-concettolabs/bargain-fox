@@ -8,7 +8,7 @@ const FooterMenu = ({ title, list }) => {
       </span>
       <ul className="flex flex-col gap-1 sm:gap-3 text-[14px] sm:text-[16px] font-normal text-[#A4A4B8] text-left ">
         {list.map((item) => (
-          <li key={item} className="hover:text-[#ff7900]">
+          <li key={item} className="hover:text-[#0063FF]">
             <Link to={"/"}>{item}</Link>
           </li>
         ))}
