@@ -112,6 +112,10 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
     if (e.key === "Backspace") setActiveOTPIndex(currentOTPIndex - 1);
   };
 
+  const handleClick = (e) => {
+    e.stopPropagation();
+  };
+
   useEffect(() => {
     inputRef.current?.focus();
   }, [activeOTPIndex]);
@@ -119,7 +123,10 @@ const OTPVerification = ({ show, handleVerify, handleClose }) => {
   return (
     <>
       <Dialog open={show} handler={handleClose} size={"xs"}>
-        <div className="relative flex  flex-col justify-center overflow-hidden">
+        <div
+          className="relative flex  flex-col justify-center overflow-hidden"
+          onClick={handleClick}
+        >
           <div className="relative px-6 py-6 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
             <div className="float-end cursor-pointer" onClick={handleClose}>
               <img src={closeIcon} alt="closeicon" />

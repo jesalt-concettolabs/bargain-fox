@@ -13,3 +13,6 @@ export const addToCart = `${Base_url}/add-to-cart`;
 export const shoppingCartAPI = `${Base_url}/my-cart`;
 export const deleteCartProduct = `${Base_url}/remove-from-cart`;
 export const currentCartDetail = `${Base_url}/cart-item-count`;
+export const wishListDetail = `${Base_url}/wishlist`;
+export const manageWishListDetail = `${Base_url}/manage-wishlist`;
+export const getWishListCountDetail = `${Base_url}/wishlist-count`;

@@ -53,6 +53,10 @@ const LoginForm = ({ show, handleClose, handleOtp }) => {
     onSubmit: handleLoginSubmit,
   });
 
+  const handleClick = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <>
       <Dialog
@@ -69,7 +73,7 @@ const LoginForm = ({ show, handleClose, handleOtp }) => {
             <img src={closeIcon} alt="closeicon" />
           </div>
 
-          <div className={`block`}>
+          <div className={`block`} onClick={handleClick}>
             <form noValidate onSubmit={loginFormik.handleSubmit}>
               <CardBody className="flex flex-col gap-4">
                 <Typography

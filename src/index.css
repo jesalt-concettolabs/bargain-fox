@@ -42,11 +42,9 @@ input[type="number"] {
   text-overflow: ellipsis;
 }
 
-/* #form-div {
-  ::-webkit-scrollbar {
-    display: none;
-  }
-} */
+::-webkit-scrollbar {
+  display: none;
+}
 
 .truncateId {
   display: -webkit-box;

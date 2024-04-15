@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbar.scss";
 import logo from "/assets/main-logo-white-.com_350x.png";
 import userlogo from "/assets/user.svg";
@@ -10,11 +10,16 @@ import MobileSideMenu from "../MobileSideMenu/MobileSideMenu";
 import OTPVerification from "../../pages/OTPVerification";
 import SignupForm from "../../pages/SignupForm";
 import { UserContext, UserIntialValue } from "../../context/UserContext";
-import { currentCartDetail, logoutUser } from "../../api/constant";
+import {
+  currentCartDetail,
+  getWishListCountDetail,
+  logoutUser,
+} from "../../api/constant";
 import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
 import { useSelector, useDispatch } from "react-redux";
 import { addCounterValue } from "../../reducers/counterDetailSlice";
+import { addCartCounterValue } from "../../reducers/cartCounterSlice";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
@@ -23,8 +28,9 @@ const Navbar = () => {
   const { userData, setUserData } = useContext(UserContext);
 
   const productCount = useSelector((state) => state.counterValueDetail);
+  const cartCount = useSelector((state) => state.cartCounterDetail);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const userName = userData.name;
   const token = localStorage.getItem("token");
 
@@ -41,11 +47,26 @@ const Navbar = () => {
     }
   };
 
+  const getWishListCount = async () => {
+    try {
+      const response = await axios.get(getWishListCountDetail, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      console.log("wish count", response.data.result.wishlistcount);
+      dispatch(addCartCounterValue(response.data.result.wishlistcount));
+    } catch (error) {
+      console.log("Current Cart count api: ", error);
+    }
+  };
+
   useEffect(() => {
     if (token) {
       getCurrentCartCount();
+      getWishListCount();
     }
-  }, [productCount, token]);
+  }, [productCount, token, cartCount]);
 
   const handleBtn = () => {
     setShow(false);
@@ -67,6 +88,22 @@ const Navbar = () => {
 
   const handleOTPClose = () => {
     setShowOtp(false);
+  };
+
+  const handleWishList = () => {
+    if (token) {
+      navigate("/wishlist");
+    } else {
+      setShow(true);
+    }
+  };
+
+  const handleCart = () => {
+    if (token) {
+      navigate("/cart");
+    } else {
+      setShow(true);
+    }
   };
 
   const handleLogout = async () => {
@@ -115,26 +152,22 @@ const Navbar = () => {
           </Link>
           <SearchBar />
           <div className="flex items-center gap-[30px]">
-            <Link to={"/wishlist"}>
-              <div className="relative">
-                <img src={heartLogo} alt="heart-logo" />
+            <div className="relative cursor-pointer" onClick={handleWishList}>
+              <img src={heartLogo} alt="heart-logo" />
+              <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#FF7900] rounded-full flex justify-center items-center">
+                {cartCount.counterValue > 0 ? cartCount.counterValue : 0}
+              </span>
+            </div>
+            <div className="relative cursor-pointer" onClick={handleCart}>
+              <img src={shoppingCart} alt="shoppingcart-logo" />
+              {productCount && (
                 <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#FF7900] rounded-full flex justify-center items-center">
-                  0
+                  {productCount.counterValue > 0
+                    ? productCount.counterValue
+                    : 0}
                 </span>
-              </div>
-            </Link>
-            <Link to={"/cart"}>
-              <div className="relative">
-                <img src={shoppingCart} alt="shoppingcart-logo" />
-                {productCount && (
-                  <span className="absolute top-[-6px] right-[-6px] h-[20px] w-[20px] text-xs text-white bg-[#FF7900] rounded-full flex justify-center items-center">
-                    {productCount.counterValue > 0
-                      ? productCount.counterValue
-                      : 0}
-                  </span>
-                )}
-              </div>
-            </Link>
+              )}
+            </div>
             <div
               id="user-div"
               className="flex flex-col items-center gap-2 cursor-pointer "

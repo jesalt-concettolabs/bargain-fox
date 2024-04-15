@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Counter from "../components/CardSubComponent/Counter";
 import Price from "../components/CardSubComponent/Price";
 import { addCounterValue } from "../reducers/counterDetailSlice";
+import { useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
   const [cartDetails, setCartDetails] = useState();
@@ -18,6 +19,8 @@ const ShoppingCart = () => {
 
   const productCount = useSelector((state) => state.counterValueDetail);
   const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const cartAPI = async () => {
     setLoading(true);
@@ -53,6 +56,7 @@ const ShoppingCart = () => {
 
   const handleCartDelete = async (id) => {
     try {
+      setLoading(true);
       const response = await axios.post(
         deleteCartProduct,
         { cart_product_id: [id] },
@@ -63,11 +67,13 @@ const ShoppingCart = () => {
         }
       );
       if (response.status === 200) {
+        setLoading(false);
         toast.success("Product deleted successfully");
         setCartDetails(response.data.result);
         dispatch(addCounterValue(response.data.result.user_cart.length));
       }
     } catch (error) {
+      setLoading(false);
       console.log("Delete Cart Product API error : ", error);
     }
   };
@@ -125,8 +131,12 @@ const ShoppingCart = () => {
     }
   };
 
-  if (loading) {
+  if (token && loading) {
     return <Loader />;
+  }
+
+  if (!token && loading) {
+    return navigate("/");
   }
 
   return (

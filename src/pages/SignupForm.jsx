@@ -63,6 +63,10 @@ const SignupForm = ({ show, handleClose }) => {
     onSubmit: handleRegisterSubmit,
   });
 
+  const handleClick = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <>
       <Dialog
@@ -78,7 +82,7 @@ const SignupForm = ({ show, handleClose }) => {
           >
             <img src={closeIcon} alt="closeicon" />
           </div>
-          <div className={`block`}>
+          <div className={`block`} onClick={handleClick}>
             <form noValidate onSubmit={formik.handleSubmit}>
               <CardBody className="flex flex-col gap-4">
                 <Typography

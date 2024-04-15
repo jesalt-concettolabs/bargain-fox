@@ -227,20 +227,19 @@ const ProductDetails = () => {
             product_variation_id: filterSkuData[0].product_variation_id,
             id: filterSkuData[0].product_id,
           }));
-          setTimeout(() => {
-            const variationColorName = response.data.result.color
-              ? response.data.result.color.find(
-                  (item) => item.variation_id == filterSkuData[0].color
-                )
-              : null;
 
-            if (variationColorName) {
-              setProductDetailData((prevData) => ({
-                ...prevData,
-                color_name: variationColorName.variation_name,
-              }));
-            }
-          }, 100);
+          const variationColorName = response.data.result.color
+            ? response.data.result.color.find(
+                (item) => item.variation_id == filterSkuData[0].color
+              )
+            : null;
+
+          if (variationColorName) {
+            setProductDetailData((prevData) => ({
+              ...prevData,
+              color_name: variationColorName.variation_name,
+            }));
+          }
         }
       }
     } catch (error) {
@@ -475,7 +474,7 @@ const ProductDetails = () => {
                   <span className="text-[#A4A4B8] text-lg font-semibold">
                     Color :
                   </span>
-                  <span className="font-normal text-[#292D32]">
+                  <span className="font-normal text-[#292D32] capitalize">
                     {productDetailData.color_name}
                   </span>
                 </p>
@@ -516,7 +515,7 @@ const ProductDetails = () => {
                       }
                     >
                       <span
-                        className={`h-5 w-5 rounded-md`}
+                        className={`h-5 w-5 rounded-md capitalize`}
                         onClick={() =>
                           handelSizeChange(
                             item.variation_id,
