@@ -60,7 +60,10 @@ const Checkout = () => {
 
   const handlePayment = () => {
     if (checkedIndex != null) {
-      navigate("/checkout/payment");
+      const selectedId = deliveryAddress[checkedIndex].id;
+      if (selectedId) {
+        navigate("/checkout/payment", { state: { selectedId } });
+      }
     } else {
       toast.error("Please Select the Address");
     }
