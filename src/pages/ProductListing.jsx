@@ -41,11 +41,13 @@ const ProductListing = () => {
         price_range: new URLSearchParams(location.search).get("price_range"),
         min_price: new URLSearchParams(location.search).get("min_price"),
         max_price: new URLSearchParams(location.search).get("max_price"),
+        is_search_all: false,
       };
 
       const response = await axios.post(productList, postData);
       if (response.status === 200) {
         setAllResponse(response.data.result);
+        console.log(response.data.result);
         setProductData(response.data.result.data);
         setLoading(false);
         setEmptyData(response.data.result.data.length === 0);

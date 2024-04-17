@@ -255,10 +255,12 @@ const ProductDetails = () => {
   };
 
   const handlePlus = () => {
+    setAddCart(false);
     setCounterValue(counterValue + 1);
   };
 
   const handleMinus = () => {
+    setAddCart(false);
     setCounterValue(counterValue - 1);
   };
 

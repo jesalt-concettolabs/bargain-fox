@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Order = ({ data, productCount, payment }) => {
+const Order = ({ data, productCount, payment, onclick }) => {
   const {
     cart_total,
     cart_sub_total,
@@ -11,6 +11,12 @@ const Order = ({ data, productCount, payment }) => {
     sale_tax_amount,
     delivery_charge,
   } = data;
+
+  const handleClick = () => {
+    if (typeof onclick === "function") {
+      onclick();
+    }
+  };
   return (
     <main className="flex flex-col gap-8">
       <section className="flex flex-col gap-2">
@@ -60,13 +66,15 @@ const Order = ({ data, productCount, payment }) => {
             <p>${grand_total}</p>
           </div>
         )}
-        {payment == "true" ? (
+        {payment == "true" && onclick ? (
           <div>
-            <Link to={"/checkout/payment"}>
-              <button className="w-full flex items-center justify-center rounded-3xl py-2 bg-[#0063FF] text-white">
-                Pay Now
-              </button>
-            </Link>
+            <button
+              type="submit"
+              onClick={handleClick}
+              className="w-full flex items-center justify-center rounded-3xl py-2 bg-[#0063FF] text-white"
+            >
+              Pay Now
+            </button>
           </div>
         ) : (
           <div>

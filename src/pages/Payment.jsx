@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Radio } from "pretty-checkbox-react";
 import "@djthoms/pretty-checkbox";
-import { getUserAddress, shoppingCartAPI } from "../api/constant";
+import { getUserAddress, placeOrder, shoppingCartAPI } from "../api/constant";
 import axios from "axios";
 import Order from "../components/OrderSummary/Order";
 import { useSelector } from "react-redux";
@@ -12,15 +12,38 @@ import PaymentCard from "../components/PaymentCard/PaymentCard";
 import americanLogo from "/assets/american.png";
 import visaLogo from "/assets/visa.png";
 import masterLogo from "/assets/mastercard.png";
-import NewAddressForm from "../components/AddressComp/NewAddressForm";
 import PaymentCardForm from "../components/PaymentCard/PaymentCardForm";
+import { Typography, Input } from "@material-tailwind/react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import ThankyouModal from "../components/ThankyouModal/ThankyouModal";
+
+const renderInput = (name, label, formik, type = "text") => (
+  <>
+    <Input
+      required
+      autoComplete="off"
+      label={label}
+      name={name}
+      onChange={formik.handleChange}
+      value={formik.values[name]}
+      type={type}
+      size="lg"
+    />
+    {formik.touched[name] && formik.errors[name] && (
+      <Typography className="text-sm text-red-400">
+        {formik.errors[name]}
+      </Typography>
+    )}
+  </>
+);
 
 const Payment = () => {
   const [loading, setLoading] = useState(false);
   const [cartData, setCartData] = useState();
+  const [open, setOpen] = useState(false);
   const [userAddress, setUserAddress] = useState();
-  const [selectedDeliveryMethod, setSelectedDeliveryMethod] =
-    useState("standard");
+  const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(1);
   const [sameAddress, setSameAddress] = useState("same");
   const [saveCard, setSaveCard] = useState("notSave");
   const productCount = useSelector((state) => state.counterValueDetail);
@@ -43,7 +66,6 @@ const Payment = () => {
       if (response.status === 200) {
         setCartData(response.data.result);
         setLoading(false);
-        console.log("shopping cart API", response);
       }
     } catch (error) {
       setLoading(false);
@@ -77,6 +99,70 @@ const Payment = () => {
     getUserAddressApi();
   }, []);
 
+  const payNowApi = async () => {
+    setLoading(true);
+    try {
+      let paynowdetail = {
+        address_id: selectedId,
+        delivery_type_id: selectedDeliveryMethod,
+        shipping_address: {
+          country: userAddress[0].country,
+          full_name: userAddress[0].full_name,
+          address: userAddress[0].address,
+          address2: userAddress[0].address2,
+          city: userAddress[0].city,
+          state: userAddress[0].state,
+          postcode: userAddress[0].postcode,
+          mobile: userAddress[0].mobile,
+        },
+        billing_address: {
+          country:
+            sameAddress === "same"
+              ? userAddress[0].country
+              : formik?.values?.country,
+          full_name:
+            sameAddress === "same"
+              ? userAddress[0].full_name
+              : formik?.values?.full_name,
+          address:
+            sameAddress === "same"
+              ? userAddress[0].address
+              : formik?.values?.address,
+          address2:
+            sameAddress === "same"
+              ? userAddress[0].address2
+              : formik?.values?.address2,
+          city:
+            sameAddress === "same" ? userAddress[0].city : formik?.values?.city,
+          state:
+            sameAddress === "same"
+              ? userAddress[0].state
+              : formik?.values?.state,
+          postcode:
+            sameAddress === "same"
+              ? userAddress[0].postcode
+              : formik?.values?.postcode,
+          mobile:
+            sameAddress === "same"
+              ? userAddress[0].mobile
+              : formik?.values?.phone,
+        },
+      };
+      const response = await axios.post(placeOrder, paynowdetail, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (response.status === 200) {
+        setLoading(false);
+        setOpen(true);
+      }
+    } catch (error) {
+      console.log("Place order API error: ", error);
+      setLoading(false);
+    }
+  };
+
   const handleDeliveryMethodChange = (method) => {
     setSelectedDeliveryMethod(method);
   };
@@ -89,12 +175,57 @@ const Payment = () => {
     setSaveCard(method);
   };
 
+  const handleModal = () => {
+    setOpen(!open);
+  };
+
+  const validationSchema = Yup.object().shape({
+    full_name: Yup.string().min(4).max(25).required("Full Name is required"),
+    phone: Yup.string()
+      .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits")
+      .required("Phone number is required"),
+    address: Yup.string().required("Address is required"),
+    address2: Yup.string()
+      .max(50, "Apartment/suite number is too long")
+      .required("Apartment number is required"),
+    state: Yup.string().required("State is required"),
+    city: Yup.string().min(4).max(25).required("City is required"),
+    postcode: Yup.number().required("Postcode number is required"),
+    country: Yup.string().required("Country is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      full_name: "",
+      address: "",
+      address2: "",
+      state: "",
+      city: "",
+      postcode: "",
+      phone: "",
+      country: "India",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        await submitForm(values, resetForm);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    },
+  });
+
+  const submitForm = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  };
+
   if (loading) {
     return <Loader />;
   }
 
   return (
     <main className="container block md:flex gap-10">
+      {open && <ThankyouModal open={open} onclick={handleModal} />}
       <section className="w-full md:w-[75%] mb-8 md:mb-0 flex flex-col gap-7">
         <h2 className="text-[#292D32] font-bold text-3xl">Payment</h2>
         <div className="block md:flex md:gap-10">
@@ -136,16 +267,16 @@ const Payment = () => {
               <div className="flex flex-col flex-wrap gap-3">
                 <Radio
                   color="warning"
-                  checked={selectedDeliveryMethod === "standard"}
-                  onChange={() => handleDeliveryMethodChange("standard")}
+                  checked={selectedDeliveryMethod === 1}
+                  onChange={() => handleDeliveryMethodChange(1)}
                 >
                   <span className="text-[#000000] font-semibold">Standard</span>
                 </Radio>
                 <p>{cartData.standard_expected_delivery}</p>
                 <Radio
                   color="warning"
-                  checked={selectedDeliveryMethod === "express"}
-                  onChange={() => handleDeliveryMethodChange("express")}
+                  checked={selectedDeliveryMethod === 2}
+                  onChange={() => handleDeliveryMethodChange(2)}
                 >
                   <span className="text-[#000000] font-semibold">Express</span>
                 </Radio>
@@ -276,7 +407,32 @@ const Payment = () => {
               </Radio>
               {sameAddress == "different" && (
                 <div className="flex items-start mt-4 ml-4">
-                  <NewAddressForm />
+                  <form
+                    noValidate
+                    onSubmit={formik.handleSubmit}
+                    className="grid grid-flow-row grid-cols-1 gap-y-5 sm:grid-cols-2 sm:gap-x-5"
+                  >
+                    <div>
+                      <select
+                        className="bg-transparent border border-blue-gray-200 text-blue-gray-500 text-sm rounded-lg block w-full p-2.5"
+                        value={formik.values.country}
+                        onChange={formik.handleChange}
+                        name="country"
+                      >
+                        <option value="India">India</option>
+                        <option value="USA">United States</option>
+                        <option value="Canada">Canada</option>
+                        <option value="France">France</option>
+                      </select>
+                    </div>
+                    {renderInput("full_name", "Full Name", formik)}
+                    {renderInput("address", "Address", formik, "textarea")}
+                    {renderInput("address2", "Apartment", formik)}
+                    {renderInput("city", "City", formik)}
+                    {renderInput("state", "State", formik)}
+                    {renderInput("postcode", "Postcode", formik, "string")}
+                    {renderInput("phone", "Phone", formik, "string")}
+                  </form>
                 </div>
               )}
             </div>
@@ -288,7 +444,19 @@ const Payment = () => {
           Order Summary
         </h6>
         {cartData && (
-          <Order data={cartData} productCount={productCount} payment={"true"} />
+          <Order
+            data={cartData}
+            productCount={productCount}
+            payment={"true"}
+            onclick={
+              sameAddress === "different"
+                ? () => {
+                    formik.handleSubmit();
+                    payNowApi();
+                  }
+                : payNowApi
+            }
+          />
         )}
       </section>
     </main>

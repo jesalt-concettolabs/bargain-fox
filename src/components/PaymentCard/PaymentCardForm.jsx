@@ -1,11 +1,8 @@
 import React from "react";
-import { Typography, Input, Button } from "@material-tailwind/react";
+import { Typography, Input } from "@material-tailwind/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Checkbox } from "pretty-checkbox-react";
 import "@djthoms/pretty-checkbox";
-import axios from "axios";
-import { storeUserAddress } from "../../api/constant";
 
 const renderInput = (name, label, formik, type = "text") => (
   <>
@@ -27,24 +24,7 @@ const renderInput = (name, label, formik, type = "text") => (
   </>
 );
 
-const PaymentCardForm = ({ editCard, update }) => {
-  // const storeUserCardApi = async (values, resetForm) => {
-  //   try {
-  //     const response = await axios.post(storeUserAddress, values, {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     });
-  //     if (response.status === 200) {
-  //       handleClose();
-  //       update((prev) => !prev);
-  //       resetForm();
-  //     }
-  //   } catch (error) {
-  //     console.log("Store user Card API error: ", error);
-  //   }
-  // };
-
+const PaymentCardForm = () => {
   const validationSchema = Yup.object().shape({
     name_on_card: Yup.string()
       .min(4)
@@ -62,17 +42,15 @@ const PaymentCardForm = ({ editCard, update }) => {
 
   const formik = useFormik({
     initialValues: {
-      id: editCard ? editCard.id : "",
-      name_on_card: editCard ? editCard.name_on_card : "",
-      card_number: editCard ? editCard.card_number : "",
-      month: editCard ? editCard.month : "",
-      year: editCard ? editCard.year : "",
-      cvv: editCard ? editCard.cvv : "",
+      name_on_card: "",
+      card_number: "",
+      month: "",
+      year: "",
+      cvv: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        console.log("Form Data:", values);
         await submitForm(values, resetForm);
       } catch (error) {
         console.error("Error:", error);
@@ -80,8 +58,9 @@ const PaymentCardForm = ({ editCard, update }) => {
     },
   });
 
-  const submitForm = async (values, resetForm) => {
+  const submitForm = async (values) => {
     await new Promise((resolve) => setTimeout(resolve, 500));
+    console.log("Form Data:", values);
   };
 
   return (

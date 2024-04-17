@@ -19,3 +19,5 @@ export const getWishListCountDetail = `${Base_url}/wishlist-count`;
 export const getUserAddress = `${Base_url}/get-delivery-address`;
 export const storeUserAddress = `${Base_url}/store-delivery-address`;
 export const deleteUserAddress = `${Base_url}/delete-delivery-address`;
+export const placeOrder = `${Base_url}/place-order`;
+export const yourOrderList = `${Base_url}/my-order-list`;

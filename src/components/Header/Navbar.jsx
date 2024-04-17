@@ -212,7 +212,7 @@ const Navbar = () => {
                       <Link to={"/"}>Your Profile</Link>
                     </li>
                     <li className="hover:bg-black hover:text-white pl-2 py-1">
-                      <Link to={"/"}>Your Orders</Link>
+                      <Link to={"/your-orders"}>Your Orders</Link>
                     </li>
                     <li className="hover:bg-black hover:text-white pl-2 py-1">
                       <Link to={"/"}>Address</Link>
@@ -221,7 +221,7 @@ const Navbar = () => {
                       <Link to={"/"}>Notifications</Link>
                     </li>
                     <li className="hover:bg-black hover:text-white pl-2 py-1">
-                      <Link to={"/"}>Wishlist</Link>
+                      <Link to={"/wishlist"}>Wishlist</Link>
                     </li>
                   </ul>
                 </div>

@@ -32,7 +32,10 @@ const SearchBar = () => {
   const fetchSearch = async (value) => {
     setLoading(true);
     try {
-      const response = await axios.post(productList, { search: value });
+      const response = await axios.post(productList, {
+        search: value,
+        is_search_all: true,
+      });
       if (response.data.result.data.length === 0) {
         setDataFound(true);
       } else {

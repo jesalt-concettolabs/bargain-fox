@@ -122,10 +122,10 @@ const MobileSideMenu = () => {
             <div>
               <ul className="flex flex-col gap-4 text-[16px] mt-2  text-[#292D32] p-3">
                 <li>
-                  <Link to={"/product-list"}>Your Profile</Link>
+                  <Link to={"/"}>Your Profile</Link>
                 </li>
                 <li>
-                  <Link to={"/"}>Your Orders</Link>
+                  <Link to={"/your-orders"}>Your Orders</Link>
                 </li>
                 <li>
                   <Link to={"/"}>Address</Link>
@@ -134,7 +134,7 @@ const MobileSideMenu = () => {
                   <Link to={"/"}>Notifications</Link>
                 </li>
                 <li>
-                  <Link to={"/"}>Wishlist</Link>
+                  <Link to={"/wishlist"}>Wishlist</Link>
                 </li>
               </ul>
             </div>
