@@ -9,6 +9,7 @@ import WhishList from "./pages/WhishList";
 import Payment from "./pages/Payment";
 import ErrorPage from "./pages/ErrorPage";
 import YourOrders from "./pages/YourOrders";
+import ProfilePage from "./pages/ProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/your-orders",
         element: <YourOrders />,
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage />,
       },
       {
         path: "*",

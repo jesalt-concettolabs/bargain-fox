@@ -21,3 +21,4 @@ export const storeUserAddress = `${Base_url}/store-delivery-address`;
 export const deleteUserAddress = `${Base_url}/delete-delivery-address`;
 export const placeOrder = `${Base_url}/place-order`;
 export const yourOrderList = `${Base_url}/my-order-list`;
+export const userData = `${Base_url}/user-detail`;

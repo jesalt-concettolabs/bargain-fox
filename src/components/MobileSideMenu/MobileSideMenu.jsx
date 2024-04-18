@@ -121,21 +121,19 @@ const MobileSideMenu = () => {
             )}
             <div>
               <ul className="flex flex-col gap-4 text-[16px] mt-2  text-[#292D32] p-3">
-                <li>
-                  <Link to={"/"}>Your Profile</Link>
-                </li>
-                <li>
-                  <Link to={"/your-orders"}>Your Orders</Link>
-                </li>
-                <li>
-                  <Link to={"/"}>Address</Link>
-                </li>
-                <li>
-                  <Link to={"/"}>Notifications</Link>
-                </li>
-                <li>
-                  <Link to={"/wishlist"}>Wishlist</Link>
-                </li>
+                <Link to={"/profile"}>
+                  <li>Your Profile</li>
+                </Link>
+                <Link to={"/your-orders"}>
+                  <li>Your Orders</li>
+                </Link>
+                <Link to={"/"}>
+                  <li>Address</li>
+                </Link>
+
+                <Link to={"/wishlist"}>
+                  <li>Wishlist</li>
+                </Link>
               </ul>
             </div>
           </div>

@@ -207,22 +207,27 @@ const Navbar = () => {
                 )}
 
                 <div>
-                  <ul className="flex flex-col gap-2 text-[16px] mt-5 text-left text-[#292D32]">
-                    <li className="hover:bg-black hover:text-white pl-2 py-1">
-                      <Link to={"/"}>Your Profile</Link>
-                    </li>
-                    <li className="hover:bg-black hover:text-white pl-2 py-1">
-                      <Link to={"/your-orders"}>Your Orders</Link>
-                    </li>
-                    <li className="hover:bg-black hover:text-white pl-2 py-1">
-                      <Link to={"/"}>Address</Link>
-                    </li>
-                    <li className="hover:bg-black hover:text-white pl-2 py-1">
-                      <Link to={"/"}>Notifications</Link>
-                    </li>
-                    <li className="hover:bg-black hover:text-white pl-2 py-1">
-                      <Link to={"/wishlist"}>Wishlist</Link>
-                    </li>
+                  <ul className="flex flex-col text-[16px] mt-5 text-left text-[#292D32]">
+                    <Link to={"/profile"}>
+                      <li className="hover:bg-black hover:text-white pl-2 py-2">
+                        Your Profile
+                      </li>
+                    </Link>
+                    <Link to={"/your-orders"}>
+                      <li className="hover:bg-black hover:text-white pl-2 py-2">
+                        Your Orders
+                      </li>
+                    </Link>
+                    <Link to={"/"}>
+                      <li className="hover:bg-black hover:text-white pl-2 py-2">
+                        Address
+                      </li>
+                    </Link>
+                    <Link to={"/wishlist"}>
+                      <li className="hover:bg-black hover:text-white pl-2 py-2">
+                        Wishlist
+                      </li>
+                    </Link>
                   </ul>
                 </div>
               </div>
